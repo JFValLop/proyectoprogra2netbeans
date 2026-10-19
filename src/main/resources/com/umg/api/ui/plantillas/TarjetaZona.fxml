@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<Button xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="loc-btn" mnemonicParsing="false" maxWidth="Infinity" alignment="CENTER_LEFT" fx:id="boton">
+  <graphic>
+    <HBox alignment="CENTER_LEFT" spacing="12">
+      <children>
+        <Region styleClass="swatch" minWidth="12" minHeight="12" prefWidth="12" prefHeight="12" maxWidth="12" maxHeight="12" style="-fx-background-color: #FF5C8A;" fx:id="color"/>
+        <VBox HBox.hgrow="ALWAYS">
+          <children>
+            <Label text="VIP" styleClass="s14,w700" fx:id="lblNombre"/>
+            <Label text="3 bloques × 4 filas × 7 asientos" styleClass="s11,c-dim" fx:id="lblForma"/>
+          </children>
+        </VBox>
+        <VBox alignment="CENTER_RIGHT">
+          <children>
+            <Label text="84" styleClass="s14,w700" fx:id="lblTotal"/>
+            <Label text="8 conciertos" styleClass="s11,c-dim" fx:id="lblConciertos"/>
+          </children>
+        </VBox>
+      </children>
+    </HBox>
+  </graphic>
+</Button>

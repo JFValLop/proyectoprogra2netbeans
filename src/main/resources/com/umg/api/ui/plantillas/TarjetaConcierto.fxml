@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER_LEFT" styleClass="concert-card" prefHeight="100" minHeight="100" fx:id="tarjeta">
+  <children>
+    <VBox prefWidth="100" minWidth="100" alignment="CENTER" spacing="2">
+      <children>
+        <Label text="SÁB" styleClass="s11,w600,c-amber" fx:id="lblDia"/>
+        <Label text="10" styleClass="disp,s44" fx:id="lblNumero"/>
+        <Label text="OCT · 20:00" styleClass="s11,w600,c-muted" fx:id="lblMesHora"/>
+      </children>
+    </VBox>
+    <Region styleClass="dash-v" minWidth="2" prefWidth="2" maxWidth="2">
+      <HBox.margin>
+        <Insets top="14" bottom="14"/>
+      </HBox.margin>
+    </Region>
+    <VBox HBox.hgrow="ALWAYS" spacing="6" alignment="CENTER_LEFT" minWidth="0">
+      <padding><Insets top="14" right="20" bottom="14" left="20"/></padding>
+      <children>
+        <HBox alignment="CENTER_LEFT" spacing="10">
+          <children>
+            <Label text="LOS VOLCANES" styleClass="disp,s26" fx:id="lblArtista"/>
+            <HBox alignment="CENTER_LEFT" styleClass="pill" spacing="6" style="-fx-background-color: rgba(91,214,138,0.14);" fx:id="pillEstado">
+              <children>
+                <Region styleClass="dot" minWidth="6" minHeight="6" prefWidth="6" prefHeight="6" maxWidth="6" maxHeight="6" style="-fx-background-color: #5BD68A;" fx:id="dotEstado"/>
+                <Label text="En venta" styleClass="s11,w700" style="-fx-text-fill: #5BD68A;" fx:id="lblEstado"/>
+              </children>
+            </HBox>
+          </children>
+        </HBox>
+        <Label text="Gira Magma 2026" styleClass="s14,w500,c-text2" fx:id="lblGira"/>
+        <HBox alignment="CENTER_LEFT" spacing="5">
+          <children>
+            <Region styleClass="icon,ic-pin" minWidth="15" minHeight="15" prefWidth="15" prefHeight="15" maxWidth="15" maxHeight="15"/>
+            <Label text="Gran Sala · Teatro Nacional · Rock" styleClass="s12,c-dim" fx:id="lblLugar"/>
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+    <StackPane prefWidth="380" minWidth="380">
+      <padding><Insets top="0" right="16" bottom="0" left="16"/></padding>
+      <children>
+        <HBox alignment="CENTER_LEFT" spacing="14" fx:id="boxZonas">
+          <children>
+          </children>
+        </HBox>
+      </children>
+    </StackPane>
+    <VBox prefWidth="170" minWidth="170" alignment="CENTER_RIGHT" spacing="8">
+      <padding><Insets top="0" right="20" bottom="0" left="20"/></padding>
+      <children>
+        <HBox alignment="BASELINE_RIGHT" spacing="5">
+          <children>
+            <Label text="Desde" styleClass="s11,c-dim" fx:id="lblDesdeTexto"/>
+            <Label text="Q 350" styleClass="s16,w700" fx:id="lblDesde"/>
+          </children>
+        </HBox>
+        <Button text="Vender" styleClass="btn-primary" mnemonicParsing="false" graphicTextGap="8" contentDisplay="RIGHT" prefHeight="36" fx:id="btnVender">
+          <graphic>
+            <Region styleClass="icon,ic-arrow-fwd,ic-dark" minWidth="18" minHeight="18" prefWidth="18" prefHeight="18" maxWidth="18" maxHeight="18"/>
+          </graphic>
+        </Button>
+      </children>
+    </VBox>
+  </children>
+</HBox>

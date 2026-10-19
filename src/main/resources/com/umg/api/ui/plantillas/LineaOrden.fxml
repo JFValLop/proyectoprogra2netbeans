@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="cart-line" spacing="10" fx:id="linea">
+  <padding><Insets top="14" right="0" bottom="14" left="0"/></padding>
+  <children>
+    <HBox alignment="CENTER_LEFT" spacing="10">
+      <children>
+        <Region styleClass="swatch" minWidth="10" minHeight="10" prefWidth="10" prefHeight="10" maxWidth="10" maxHeight="10" style="-fx-background-color: #3CC8E0;" fx:id="color"/>
+        <VBox HBox.hgrow="ALWAYS">
+          <children>
+            <Label text="Platea" styleClass="s14,w600" fx:id="lblZona"/>
+            <Label text="2 asientos × Q 850" styleClass="s12,c-dim" fx:id="lblCantidad"/>
+          </children>
+        </VBox>
+        <Label text="Q 1,700.00" styleClass="s14,w600" fx:id="lblSubtotal"/>
+      </children>
+    </HBox>
+    <FlowPane hgap="6" vgap="6" fx:id="chips">
+      <padding><Insets top="0" right="0" bottom="0" left="20"/></padding>
+      <children>
+      </children>
+    </FlowPane>
+  </children>
+</VBox>

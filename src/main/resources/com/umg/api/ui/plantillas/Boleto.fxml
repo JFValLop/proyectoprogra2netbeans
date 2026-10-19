@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER_LEFT" styleClass="ticket" prefHeight="150" minHeight="150" fx:id="boleto">
+  <children>
+    <VBox HBox.hgrow="ALWAYS" minWidth="0">
+      <padding><Insets top="13" right="14" bottom="13" left="14"/></padding>
+      <children>
+        <Label text="SVB·GUA · BOLETO DE ACCESO" styleClass="tk-eyebrow"/>
+        <Label text="SOFÍA LEMUS" styleClass="disp,s23,w900,tk-ink" fx:id="lblArtista"/>
+        <Label text="vie 16 oct · 19:30 · Teatro Nacional" styleClass="tk-body" fx:id="lblFecha"/>
+        <Region VBox.vgrow="ALWAYS"/>
+        <HBox alignment="CENTER_LEFT" spacing="8">
+          <children>
+            <Label text="Platea" styleClass="tk-loc" style="-fx-background-color: #3CC8E0;" fx:id="lblZona"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="Q 850" styleClass="tk-price" fx:id="lblPrecio"/>
+          </children>
+        </HBox>
+        <Label text="Bloque B · Fila D · Asiento 4" styleClass="tk-seat" fx:id="lblAsiento"/>
+      </children>
+    </VBox>
+    <Region styleClass="dash-v-light" minWidth="2" prefWidth="2" maxWidth="2">
+      <HBox.margin>
+        <Insets top="12" bottom="12"/>
+      </HBox.margin>
+    </Region>
+    <VBox prefWidth="112" minWidth="112" alignment="CENTER" spacing="6">
+      <children>
+        <SVGPath content="M0 0h4v4h-4zM4 0h4v4h-4zM8 0h4v4h-4zM12 0h4v4h-4zM16 0h4v4h-4zM20 0h4v4h-4zM24 0h4v4h-4zM36 0h4v4h-4zM40 0h4v4h-4zM44 0h4v4h-4zM56 0h4v4h-4zM60 0h4v4h-4zM64 0h4v4h-4zM68 0h4v4h-4zM72 0h4v4h-4zM76 0h4v4h-4zM80 0h4v4h-4zM0 4h4v4h-4zM24 4h4v4h-4zM36 4h4v4h-4zM40 4h4v4h-4zM44 4h4v4h-4zM56 4h4v4h-4zM80 4h4v4h-4zM0 8h4v4h-4zM8 8h4v4h-4zM12 8h4v4h-4zM16 8h4v4h-4zM24 8h4v4h-4zM36 8h4v4h-4zM40 8h4v4h-4zM44 8h4v4h-4zM56 8h4v4h-4zM64 8h4v4h-4zM68 8h4v4h-4zM72 8h4v4h-4zM80 8h4v4h-4zM0 12h4v4h-4zM8 12h4v4h-4zM12 12h4v4h-4zM16 12h4v4h-4zM24 12h4v4h-4zM36 12h4v4h-4zM40 12h4v4h-4zM44 12h4v4h-4zM56 12h4v4h-4zM64 12h4v4h-4zM68 12h4v4h-4zM72 12h4v4h-4zM80 12h4v4h-4zM0 16h4v4h-4zM8 16h4v4h-4zM12 16h4v4h-4zM16 16h4v4h-4zM24 16h4v4h-4zM36 16h4v4h-4zM40 16h4v4h-4zM44 16h4v4h-4zM56 16h4v4h-4zM64 16h4v4h-4zM68 16h4v4h-4zM72 16h4v4h-4zM80 16h4v4h-4zM0 20h4v4h-4zM24 20h4v4h-4zM36 20h4v4h-4zM40 20h4v4h-4zM44 20h4v4h-4zM56 20h4v4h-4zM80 20h4v4h-4zM0 24h4v4h-4zM4 24h4v4h-4zM8 24h4v4h-4zM12 24h4v4h-4zM16 24h4v4h-4zM20 24h4v4h-4zM24 24h4v4h-4zM32 24h4v4h-4zM40 24h4v4h-4zM48 24h4v4h-4zM56 24h4v4h-4zM60 24h4v4h-4zM64 24h4v4h-4zM68 24h4v4h-4zM72 24h4v4h-4zM76 24h4v4h-4zM80 24h4v4h-4zM36 28h4v4h-4zM40 28h4v4h-4zM44 28h4v4h-4zM4 32h4v4h-4zM20 32h4v4h-4zM24 32h4v4h-4zM28 32h4v4h-4zM36 32h4v4h-4zM40 32h4v4h-4zM44 32h4v4h-4zM56 32h4v4h-4zM60 32h4v4h-4zM68 32h4v4h-4zM72 32h4v4h-4zM4 36h4v4h-4zM20 36h4v4h-4zM28 36h4v4h-4zM36 36h4v4h-4zM40 36h4v4h-4zM44 36h4v4h-4zM56 36h4v4h-4zM60 36h4v4h-4zM68 36h4v4h-4zM72 36h4v4h-4zM4 40h4v4h-4zM8 40h4v4h-4zM16 40h4v4h-4zM20 40h4v4h-4zM24 40h4v4h-4zM28 40h4v4h-4zM36 40h4v4h-4zM40 40h4v4h-4zM44 40h4v4h-4zM48 40h4v4h-4zM56 40h4v4h-4zM60 40h4v4h-4zM68 40h4v4h-4zM80 40h4v4h-4zM4 44h4v4h-4zM8 44h4v4h-4zM16 44h4v4h-4zM20 44h4v4h-4zM28 44h4v4h-4zM36 44h4v4h-4zM40 44h4v4h-4zM44 44h4v4h-4zM48 44h4v4h-4zM56 44h4v4h-4zM60 44h4v4h-4zM68 44h4v4h-4zM80 44h4v4h-4zM4 48h4v4h-4zM8 48h4v4h-4zM16 48h4v4h-4zM20 48h4v4h-4zM24 48h4v4h-4zM28 48h4v4h-4zM36 48h4v4h-4zM40 48h4v4h-4zM44 48h4v4h-4zM48 48h4v4h-4zM56 48h4v4h-4zM60 48h4v4h-4zM68 48h4v4h-4zM80 48h4v4h-4zM36 52h4v4h-4zM40 52h4v4h-4zM44 52h4v4h-4zM48 52h4v4h-4zM56 52h4v4h-4zM60 52h4v4h-4zM68 52h4v4h-4zM80 52h4v4h-4zM0 56h4v4h-4zM4 56h4v4h-4zM8 56h4v4h-4zM12 56h4v4h-4zM16 56h4v4h-4zM20 56h4v4h-4zM24 56h4v4h-4zM32 56h4v4h-4zM36 56h4v4h-4zM40 56h4v4h-4zM44 56h4v4h-4zM48 56h4v4h-4zM56 56h4v4h-4zM60 56h4v4h-4zM68 56h4v4h-4zM80 56h4v4h-4zM0 60h4v4h-4zM24 60h4v4h-4zM32 60h4v4h-4zM36 60h4v4h-4zM40 60h4v4h-4zM44 60h4v4h-4zM48 60h4v4h-4zM56 60h4v4h-4zM60 60h4v4h-4zM68 60h4v4h-4zM80 60h4v4h-4zM0 64h4v4h-4zM8 64h4v4h-4zM12 64h4v4h-4zM16 64h4v4h-4zM24 64h4v4h-4zM32 64h4v4h-4zM36 64h4v4h-4zM40 64h4v4h-4zM44 64h4v4h-4zM48 64h4v4h-4zM56 64h4v4h-4zM60 64h4v4h-4zM68 64h4v4h-4zM80 64h4v4h-4zM0 68h4v4h-4zM8 68h4v4h-4zM12 68h4v4h-4zM16 68h4v4h-4zM24 68h4v4h-4zM36 68h4v4h-4zM40 68h4v4h-4zM44 68h4v4h-4zM48 68h4v4h-4zM56 68h4v4h-4zM60 68h4v4h-4zM68 68h4v4h-4zM80 68h4v4h-4zM0 72h4v4h-4zM8 72h4v4h-4zM12 72h4v4h-4zM16 72h4v4h-4zM24 72h4v4h-4zM36 72h4v4h-4zM40 72h4v4h-4zM44 72h4v4h-4zM48 72h4v4h-4zM56 72h4v4h-4zM60 72h4v4h-4zM68 72h4v4h-4zM80 72h4v4h-4zM0 76h4v4h-4zM24 76h4v4h-4zM36 76h4v4h-4zM40 76h4v4h-4zM44 76h4v4h-4zM48 76h4v4h-4zM56 76h4v4h-4zM60 76h4v4h-4zM68 76h4v4h-4zM80 76h4v4h-4zM0 80h4v4h-4zM4 80h4v4h-4zM8 80h4v4h-4zM12 80h4v4h-4zM16 80h4v4h-4zM20 80h4v4h-4zM24 80h4v4h-4zM32 80h4v4h-4zM40 80h4v4h-4zM52 80h4v4h-4zM56 80h4v4h-4zM68 80h4v4h-4zM72 80h4v4h-4zM76 80h4v4h-4z" styleClass="qr" fx:id="qr"/>
+        <Label text="SVB-4823-01" styleClass="tk-code" fx:id="lblCodigo"/>
+      </children>
+    </VBox>
+  </children>
+</HBox>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<Button xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="legend-btn" mnemonicParsing="false" maxWidth="Infinity" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT" prefHeight="40" fx:id="boton">
+  <graphic>
+    <HBox alignment="CENTER_LEFT" spacing="8">
+      <children>
+        <Region styleClass="swatch" minWidth="10" minHeight="10" prefWidth="10" prefHeight="10" maxWidth="10" maxHeight="10" style="-fx-background-color: #FF5C8A;" fx:id="color"/>
+        <Label text="VIP" styleClass="s13,w600" fx:id="lblZona"/>
+        <Label text="Q 1,450" styleClass="s12,w600,c-text2" fx:id="lblPrecio"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label text="3 disp." styleClass="s11,c-dim" fx:id="lblDisponibles"/>
+      </children>
+    </HBox>
+  </graphic>
+</Button>

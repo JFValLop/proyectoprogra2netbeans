@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefWidth="1366" prefHeight="768" styleClass="app" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@styles.css" fx:controller="com.umg.api.ui.CarteleraController">
+  <center>
+    <VBox>
+      <children>
+        <HBox alignment="BOTTOM_LEFT" spacing="10">
+          <padding><Insets top="22" right="28" bottom="16" left="28"/></padding>
+          <children>
+            <VBox spacing="6">
+              <children>
+                <Label text="PUNTO DE VENTA" styleClass="eyebrow"/>
+                <Label text="CARTELERA" styleClass="disp,s34"/>
+              </children>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <HBox alignment="CENTER_LEFT" spacing="8">
+              <children>
+                <Region styleClass="dot" minWidth="8" minHeight="8" prefWidth="8" prefHeight="8" maxWidth="8" maxHeight="8" style="-fx-background-color: #5BD68A;"/>
+                <Label text="Disponibilidad en tiempo real · F2 nueva venta" styleClass="s12,c-muted"/>
+              </children>
+            </HBox>
+          </children>
+        </HBox>
+        <HBox alignment="CENTER_LEFT" spacing="10">
+          <padding><Insets top="0" right="28" bottom="16" left="28"/></padding>
+          <children>
+            <HBox alignment="CENTER_LEFT" styleClass="field" spacing="10" prefHeight="40" prefWidth="300">
+              <children>
+                <Region styleClass="icon,ic-search" minWidth="19" minHeight="19" prefWidth="19" prefHeight="19" maxWidth="19" maxHeight="19"/>
+                <TextField promptText="Buscar artista, evento o recinto" styleClass="field-input" HBox.hgrow="ALWAYS" id="txtBuscar" fx:id="txtBuscar"/>
+              </children>
+            </HBox>
+            <ComboBox styleClass="combo" prefHeight="40" maxWidth="210" id="cmbArtista" prefWidth="210" fx:id="cmbArtista">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Todos los artistas"/>
+                  <String fx:value="Los Volcanes"/>
+                  <String fx:value="Sofía Lemus"/>
+                  <String fx:value="Niebla Norte"/>
+                  <String fx:value="Marimba Eléctrica"/>
+                  <String fx:value="Kaaxil"/>
+                  <String fx:value="La Sonora Quetzal"/>
+                  <String fx:value="Dúo Cenzontle"/>
+                  <String fx:value="Alba Rivera"/>
+                </FXCollections>
+              </items>
+              <value>
+                <String fx:value="Todos los artistas"/>
+              </value>
+            </ComboBox>
+            <HBox alignment="CENTER_LEFT" styleClass="seg" spacing="2">
+              <children>
+                <Button text="Todas" mnemonicParsing="false" styleClass="seg-btn,seg-on" fx:id="btnTodas"/>
+                <Button text="7 días" mnemonicParsing="false" styleClass="seg-btn" fx:id="btn7Dias"/>
+                <Button text="30 días" mnemonicParsing="false" styleClass="seg-btn" fx:id="btn30Dias"/>
+                <Button text="Más adelante" mnemonicParsing="false" styleClass="seg-btn" fx:id="btnMasAdelante"/>
+              </children>
+            </HBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="7 conciertos" styleClass="s12,c-dim" fx:id="lblCantidad"/>
+          </children>
+        </HBox>
+        <ScrollPane fitToWidth="true" styleClass="scroll" VBox.vgrow="ALWAYS">
+          <content>
+            <VBox id="listaConciertos" spacing="12" fx:id="listaConciertos">
+              <padding><Insets top="0" right="28" bottom="24" left="28"/></padding>
+              <children>
+              </children>
+            </VBox>
+          </content>
+        </ScrollPane>
+      </children>
+    </VBox>
+  </center>
+</BorderPane>

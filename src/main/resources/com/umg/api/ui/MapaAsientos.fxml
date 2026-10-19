@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefWidth="1366" prefHeight="768" styleClass="app" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@styles.css" fx:controller="com.umg.api.ui.MapaController">
+  <center>
+    <VBox>
+      <children>
+        <HBox alignment="CENTER_LEFT" styleClass="venta-head" prefHeight="60" minHeight="60" spacing="14">
+          <padding><Insets top="0" right="20" bottom="0" left="20"/></padding>
+          <children>
+            <Button styleClass="btn-icon,btn-icon-box" mnemonicParsing="false" graphicTextGap="8" id="btnVolver" fx:id="btnVolver">
+              <graphic>
+                <Region styleClass="icon,ic-arrow-back,ic-text" minWidth="18" minHeight="18" prefWidth="18" prefHeight="18" maxWidth="18" maxHeight="18"/>
+              </graphic>
+            </Button>
+            <VBox spacing="4">
+              <children>
+                <HBox alignment="BASELINE_LEFT" spacing="10">
+                  <children>
+                    <Label text="SOFÍA LEMUS" styleClass="disp,s24" fx:id="lblArtista"/>
+                    <Label text="Cielo Abierto Tour" styleClass="s14,c-muted" fx:id="lblGira"/>
+                  </children>
+                </HBox>
+                <Label text="vie 16 oct 2026 · 19:30 h · Gran Sala · Teatro Nacional" styleClass="s12,c-dim" fx:id="lblDetalle"/>
+              </children>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <HBox alignment="CENTER_LEFT" styleClass="seg" spacing="2">
+              <children>
+                <Button text="A · Plano completo" mnemonicParsing="false" styleClass="seg-btn,seg-on" fx:id="btnModoA"/>
+                <Button text="B · Por sección" mnemonicParsing="false" styleClass="seg-btn" fx:id="btnModoB"/>
+                <Button text="C · Cantidad primero" mnemonicParsing="false" styleClass="seg-btn" fx:id="btnModoC"/>
+              </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="8" prefWidth="150">
+              <children>
+                <Region styleClass="dot" minWidth="8" minHeight="8" prefWidth="8" prefHeight="8" maxWidth="8" maxHeight="8" style="-fx-background-color: #5BD68A;"/>
+                <Label text="Actualizado hace 2 s" styleClass="s12,c-muted" fx:id="lblActualizado"/>
+              </children>
+            </HBox>
+          </children>
+        </HBox>
+        <HBox alignment="TOP_LEFT" VBox.vgrow="ALWAYS">
+          <children>
+            <VBox HBox.hgrow="ALWAYS" spacing="10">
+              <padding><Insets top="12" right="20" bottom="10" left="20"/></padding>
+              <children>
+                <HBox alignment="CENTER_LEFT" spacing="8" fx:id="boxLeyenda">
+                  <children>
+                  </children>
+                </HBox>
+                <StackPane styleClass="map-area" VBox.vgrow="ALWAYS">
+                  <children>
+                    <ScrollPane styleClass="scroll" fitToWidth="true" hbarPolicy="AS_NEEDED" vbarPolicy="AS_NEEDED">
+              <content>
+                <VBox fx:id="mapaAsientos" alignment="TOP_CENTER" spacing="18">
+                  <padding><Insets top="12" right="20" bottom="20" left="20"/></padding>
+                  <children>
+                    <Label text="ESCENARIO" styleClass="stage" prefWidth="320" prefHeight="44" minHeight="44" alignment="CENTER"/>
+                  </children>
+                </VBox>
+              </content>
+            </ScrollPane>
+                  </children>
+                </StackPane>
+                <HBox alignment="CENTER_LEFT" spacing="16" prefHeight="30" minHeight="30">
+                  <padding><Insets top="0" right="4" bottom="0" left="4"/></padding>
+                  <children>
+                    <Region styleClass="swatch" minWidth="10" minHeight="10" prefWidth="10" prefHeight="10" maxWidth="10" maxHeight="10" style="-fx-background-color: #FFB020;" fx:id="infoColor"/>
+                    <Label text="Platea · Bloque B · Fila D · Asiento 4" styleClass="s13,w600" fx:id="lblInfoAsiento"/>
+                    <Label text="En tu orden · Q 850" styleClass="s12,c-muted" minWidth="0" fx:id="lblInfoPrecio"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <HBox alignment="CENTER_LEFT" spacing="6">
+                      <children>
+                        <Region styleClass="swatch,seat-sel" minWidth="11" minHeight="11" prefWidth="11" prefHeight="11" maxWidth="11" maxHeight="11"/>
+                        <Label text="Tu selección" styleClass="s11,c-muted"/>
+                      </children>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" spacing="6">
+                      <children>
+                        <Region styleClass="swatch,seat-sold" minWidth="11" minHeight="11" prefWidth="11" prefHeight="11" maxWidth="11" maxHeight="11"/>
+                        <Label text="Vendido" styleClass="s11,c-muted"/>
+                      </children>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" spacing="6">
+                      <children>
+                        <Region styleClass="swatch,seat-held" minWidth="11" minHeight="11" prefWidth="11" prefHeight="11" maxWidth="11" maxHeight="11"/>
+                        <Label text="En otra taquilla" styleClass="s11,c-muted"/>
+                      </children>
+                    </HBox>
+                  </children>
+                </HBox>
+              </children>
+            </VBox>
+            <VBox id="panelOrden" styleClass="cart" prefWidth="352" minWidth="352" maxWidth="352">
+              <children>
+                <HBox alignment="TOP_LEFT">
+                  <padding><Insets top="16" right="20" bottom="12" left="20"/></padding>
+                  <children>
+                    <VBox spacing="6">
+                      <children>
+                        <Label text="ORDEN ACTUAL" styleClass="disp,s22"/>
+                        <Label text="V-004823 · provisional" styleClass="s11,c-dim" fx:id="lblOrdenNumero"/>
+                      </children>
+                    </VBox>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button text="Vaciar" styleClass="btn-ghost,btn-sm" mnemonicParsing="false" graphicTextGap="8" id="btnVaciar" fx:id="btnVaciar"/>
+                  </children>
+                </HBox>
+                <VBox styleClass="hold" spacing="8" fx:id="boxHold">
+                  <VBox.margin>
+                    <Insets left="20" right="20" bottom="6"/>
+                  </VBox.margin>
+                  <padding><Insets top="10" right="12" bottom="10" left="12"/></padding>
+                  <children>
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                      <children>
+                        <Region styleClass="icon,ic-timer,ic-amber" minWidth="17" minHeight="17" prefWidth="17" prefHeight="17" maxWidth="17" maxHeight="17"/>
+                        <Label text="Asientos retenidos para esta orden" styleClass="s12,w600,c-text2"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label text="4:12" styleClass="s13,w700,c-amber" fx:id="lblTiempo"/>
+                      </children>
+                    </HBox>
+                    <StackPane styleClass="meter-track" alignment="CENTER_LEFT" prefHeight="3" maxHeight="3">
+                      <children>
+                        <Region styleClass="meter-fill,fill-amber" prefWidth="236" maxWidth="236" prefHeight="3" fx:id="barraTiempo"/>
+                      </children>
+                    </StackPane>
+                  </children>
+                </VBox>
+                <ScrollPane fitToWidth="true" styleClass="scroll" VBox.vgrow="ALWAYS">
+                  <content>
+                    <VBox fx:id="lineasOrden">
+                      <padding><Insets top="0" right="20" bottom="0" left="20"/></padding>
+                      <children>
+                      </children>
+                    </VBox>
+                  </content>
+                </ScrollPane>
+                <VBox styleClass="cart-foot" spacing="10">
+                  <padding><Insets top="14" right="20" bottom="18" left="20"/></padding>
+                  <children>
+                    <HBox alignment="CENTER_LEFT">
+                      <children>
+                        <Label text="Boletos" styleClass="s13,c-muted"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label text="3" styleClass="s13,w600" fx:id="lblBoletos"/>
+                      </children>
+                    </HBox>
+                    <HBox alignment="BASELINE_LEFT">
+                      <children>
+                        <Label text="TOTAL" styleClass="s11,w700,c-dim"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label text="Q 3,150.00" styleClass="disp,s38" fx:id="lblTotal"/>
+                      </children>
+                    </HBox>
+                    <Button text="Cobrar  ·  F9" styleClass="btn-primary,btn-xl" mnemonicParsing="false" graphicTextGap="8" id="btnCobrar" maxWidth="Infinity" defaultButton="true" fx:id="btnCobrar">
+                      <graphic>
+                        <Region styleClass="icon,ic-payments,ic-dark" minWidth="18" minHeight="18" prefWidth="18" prefHeight="18" maxWidth="18" maxHeight="18"/>
+                      </graphic>
+                    </Button>
+                  </children>
+                </VBox>
+              </children>
+            </VBox>
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+  </center>
+</BorderPane>

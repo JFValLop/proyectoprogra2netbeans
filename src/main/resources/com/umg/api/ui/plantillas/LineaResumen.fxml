@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="cart-line" spacing="4" fx:id="linea">
+  <padding><Insets top="10" right="0" bottom="10" left="0"/></padding>
+  <children>
+    <HBox alignment="CENTER_LEFT" spacing="8">
+      <children>
+        <Region styleClass="swatch" minWidth="9" minHeight="9" prefWidth="9" prefHeight="9" maxWidth="9" maxHeight="9" style="-fx-background-color: #3CC8E0;" fx:id="color"/>
+        <Label text="Platea" styleClass="s13,w600" HBox.hgrow="ALWAYS" maxWidth="Infinity" fx:id="lblZona"/>
+        <Label text="Q 1,700.00" styleClass="s13,w600" fx:id="lblSubtotal"/>
+      </children>
+    </HBox>
+    <Label text="2 × Q 850 · B·D4  B·D5" styleClass="s11,c-dim" fx:id="lblDetalle">
+      <padding><Insets top="0" right="0" bottom="0" left="17"/></padding>
+    </Label>
+  </children>
+</VBox>

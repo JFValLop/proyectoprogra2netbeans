@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER_LEFT" styleClass="seat-chip" spacing="2" prefHeight="26" fx:id="chip">
+  <padding><Insets top="0" right="3" bottom="0" left="8"/></padding>
+  <children>
+    <Label text="B·D4" styleClass="s11,w600" fx:id="lblAsiento"/>
+    <Button styleClass="btn-icon,btn-xs" mnemonicParsing="false" graphicTextGap="8" fx:id="btnQuitar">
+      <graphic>
+        <Region styleClass="icon,ic-close,ic-muted" minWidth="14" minHeight="14" prefWidth="14" prefHeight="14" maxWidth="14" maxHeight="14"/>
+      </graphic>
+    </Button>
+  </children>
+</HBox>

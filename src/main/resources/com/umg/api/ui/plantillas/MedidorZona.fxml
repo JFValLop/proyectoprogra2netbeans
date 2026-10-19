@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" spacing="6" prefWidth="76" minWidth="0" HBox.hgrow="ALWAYS">
+  <children>
+    <Label text="VIP" styleClass="s11,w600,c-muted" fx:id="lblZona"/>
+    <StackPane styleClass="meter-track" alignment="CENTER_LEFT" prefHeight="6" maxHeight="6">
+      <children>
+        <Region styleClass="meter-fill,fill-vip" prefWidth="19" maxWidth="19" prefHeight="6" fx:id="barra"/>
+      </children>
+    </StackPane>
+    <Label text="21 disp." styleClass="s11,c-muted" fx:id="lblDisponibles"/>
+  </children>
+</VBox>

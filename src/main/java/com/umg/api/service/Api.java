@@ -1,0 +1,31 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.umg.api.service;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.InputStream;
+
+/**
+ *
+ * @author juanfranciscovaldezlopez
+ */
+public class Api {
+
+    public static final String URL = "http://localhost:8081/api";
+    public static final ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+    public static Exception error(InputStream is, int statusCode) {
+        try {
+            JsonNode json = mapper.readTree(is);
+            if (json != null && json.has("message")) {
+                return new Exception(json.get("message").asText());
+            }
+        } catch (Exception ex) {
+        }
+        return new Exception("Error del servidor: " + statusCode);
+    }
+}

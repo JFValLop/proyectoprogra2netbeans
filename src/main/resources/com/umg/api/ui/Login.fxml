@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.media.Media?>
+<?import javafx.scene.media.MediaPlayer?>
+
+<HBox alignment="TOP_LEFT" prefHeight="768" prefWidth="1366" styleClass="app" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.umg.api.ui.LoginController">
+  <children>
+    <StackPane minWidth="520" prefWidth="520.0" styleClass="login-side">
+      <padding>
+            <Insets bottom="44" left="44" right="44" top="44" />
+         </padding>
+      <children>
+        <VBox alignment="CENTER_LEFT" maxWidth="380" spacing="20">
+          <children>
+            <VBox spacing="8">
+              <children>
+                <Label styleClass="eyebrow" text="ACCESO DE PERSONAL" />
+                <Label styleClass="disp,s44" text="INICIAR SESIÓN" />
+                <Label styleClass="s14,c-muted" text="Ingresa con el usuario asignado por administración." wrapText="true" />
+              </children>
+            </VBox>
+            <VBox spacing="6">
+              <children>
+                <Label styleClass="form-lbl" text="Usuario" />
+                <HBox alignment="CENTER_LEFT" prefHeight="48" spacing="10" styleClass="field">
+                  <children>
+                    <Region maxHeight="19" maxWidth="19" minHeight="19" minWidth="19" prefHeight="19" prefWidth="19" styleClass="icon,ic-person" />
+                    <TextField id="txtUsuario" fx:id="txtUsuario" promptText="p. ej. jlopez" styleClass="field-input" HBox.hgrow="ALWAYS" />
+                  </children>
+                </HBox>
+              </children>
+            </VBox>
+            <VBox spacing="6">
+              <children>
+                <Label styleClass="form-lbl" text="Contraseña" />
+                <HBox alignment="CENTER_LEFT" prefHeight="48" spacing="10" styleClass="field">
+                  <children>
+                    <Region maxHeight="19" maxWidth="19" minHeight="19" minWidth="19" prefHeight="19" prefWidth="19" styleClass="icon,ic-lock" />
+                    <PasswordField id="txtContrasena" fx:id="txtContrasena" promptText="••••••••" styleClass="field-input" HBox.hgrow="ALWAYS" />
+                    <Button graphicTextGap="8" mnemonicParsing="false" styleClass="btn-icon">
+                      <graphic>
+                        <Region maxHeight="18" maxWidth="18" minHeight="18" minWidth="18" prefHeight="18" prefWidth="18" styleClass="icon,ic-eye,ic-muted" />
+                      </graphic>
+                    </Button>
+                  </children>
+                </HBox>
+              </children>
+            </VBox>
+            <HBox id="lblError" alignment="CENTER_LEFT" managed="false" spacing="8" visible="false">
+              <children>
+                <Region maxHeight="18" maxWidth="18" minHeight="18" minWidth="18" prefHeight="18" prefWidth="18" styleClass="icon,ic-error,ic-red" />
+                <Label styleClass="s13,c-red" text="Usuario o contraseña incorrectos." />
+              </children>
+            </HBox>
+            <Button id="btnIngresar" fx:id="btnIngresar" contentDisplay="RIGHT" defaultButton="true" graphicTextGap="8" maxWidth="Infinity" mnemonicParsing="false" onAction="#ingresar" styleClass="btn-primary,btn-lg" text="Ingresar">
+              <graphic>
+                <Region maxHeight="18" maxWidth="18" minHeight="18" minWidth="18" prefHeight="18" prefWidth="18" styleClass="icon,ic-arrow-fwd,ic-dark" />
+              </graphic>
+            </Button>
+            <VBox spacing="10">
+              <children>
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                  <children>
+                    <Region styleClass="hr" HBox.hgrow="ALWAYS" />
+                    <Label styleClass="s10,w600,c-dim" text="Problemas para iniciar sesion" />
+                    <Region styleClass="hr" HBox.hgrow="ALWAYS" />
+                  </children>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                  <children>
+                    <Button alignment="CENTER_LEFT" maxWidth="Infinity" mnemonicParsing="false" styleClass="demo-card" HBox.hgrow="ALWAYS">
+                      <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                          <children>
+                            <Region maxHeight="20" maxWidth="20" minHeight="20" minWidth="20" prefHeight="20" prefWidth="20" styleClass="icon,ic-shield,ic-amber" />
+                            <VBox>
+                              <children>
+                                <Label styleClass="s13,w600" text="Cambiar mi contraseña" />
+                                <Label styleClass="s11,c-dim" text="Administrador" />
+                              </children>
+                            </VBox>
+                          </children>
+                        </HBox>
+                      </graphic>
+                    </Button>
+                  </children>
+                </HBox>
+              </children>
+            </VBox>
+            <HBox alignment="CENTER_LEFT" spacing="8" />
+          </children>
+        </VBox>
+      </children>
+    </StackPane>
+    <Region maxWidth="2" minWidth="0.0" prefHeight="680.0" prefWidth="0.0" styleClass="dash-v" />
+      <StackPane fx:id="video" minHeight="0.0" minWidth="0.0" prefHeight="768.0" prefWidth="921.0" HBox.hgrow="ALWAYS">
+         <children>
+            <MediaView fitWidth="${video.width}" fitHeight="${video.height}" preserveRatio="false">
+  <mediaPlayer>
+    <MediaPlayer autoPlay="true" cycleCount="-1" mute="true">
+      <media><Media source="@fondo.mp4"/></media>
+    </MediaPlayer>
+  </mediaPlayer>
+</MediaView>
+         </children>
+      </StackPane>
+  </children>
+</HBox>

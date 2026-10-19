@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" hgap="10" styleClass="inv-row" fx:id="fila">
+  <columnConstraints>
+    <ColumnConstraints minWidth="26" prefWidth="26"/>
+    <ColumnConstraints hgrow="ALWAYS"/>
+    <ColumnConstraints minWidth="170" prefWidth="170"/>
+    <ColumnConstraints minWidth="110" prefWidth="110"/>
+    <ColumnConstraints minWidth="110" prefWidth="110"/>
+  </columnConstraints>
+  <padding><Insets top="9" right="0" bottom="9" left="0"/></padding>
+  <children>
+    <CheckBox selected="true" mnemonicParsing="false" fx:id="chkActiva"/>
+    <HBox alignment="CENTER_LEFT" spacing="8" GridPane.columnIndex="1">
+      <children>
+        <Region styleClass="swatch" minWidth="10" minHeight="10" prefWidth="10" prefHeight="10" maxWidth="10" maxHeight="10" style="-fx-background-color: #FF5C8A;" fx:id="color"/>
+        <Label text="VIP" styleClass="s14,w600" fx:id="lblZona"/>
+      </children>
+    </HBox>
+    <HBox GridPane.columnIndex="2" styleClass="seg" spacing="2" alignment="CENTER_LEFT">
+      <children>
+        <Button text="Numerada" styleClass="seg-btn,seg-on" mnemonicParsing="false" HBox.hgrow="ALWAYS" maxWidth="Infinity" fx:id="btnNumerada"/>
+        <Button text="De pie" styleClass="seg-btn" mnemonicParsing="false" HBox.hgrow="ALWAYS" maxWidth="Infinity" fx:id="btnDePie"/>
+      </children>
+    </HBox>
+    <Label text="84 asientos" styleClass="s12,w600,c-text2" GridPane.columnIndex="3" fx:id="lblAforo"/>
+    <TextField text="" styleClass="input" prefHeight="34" GridPane.columnIndex="3" visible="false" managed="false" promptText="0" fx:id="txtAforo"/>
+    <HBox alignment="CENTER_LEFT" styleClass="field" spacing="6" prefHeight="34" GridPane.columnIndex="4">
+      <children>
+        <Label text="Q" styleClass="s12,w600,c-dim" minWidth="-Infinity"/>
+        <TextField text="" styleClass="field-input" HBox.hgrow="ALWAYS" promptText="0" fx:id="txtPrecio"/>
+      </children>
+    </HBox>
+  </children>
+</GridPane>
