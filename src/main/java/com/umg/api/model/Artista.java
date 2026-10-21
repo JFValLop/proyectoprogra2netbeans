@@ -4,14 +4,19 @@
  */
 package com.umg.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  *
  * @author juanfranciscovaldezlopez
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Artista {
 
     private int id;
     private String nombre;
+    private String genero;
+    private String agencia;
 
     public Artista() {
     }
@@ -35,5 +40,21 @@ public class Artista {
     @Override
     public String toString() {
         return nombre;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public String getAgencia() {
+        return agencia;
+    }
+
+    public void setAgencia(String agencia) {
+        this.agencia = agencia;
     }
 }

@@ -49,7 +49,8 @@ public class App extends Application {
             ventana.centerOnScreen();
         }
         salirDePantalla();
-        Region pantalla = FXMLLoader.load(App.class.getResource("/com/umg/api/ui/" + fxml));
+        String ruta = fxml.startsWith("/") ? fxml : "/com/umg/api/ui/" + fxml;
+        Region pantalla = FXMLLoader.load(App.class.getResource(ruta));
         pantalla.setPrefSize(0, 0);
         principal.mostrar(pantalla, fxml);
     }

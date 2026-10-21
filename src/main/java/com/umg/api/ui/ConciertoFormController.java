@@ -72,6 +72,8 @@ public class ConciertoFormController {
     @FXML
     private Button btnGuardar;
 
+    public static Integer conciertoInicial;
+
     private final ConciertoService conciertoService = new ConciertoService();
     private final EstadioService estadioService = new EstadioService();
     private final LocalidadService localidadService = new LocalidadService();
@@ -114,6 +116,14 @@ public class ConciertoFormController {
         btnGuardar.setOnAction(e -> guardar());
 
         cmbConcierto.getSelectionModel().selectFirst();
+        if (conciertoInicial != null) {
+            for (Concierto c : cmbConcierto.getItems()) {
+                if (c.getId() == conciertoInicial) {
+                    cmbConcierto.getSelectionModel().select(c);
+                }
+            }
+            conciertoInicial = null;
+        }
         mostrarConcierto();
     }
 

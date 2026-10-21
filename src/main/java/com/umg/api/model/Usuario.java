@@ -4,18 +4,34 @@
  */
 package com.umg.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.time.LocalDateTime;
+
 /**
  *
  * @author juanfranciscovaldezlopez
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Usuario {
 
     private int id;
     private String usuario;
     private String nombre;
     private String rol;
+    private String contrasena;
+    private boolean status;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public Usuario() {
+    }
+
+    public Usuario(String usuario, String contrasena, String nombre, String rol) {
+        this.usuario = usuario;
+        this.contrasena = contrasena;
+        this.nombre = nombre;
+        this.rol = rol;
+        this.status = true;
     }
 
     public int getId() {
@@ -53,5 +69,37 @@ public class Usuario {
     @Override
     public String toString() {
         return nombre != null ? nombre : usuario;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

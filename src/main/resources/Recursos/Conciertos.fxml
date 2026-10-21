@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="768" prefWidth="1366" styleClass="app" stylesheets="@../com/umg/api/ui/styles.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+  <left>
+    <VBox id="sidebar" maxWidth="216" minWidth="216" prefWidth="216" spacing="18" styleClass="sidebar">
+      <padding><Insets bottom="12" left="12" right="12" top="16" /></padding>
+      <children>
+        <HBox alignment="CENTER_LEFT" spacing="10">
+          <padding><Insets bottom="0" left="6" right="6" top="0" /></padding>
+          <children>
+            <StackPane maxHeight="34" maxWidth="34" minHeight="34" minWidth="34" prefHeight="34" prefWidth="34" styleClass="logo">
+              <children>
+                <Region maxHeight="20" maxWidth="20" minHeight="20" minWidth="20" prefHeight="20" prefWidth="20" styleClass="icon,ic-ticket,ic-dark" />
+              </children>
+            </StackPane>
+            <VBox spacing="3">
+              <children>
+                <Label styleClass="disp,s21" text="SVB·GUA" />
+                <Label styleClass="s10,w600,c-dim" text="TAQUILLA V1.0" />
+              </children>
+            </VBox>
+          </children>
+        </HBox>
+        <VBox spacing="2">
+          <children>
+            <Label styleClass="eyebrow" text="OPERACIÓN">
+              <padding><Insets bottom="6" left="10" right="10" top="0" /></padding>
+            </Label>
+            <Button alignment="CENTER_LEFT" graphicTextGap="10" maxWidth="Infinity" mnemonicParsing="false" prefHeight="38" styleClass="nav-item" text="Panel de control">
+              <graphic>
+                <Region maxHeight="20" maxWidth="20" minHeight="20" minWidth="20" prefHeight="20" prefWidth="20" styleClass="icon,ic-dashboard,ic-text2" />
+              </graphic>
+            </Button>
+            <Button alignment="CENTER_LEFT" graphicTextGap="10" maxWidth="Infinity" mnemonicParsing="false" prefHeight="38" styleClass="nav-item" text="Punto de venta">
+              <graphic>
+                <Region maxHeight="20" maxWidth="20" minHeight="20" minWidth="20" prefHeight="20" prefWidth="20" styleClass="icon,ic-pos,ic-text2" />
+              </graphic>
+            </Button>
+            <Button alignment="CENTER_LEFT" graphicTextGap="10" maxWidth="Infinity" mnemonicParsing="false" prefHeight="38" styleClass="nav-item" text="Historial de ventas">
+              <graphic>
+                <Region maxHeight="20" maxWidth="20" minHeight="20" minWidth="20" prefHeight="20" prefWidth="20" styleClass="icon,ic-list,ic-text2" />
+              </graphic>
+            </Button>
+            <Button alignment="CENTER_LEFT" graphicTextGap="10" maxWidth="Infinity" mnemonicParsing="false" prefHeight="38" styleClass="nav-item" text="Reportes">
+              <graphic>
+                <Region maxHeight="20" maxWidth="20" minHeight="20" minWidth="20" prefHeight="20" prefWidth="20" styleClass="icon,ic-chart,ic-text2" />
+              </graphic>
+            </Button>
+          </children>
+        </VBox>
+        <VBox spacing="2">
+          <children>
+            <Label styleClass="eyebrow" text="CATÁLOGOS">
+              <padding><Insets bottom="6" left="10" right="10" top="0" /></padding>
+            </Label>
+            <Button alignment="CENTER_LEFT" graphicTextGap="10" maxWidth="Infinity" mnemonicParsing="false" prefHeight="38" styleClass="nav-item" text="Artistas">
+              <graphic>
+                <Region maxHeight="20" maxWidth="20" minHeight="20" minWidth="20" prefHeight="20" prefWidth="20" styleClass="icon,ic-mic,ic-text2" />
+              </graphic>
+            </Button>
+            <Button alignment="CENTER_LEFT" graphicTextGap="10" maxWidth="Infinity" mnemonicParsing="false" prefHeight="38" styleClass="nav-item,nav-active" text="Conciertos">
+              <graphic>
+                <Region maxHeight="20" maxWidth="20" minHeight="20" minWidth="20" prefHeight="20" prefWidth="20" styleClass="icon,ic-event,ic-amber" />
+              </graphic>
+            </Button>
+            <Button alignment="CENTER_LEFT" graphicTextGap="10" maxWidth="Infinity" mnemonicParsing="false" prefHeight="38" styleClass="nav-item" text="Localidades">
+              <graphic>
+                <Region maxHeight="20" maxWidth="20" minHeight="20" minWidth="20" prefHeight="20" prefWidth="20" styleClass="icon,ic-seat,ic-text2" />
+              </graphic>
+            </Button>
+            <Button alignment="CENTER_LEFT" graphicTextGap="10" maxWidth="Infinity" mnemonicParsing="false" prefHeight="38" styleClass="nav-item" text="Usuarios">
+              <graphic>
+                <Region maxHeight="20" maxWidth="20" minHeight="20" minWidth="20" prefHeight="20" prefWidth="20" styleClass="icon,ic-group,ic-text2" />
+              </graphic>
+            </Button>
+          </children>
+        </VBox>
+        <Region VBox.vgrow="ALWAYS" />
+        <VBox spacing="4" styleClass="turno-card">
+          <padding><Insets bottom="12" left="12" right="12" top="12" /></padding>
+          <children>
+            <Label styleClass="eyebrow" text="HOY · TODAS" />
+            <Label styleClass="disp,s24" text="Q 48,350" />
+            <Label styleClass="s12,c-muted" text="16 ventas · 41 boletos" />
+          </children>
+        </VBox>
+        <HBox alignment="CENTER_LEFT" spacing="10">
+          <padding><Insets bottom="0" left="4" right="4" top="4" /></padding>
+          <children>
+            <StackPane maxHeight="34" maxWidth="34" minHeight="34" minWidth="34" prefHeight="34" prefWidth="34" styleClass="avatar">
+              <children>
+                <Label styleClass="s12,w700,c-amber" text="AM" />
+              </children>
+            </StackPane>
+            <VBox HBox.hgrow="ALWAYS">
+              <children>
+                <Label styleClass="s13,w600" text="Andrea Morales" />
+                <Label styleClass="s11,c-dim" text="Administrador" />
+              </children>
+            </VBox>
+            <Button id="btnCerrarSesion" graphicTextGap="8" mnemonicParsing="false" styleClass="btn-icon">
+              <graphic>
+                <Region maxHeight="18" maxWidth="18" minHeight="18" minWidth="18" prefHeight="18" prefWidth="18" styleClass="icon,ic-logout,ic-muted" />
+              </graphic>
+            </Button>
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+  </left>
+  <center>
+    <VBox>
+      <children>
+        <HBox alignment="BOTTOM_LEFT" spacing="10">
+          <padding><Insets bottom="16" left="28" right="28" top="22" /></padding>
+          <children>
+            <VBox spacing="6">
+              <children>
+                <Label styleClass="eyebrow" text="AGENDA · 8 CONCIERTOS" />
+                <Label styleClass="disp,s34" text="CONCIERTOS" />
+              </children>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <HBox alignment="CENTER_LEFT" prefHeight="40" prefWidth="280" spacing="10" styleClass="field">
+              <children>
+                <Region maxHeight="19" maxWidth="19" minHeight="19" minWidth="19" prefHeight="19" prefWidth="19" styleClass="icon,ic-search" />
+                <TextField promptText="Buscar evento, artista o recinto" styleClass="field-input" HBox.hgrow="ALWAYS" />
+              </children>
+            </HBox>
+            <Button id="btnProgramar" graphicTextGap="8" mnemonicParsing="false" prefHeight="40" styleClass="btn-primary" text="Programar concierto">
+              <graphic>
+                <Region maxHeight="18" maxWidth="18" minHeight="18" minWidth="18" prefHeight="18" prefWidth="18" styleClass="icon,ic-add,ic-dark" />
+              </graphic>
+            </Button>
+          </children>
+        </HBox>
+        <VBox styleClass="table" VBox.vgrow="ALWAYS">
+          <VBox.margin>
+            <Insets bottom="24" left="28" right="28" />
+          </VBox.margin>
+          <children>
+            <GridPane hgap="12" styleClass="thead">
+              <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10" prefWidth="220" />
+                <ColumnConstraints maxWidth="140" minWidth="140" prefWidth="140" />
+                <ColumnConstraints maxWidth="110" minWidth="110" prefWidth="110" />
+                <ColumnConstraints maxWidth="104" minWidth="104" prefWidth="104" />
+                <ColumnConstraints maxWidth="140" minWidth="140" prefWidth="140" />
+                <ColumnConstraints halignment="RIGHT" maxWidth="72" minWidth="72" prefWidth="72" />
+              </columnConstraints>
+              <padding><Insets bottom="11" left="18" right="18" top="11" /></padding>
+              <children>
+                <Label styleClass="th" text="EVENTO" GridPane.columnIndex="0" />
+                <Label styleClass="th" text="FECHA Y HORA" GridPane.columnIndex="1" />
+                <Label styleClass="th" text="RECINTO" GridPane.columnIndex="2" />
+                <Label styleClass="th" text="ESTADO" GridPane.columnIndex="3" />
+                <Label styleClass="th" text="OCUPACIÓN" GridPane.columnIndex="4" />
+                <Label styleClass="th" GridPane.columnIndex="5" />
+              </children>
+                     <rowConstraints>
+                        <RowConstraints />
+                     </rowConstraints>
+            </GridPane>
+            <ScrollPane fitToWidth="true" styleClass="scroll" VBox.vgrow="ALWAYS">
+              <content>
+                <VBox>
+                  <children>
+                    <GridPane hgap="12" styleClass="trow">
+                      <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10" prefWidth="220" />
+                        <ColumnConstraints maxWidth="140" minWidth="140" prefWidth="140" />
+                        <ColumnConstraints maxWidth="110" minWidth="110" prefWidth="110" />
+                        <ColumnConstraints maxWidth="104" minWidth="104" prefWidth="104" />
+                        <ColumnConstraints maxWidth="140" minWidth="140" prefWidth="140" />
+                        <ColumnConstraints halignment="RIGHT" maxWidth="72" minWidth="72" prefWidth="72" />
+                      </columnConstraints>
+                      <padding><Insets bottom="10" left="18" right="18" top="10" /></padding>
+                      <children>
+                        <VBox GridPane.columnIndex="0">
+                          <children>
+                            <Label styleClass="s13,w600" text="Alba Rivera" />
+                            <Label styleClass="s12,c-dim" text="#108 · Íntimo" />
+                          </children>
+                        </VBox>
+                        <VBox GridPane.columnIndex="1">
+                          <children>
+                            <Label styleClass="s12" text="sáb 19 sep 2026" />
+                            <Label styleClass="s11,c-dim" text="20:00 h" />
+                          </children>
+                        </VBox>
+                        <Label styleClass="s13,c-text2" text="Teatro Lux" GridPane.columnIndex="2" />
+                        <HBox alignment="CENTER_LEFT" GridPane.columnIndex="3">
+                          <children>
+                            <HBox alignment="CENTER_LEFT" spacing="6" style="-fx-background-color: rgba(140,134,121,0.14);" styleClass="pill">
+                              <children>
+                                <Region maxHeight="6" maxWidth="6" minHeight="6" minWidth="6" prefHeight="6" prefWidth="6" style="-fx-background-color: #8C8679;" styleClass="dot" />
+                                <Label style="-fx-text-fill: #8C8679;" styleClass="s11,w700" text="Finalizado" />
+                              </children>
+                            </HBox>
+                          </children>
+                        </HBox>
+                        <VBox spacing="5" GridPane.columnIndex="4">
+                          <children>
+                            <HBox alignment="CENTER_LEFT">
+                              <children>
+                                <Label styleClass="s11,c-muted" text="90%" />
+                                <Region HBox.hgrow="ALWAYS" />
+                                <Label styleClass="s11,c-muted" text="434 / 480" />
+                              </children>
+                            </HBox>
+                            <StackPane alignment="CENTER_LEFT" maxHeight="5" prefHeight="5" styleClass="meter-track">
+                              <children>
+                                <Region maxWidth="126" prefHeight="5" prefWidth="126" styleClass="meter-fill,fill-amber" />
+                              </children>
+                            </StackPane>
+                          </children>
+                        </VBox>
+                        <HBox alignment="CENTER_RIGHT" spacing="4" GridPane.columnIndex="5">
+                          <children>
+                            <Button disable="true" graphicTextGap="8" mnemonicParsing="false" styleClass="btn-icon" />
+                            <Button graphicTextGap="8" mnemonicParsing="false" styleClass="btn-icon">
+                              <graphic>
+                                <Region maxHeight="18" maxWidth="18" minHeight="18" minWidth="18" prefHeight="18" prefWidth="18" styleClass="icon,ic-edit,ic-muted" />
+                              </graphic>
+                            </Button>
+                          </children>
+                        </HBox>
+                      </children>
+                                 <rowConstraints>
+                                    <RowConstraints />
+                                 </rowConstraints>
+                    </GridPane>
+                    <GridPane hgap="12" styleClass="trow">
+                      <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10" prefWidth="220" />
+                        <ColumnConstraints maxWidth="140" minWidth="140" prefWidth="140" />
+                        <ColumnConstraints maxWidth="110" minWidth="110" prefWidth="110" />
+                        <ColumnConstraints maxWidth="104" minWidth="104" prefWidth="104" />
+                        <ColumnConstraints maxWidth="140" minWidth="140" prefWidth="140" />
+                        <ColumnConstraints halignment="RIGHT" maxWidth="72" minWidth="72" prefWidth="72" />
+                      </columnConstraints>
+                      <padding><Insets bottom="10" left="18" right="18" top="10" /></padding>
+                    </GridPane>
+                    <GridPane hgap="12" styleClass="trow">
+                      <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10" prefWidth="220" />
+                        <ColumnConstraints maxWidth="140" minWidth="140" prefWidth="140" />
+                        <ColumnConstraints maxWidth="110" minWidth="110" prefWidth="110" />
+                        <ColumnConstraints maxWidth="104" minWidth="104" prefWidth="104" />
+                        <ColumnConstraints maxWidth="140" minWidth="140" prefWidth="140" />
+                        <ColumnConstraints halignment="RIGHT" maxWidth="72" minWidth="72" prefWidth="72" />
+                      </columnConstraints>
+                      <padding><Insets bottom="10" left="18" right="18" top="10" /></padding>
+                    </GridPane>
+                    <GridPane hgap="12" styleClass="trow">
+                      <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10" prefWidth="220" />
+                        <ColumnConstraints maxWidth="140" minWidth="140" prefWidth="140" />
+                        <ColumnConstraints maxWidth="110" minWidth="110" prefWidth="110" />
+                        <ColumnConstraints maxWidth="104" minWidth="104" prefWidth="104" />
+                        <ColumnConstraints maxWidth="140" minWidth="140" prefWidth="140" />
+                        <ColumnConstraints halignment="RIGHT" maxWidth="72" minWidth="72" prefWidth="72" />
+                      </columnConstraints>
+                      <padding><Insets bottom="10" left="18" right="18" top="10" /></padding>
+                    </GridPane>
+                    <GridPane hgap="12" styleClass="trow">
+                      <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10" prefWidth="220" />
+                        <ColumnConstraints maxWidth="140" minWidth="140" prefWidth="140" />
+                        <ColumnConstraints maxWidth="110" minWidth="110" prefWidth="110" />
+                        <ColumnConstraints maxWidth="104" minWidth="104" prefWidth="104" />
+                        <ColumnConstraints maxWidth="140" minWidth="140" prefWidth="140" />
+                        <ColumnConstraints halignment="RIGHT" maxWidth="72" minWidth="72" prefWidth="72" />
+                      </columnConstraints>
+                      <padding><Insets bottom="10" left="18" right="18" top="10" /></padding>
+                    </GridPane>
+                    <GridPane hgap="12" styleClass="trow">
+                      <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10" prefWidth="220" />
+                        <ColumnConstraints maxWidth="140" minWidth="140" prefWidth="140" />
+                        <ColumnConstraints maxWidth="110" minWidth="110" prefWidth="110" />
+                        <ColumnConstraints maxWidth="104" minWidth="104" prefWidth="104" />
+                        <ColumnConstraints maxWidth="140" minWidth="140" prefWidth="140" />
+                        <ColumnConstraints halignment="RIGHT" maxWidth="72" minWidth="72" prefWidth="72" />
+                      </columnConstraints>
+                      <padding><Insets bottom="10" left="18" right="18" top="10" /></padding>
+                    </GridPane>
+                    <GridPane hgap="12" styleClass="trow">
+                      <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10" prefWidth="220" />
+                        <ColumnConstraints maxWidth="140" minWidth="140" prefWidth="140" />
+                        <ColumnConstraints maxWidth="110" minWidth="110" prefWidth="110" />
+                        <ColumnConstraints maxWidth="104" minWidth="104" prefWidth="104" />
+                        <ColumnConstraints maxWidth="140" minWidth="140" prefWidth="140" />
+                        <ColumnConstraints halignment="RIGHT" maxWidth="72" minWidth="72" prefWidth="72" />
+                      </columnConstraints>
+                      <padding><Insets bottom="10" left="18" right="18" top="10" /></padding>
+                    </GridPane>
+                    <GridPane hgap="12" styleClass="trow">
+                      <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10" prefWidth="220" />
+                        <ColumnConstraints maxWidth="140" minWidth="140" prefWidth="140" />
+                        <ColumnConstraints maxWidth="110" minWidth="110" prefWidth="110" />
+                        <ColumnConstraints maxWidth="104" minWidth="104" prefWidth="104" />
+                        <ColumnConstraints maxWidth="140" minWidth="140" prefWidth="140" />
+                        <ColumnConstraints halignment="RIGHT" maxWidth="72" minWidth="72" prefWidth="72" />
+                      </columnConstraints>
+                      <padding><Insets bottom="10" left="18" right="18" top="10" /></padding>
+                    </GridPane>
+                  </children>
+                </VBox>
+              </content>
+            </ScrollPane>
+          </children>
+        </VBox>
+      </children>
+    </VBox>
+  </center>
+</BorderPane>

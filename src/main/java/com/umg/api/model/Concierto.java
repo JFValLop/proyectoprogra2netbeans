@@ -4,10 +4,14 @@
  */
 package com.umg.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  *
  * @author juanfranciscovaldezlopez
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Concierto {
 
     private int id;
@@ -21,6 +25,16 @@ public class Concierto {
     private String estadio;
 
     public Concierto() {
+    }
+
+    public Concierto(int id, String gira, int estadioId, String hora, String fecha, int artistaId, String estado) {
+        this.id = id;
+        this.gira = gira;
+        this.estadioId = estadioId;
+        this.hora = hora;
+        this.fecha = fecha;
+        this.artistaId = artistaId;
+        this.estado = estado;
     }
 
     public int getId() {
@@ -79,6 +93,7 @@ public class Concierto {
         this.estado = estado;
     }
 
+    @JsonIgnore
     public String getArtista() {
         return artista;
     }
@@ -87,6 +102,7 @@ public class Concierto {
         this.artista = artista;
     }
 
+    @JsonIgnore
     public String getEstadio() {
         return estadio;
     }

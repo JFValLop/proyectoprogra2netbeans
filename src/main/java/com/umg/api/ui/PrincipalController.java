@@ -2,13 +2,13 @@ package com.umg.api.ui;
 
 import com.umg.api.App;
 import com.umg.api.Sesion;
+import com.umg.api.controller.Artistas_Controller;
 import com.umg.api.model.Usuario;
 import com.umg.api.service.VentaService;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -67,6 +67,8 @@ public class PrincipalController {
     @FXML
     private StackPane contenido;
 
+    private static final String CATALOGO = "/Recursos/Artistas.fxml";
+
     private String actual;
 
     @FXML
@@ -88,12 +90,12 @@ public class PrincipalController {
 
         btnPuntoVenta.setOnAction(e -> Barra.ir("Cartelera.fxml"));
         btnLocalidades.setOnAction(e -> Barra.ir("Recintos.fxml"));
-        btnConciertos.setOnAction(e -> abrirConciertos());
+        btnConciertos.setOnAction(e -> catalogo("CONCIERTOS"));
         btnPanel.setOnAction(e -> vacia(btnPanel, "OPERACIÓN", "PANEL DE CONTROL"));
         btnHistorial.setOnAction(e -> vacia(btnHistorial, "OPERACIÓN", btnHistorial.getText().toUpperCase()));
         btnReportes.setOnAction(e -> vacia(btnReportes, "OPERACIÓN", "REPORTES"));
-        btnArtistas.setOnAction(e -> vacia(btnArtistas, "CATÁLOGO", "ARTISTAS"));
-        btnUsuarios.setOnAction(e -> vacia(btnUsuarios, "CATÁLOGO", "USUARIOS"));
+        btnArtistas.setOnAction(e -> catalogo("ARTISTAS"));
+        btnUsuarios.setOnAction(e -> catalogo("USUARIOS"));
         btnCerrarSesion.setOnAction(e -> Barra.cerrarSesion());
 
         actualizarTurno();
@@ -104,6 +106,9 @@ public class PrincipalController {
         contenido.getChildren().setAll(pantalla);
         if (nombre.equals("Recintos.fxml")) {
             marcar(btnLocalidades);
+        } else if (nombre.equals(CATALOGO)) {
+            String vista = Artistas_Controller.vistaInicial;
+            marcar(vista.equals("CONCIERTOS") ? btnConciertos : vista.equals("USUARIOS") ? btnUsuarios : btnArtistas);
         } else if (nombre.endsWith(".fxml")) {
             marcar(btnPuntoVenta);
         }
@@ -143,14 +148,8 @@ public class PrincipalController {
         marcar(boton);
     }
 
-    private void abrirConciertos() {
-        try {
-            App.abrirDialogo("ConciertoForm.fxml", "Conciertos");
-            if (actual != null && (actual.equals("Cartelera.fxml") || actual.equals("Recintos.fxml"))) {
-                Barra.ir(actual);
-            }
-        } catch (Exception ex) {
-            Barra.alerta(Alert.AlertType.ERROR, ex.getMessage());
-        }
+    private void catalogo(String vista) {
+        Artistas_Controller.vistaInicial = vista;
+        Barra.ir(CATALOGO);
     }
 }
