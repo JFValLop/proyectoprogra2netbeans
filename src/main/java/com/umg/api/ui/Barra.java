@@ -32,6 +32,12 @@ public class Barra {
             App.getPrincipal().actualizarTurno();
         }
     }
+    
+    public static void notificar(String texto, String tipo) {
+        if (App.getPrincipal() != null) {
+            App.getPrincipal().notificar(texto, tipo);
+        }
+    }
 
     public static void alerta(Alert.AlertType tipo, String mensaje) {
         Alert alerta = new Alert(tipo);

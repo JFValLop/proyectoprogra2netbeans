@@ -29,7 +29,7 @@ public class Sesion {
     }
 
     public static boolean esAdmin() {
-        return usuario != null && "ADMIN".equalsIgnoreCase(usuario.getRol());
+        return usuario != null && ("ADMIN".equalsIgnoreCase(usuario.getRol()) || "Administrador".equalsIgnoreCase(usuario.getRol()));
     }
 
     public static Concierto getConcierto() {

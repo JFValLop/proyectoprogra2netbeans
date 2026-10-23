@@ -4,6 +4,8 @@
  */
 package com.umg.api.model;
 
+import java.util.List;
+
 /**
  *
  * @author juanfranciscovaldezlopez
@@ -13,6 +15,7 @@ public class ResumenVentas {
     private int totalVentas;
     private int totalBoletos;
     private double totalMonto;
+    private List<Venta> ventas;
 
     public ResumenVentas() {
     }
@@ -39,5 +42,13 @@ public class ResumenVentas {
 
     public void setTotalMonto(double totalMonto) {
         this.totalMonto = totalMonto;
+    }
+
+    public List<Venta> getVentas() {
+        return ventas;
+    }
+
+    public void setVentas(List<Venta> ventas) {
+        this.ventas = ventas;
     }
 }

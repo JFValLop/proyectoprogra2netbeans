@@ -102,6 +102,9 @@ public class Formato {
         if (rol == null) {
             return "";
         }
-        return "ADMIN".equalsIgnoreCase(rol) ? "Administrador" : "Vendedor";
+        if ("ADMIN".equalsIgnoreCase(rol) || "Administrador".equalsIgnoreCase(rol)) {
+            return "Administrador";
+        }
+        return "Vendedor";
     }
 }

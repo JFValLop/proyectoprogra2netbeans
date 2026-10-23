@@ -73,6 +73,7 @@ public class ConfirmacionController {
         Concierto concierto = orden.getConcierto();
 
         Barra.actualizarTurno();
+        Barra.notificar("Venta " + venta.getNumero() + " registrada · " + venta.getBoletos().size() + " boletos · " + Formato.dinero(venta.getTotal()), "ok");
         btnReenviar.setDisable(true);
         btnNuevaVenta.setOnAction(e -> Barra.ir("Cartelera.fxml"));
         btnOtraVenta.setOnAction(e -> {
