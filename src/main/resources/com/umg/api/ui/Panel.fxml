@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- Los estilos (styleClass) vienen de styles.css, que ya carga Principal.fxml -->
+<ScrollPane fx:id="raiz" styleClass="scroll" fitToWidth="true"
+            xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.umg.api.ui.PanelController">
+   <content>
+      <VBox spacing="16">
+         <padding>
+            <Insets top="22" right="28" bottom="28" left="28" />
+         </padding>
+         <children>
+
+            <!-- ============ ENCABEZADO ============ -->
+            <HBox alignment="BOTTOM_LEFT">
+               <children>
+                  <VBox spacing="6">
+                     <children>
+                        <Label fx:id="lblFecha" text="" styleClass="eyebrow" />
+                        <Label text="PANEL DE CONTROL" styleClass="disp,s44" />
+                     </children>
+                  </VBox>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <HBox alignment="CENTER_LEFT" spacing="8">
+                     <children>
+                        <Region fx:id="punto" styleClass="dot" minWidth="8" minHeight="8"
+                                prefWidth="8" prefHeight="8" maxWidth="8" maxHeight="8" />
+                        <Label fx:id="lblEstado" text="Cargando datos…" styleClass="s12,c-muted" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+
+            <!-- ============ 4 TARJETAS ============ -->
+            <HBox spacing="14">
+               <children>
+                  <VBox styleClass="stat" spacing="6" HBox.hgrow="ALWAYS" prefWidth="200" maxWidth="Infinity">
+                     <padding>
+                        <Insets top="16" right="18" bottom="16" left="18" />
+                     </padding>
+                     <children>
+                        <HBox spacing="8" alignment="CENTER_LEFT">
+                           <children>
+                              <Region styleClass="icon,ic-payments,ic-muted" minWidth="16" minHeight="16"
+                                      prefWidth="16" prefHeight="16" maxWidth="16" maxHeight="16" />
+                              <Label text="Recaudación hoy" styleClass="s12,w600,c-muted" />
+                           </children>
+                        </HBox>
+                        <Label fx:id="lblRecaudacion" text="Q 0" styleClass="disp,s38" />
+                        <Label fx:id="lblRecaudacionSub" text="" styleClass="s12,c-dim" />
+                     </children>
+                  </VBox>
+
+                  <VBox styleClass="stat" spacing="6" HBox.hgrow="ALWAYS" prefWidth="200" maxWidth="Infinity">
+                     <padding>
+                        <Insets top="16" right="18" bottom="16" left="18" />
+                     </padding>
+                     <children>
+                        <HBox spacing="8" alignment="CENTER_LEFT">
+                           <children>
+                              <Region styleClass="icon,ic-ticket,ic-muted" minWidth="16" minHeight="16"
+                                      prefWidth="16" prefHeight="16" maxWidth="16" maxHeight="16" />
+                              <Label text="Boletos vendidos hoy" styleClass="s12,w600,c-muted" />
+                           </children>
+                        </HBox>
+                        <Label fx:id="lblBoletos" text="0" styleClass="disp,s38" />
+                        <Label fx:id="lblBoletosSub" text="" styleClass="s12,c-dim" />
+                     </children>
+                  </VBox>
+
+                  <VBox styleClass="stat" spacing="6" HBox.hgrow="ALWAYS" prefWidth="200" maxWidth="Infinity">
+                     <padding>
+                        <Insets top="16" right="18" bottom="16" left="18" />
+                     </padding>
+                     <children>
+                        <HBox spacing="8" alignment="CENTER_LEFT">
+                           <children>
+                              <Region styleClass="icon,ic-receipt,ic-muted" minWidth="16" minHeight="16"
+                                      prefWidth="16" prefHeight="16" maxWidth="16" maxHeight="16" />
+                              <Label text="Promedio por venta" styleClass="s12,w600,c-muted" />
+                           </children>
+                        </HBox>
+                        <Label fx:id="lblPromedio" text="Q 0" styleClass="disp,s38" />
+                        <Label fx:id="lblPromedioSub" text="" styleClass="s12,c-dim" />
+                     </children>
+                  </VBox>
+
+                  <VBox styleClass="stat" spacing="6" HBox.hgrow="ALWAYS" prefWidth="200" maxWidth="Infinity">
+                     <padding>
+                        <Insets top="16" right="18" bottom="16" left="18" />
+                     </padding>
+                     <children>
+                        <HBox spacing="8" alignment="CENTER_LEFT">
+                           <children>
+                              <Region styleClass="icon,ic-seat,ic-muted" minWidth="16" minHeight="16"
+                                      prefWidth="16" prefHeight="16" maxWidth="16" maxHeight="16" />
+                              <Label text="Aforo vendido" styleClass="s12,w600,c-muted" />
+                           </children>
+                        </HBox>
+                        <Label fx:id="lblAforo" text="0%" styleClass="disp,s38" />
+                        <Label fx:id="lblAforoSub" text="" styleClass="s12,c-dim" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+
+            <!-- ============ INVENTARIO + POPULARIDAD ============ -->
+            <HBox spacing="14">
+               <children>
+                  <VBox styleClass="card" HBox.hgrow="ALWAYS" prefWidth="700" maxWidth="Infinity" spacing="6">
+                     <padding>
+                        <Insets top="18" right="20" bottom="8" left="20" />
+                     </padding>
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="12">
+                           <children>
+                              <Label text="Inventario en tiempo real" styleClass="s15,w700" />
+                              <Region HBox.hgrow="ALWAYS" />
+                              <HBox fx:id="leyenda" spacing="12" alignment="CENTER_RIGHT" />
+                           </children>
+                        </HBox>
+                        <VBox fx:id="listaInventario" />
+                     </children>
+                  </VBox>
+
+                  <VBox styleClass="card" minWidth="380" prefWidth="380" maxWidth="380" spacing="14">
+                     <padding>
+                        <Insets top="18" right="20" bottom="14" left="20" />
+                     </padding>
+                     <children>
+                        <Label text="Popularidad de artistas" styleClass="s15,w700" />
+                        <VBox fx:id="listaArtistas" />
+                        <Label text="Boletos vendidos acumulados" styleClass="s11,c-dim" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+
+            <!-- ============ RECAUDACION 14 DIAS + ACTIVIDAD ============ -->
+            <HBox spacing="14">
+               <children>
+                  <VBox styleClass="card" HBox.hgrow="ALWAYS" prefWidth="700" maxWidth="Infinity" spacing="16">
+                     <padding>
+                        <Insets top="18" right="20" bottom="16" left="20" />
+                     </padding>
+                     <children>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <Label text="Recaudación · últimos 14 días" styleClass="s15,w700" />
+                              <Region HBox.hgrow="ALWAYS" />
+                              <Label fx:id="lblTotal14" text="Q 0" styleClass="s15,w700" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="barras14" spacing="8" alignment="BOTTOM_LEFT"
+                              minHeight="170" prefHeight="170" maxHeight="170" />
+                     </children>
+                  </VBox>
+
+                  <VBox styleClass="card" minWidth="380" prefWidth="380" maxWidth="380" spacing="16">
+                     <padding>
+                        <Insets top="18" right="20" bottom="4" left="20" />
+                     </padding>
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="8">
+                           <children>
+                              <Label text="Actividad en taquillas" styleClass="s15,w700" />
+                              <Region styleClass="dot,fill-bal" minWidth="8" minHeight="8"
+                                      prefWidth="8" prefHeight="8" maxWidth="8" maxHeight="8" />
+                           </children>
+                        </HBox>
+                        <VBox fx:id="listaActividad" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>

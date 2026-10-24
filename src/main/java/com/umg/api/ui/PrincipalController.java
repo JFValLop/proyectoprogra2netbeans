@@ -106,8 +106,8 @@ public class PrincipalController {
 
         btnPuntoVenta.setOnAction(e -> Barra.ir("Cartelera.fxml"));
         btnLocalidades.setOnAction(e -> Barra.ir("Recintos.fxml"));
+        btnPanel.setOnAction(e -> Barra.ir("Panel.fxml"));
         btnConciertos.setOnAction(e -> catalogo("CONCIERTOS"));
-        btnPanel.setOnAction(e -> vacia(btnPanel, "OPERACIÓN", "PANEL DE CONTROL"));
         btnHistorial.setOnAction(e -> vacia(btnHistorial, "OPERACIÓN", btnHistorial.getText().toUpperCase()));
         btnReportes.setOnAction(e -> Barra.ir("Reportes.fxml")); 
         btnArtistas.setOnAction(e -> vacia(btnArtistas, "CATÁLOGO", "ARTISTAS"));
@@ -128,9 +128,15 @@ public class PrincipalController {
         contenido.getChildren().setAll(pantalla);
         if (nombre.equals("Recintos.fxml")) {
             marcar(btnLocalidades);
-        } else if (nombre.equals("Reportes.fxml")) {
+        } 
+         else if (nombre.equals("Panel.fxml")) {
+        marcar(btnPanel);
+        }
+        else if (nombre.equals("Reportes.fxml")) {
         marcar(btnReportes);
-         }else if (nombre.equals(CATALOGO)) {
+        }
+        
+        else if (nombre.equals(CATALOGO)) {
             String vista = Artistas_Controller.vistaInicial;
             marcar(vista.equals("CONCIERTOS") ? btnConciertos : vista.equals("USUARIOS") ? btnUsuarios : btnArtistas);
         } else if (nombre.endsWith(".fxml")) {
