@@ -108,8 +108,8 @@ public class PrincipalController {
         btnLocalidades.setOnAction(e -> Barra.ir("Recintos.fxml"));
         btnPanel.setOnAction(e -> Barra.ir("Panel.fxml"));
         btnConciertos.setOnAction(e -> catalogo("CONCIERTOS"));
-        btnHistorial.setOnAction(e -> vacia(btnHistorial, "OPERACIÓN", btnHistorial.getText().toUpperCase()));
-        btnReportes.setOnAction(e -> Barra.ir("Reportes.fxml")); 
+        btnHistorial.setText(admin ? "Gestión de ventas" : "Mis ventas");
+        btnHistorial.setOnAction(e -> Barra.ir("GestionVentas.fxml"));        btnReportes.setOnAction(e -> Barra.ir("Reportes.fxml")); 
         btnArtistas.setOnAction(e -> vacia(btnArtistas, "CATÁLOGO", "ARTISTAS"));
         btnArtistas.setOnAction(e -> catalogo("ARTISTAS"));
         btnUsuarios.setOnAction(e -> catalogo("USUARIOS"));
@@ -134,6 +134,9 @@ public class PrincipalController {
         }
         else if (nombre.equals("Reportes.fxml")) {
         marcar(btnReportes);
+        }
+        else if (nombre.equals("GestionVentas.fxml")) {
+        marcar(btnHistorial);
         }
         
         else if (nombre.equals(CATALOGO)) {

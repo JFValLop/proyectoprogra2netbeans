@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="raiz" styleClass="app" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@styles.css" fx:controller="com.umg.api.ui.GestionVentasController">
+  <children>
+    <VBox spacing="16">
+      <padding><Insets top="22" right="28" bottom="20" left="28"/></padding>
+      <children>
+        <HBox alignment="BOTTOM_LEFT">
+          <children>
+            <VBox spacing="2" HBox.hgrow="ALWAYS">
+              <children>
+                <Label text="TODAS LAS TAQUILLAS · VENTAS Y DETALLE" styleClass="eyebrow" fx:id="lblCeja"/>
+                <Label text="GESTIÓN DE VENTAS" styleClass="disp,s34" fx:id="lblTitulo"/>
+              </children>
+            </VBox>
+            <VBox alignment="CENTER_RIGHT" spacing="2">
+              <children>
+                <Label text="" styleClass="s12,c-dim" fx:id="lblResumen"/>
+                <Label text="Q 0.00" styleClass="disp,s28" fx:id="lblTotalGeneral"/>
+              </children>
+            </VBox>
+          </children>
+        </HBox>
+
+        <HBox alignment="CENTER_LEFT" spacing="12">
+          <children>
+            <TextField fx:id="txtBuscar" promptText="No. de venta, artista o cliente" prefWidth="320" minHeight="38"/>
+            <HBox fx:id="boxRango" alignment="CENTER_LEFT" spacing="2"/>
+            <ComboBox fx:id="cmbVendedor" prefWidth="220" minHeight="38"/>
+          </children>
+        </HBox>
+
+        <VBox VBox.vgrow="ALWAYS" spacing="0" style="-fx-background-color: #1F1E1B; -fx-border-color: #34322D; -fx-background-radius: 14; -fx-border-radius: 14;">
+          <children>
+            <HBox fx:id="cabecera" alignment="CENTER_LEFT"/>
+            <ScrollPane fx:id="scroll" fitToWidth="true" hbarPolicy="NEVER" VBox.vgrow="ALWAYS" style="-fx-background: transparent; -fx-background-color: transparent;">
+              <content>
+                <VBox fx:id="filas"/>
+              </content>
+            </ScrollPane>
+          </children>
+        </VBox>
+      </children>
+    </VBox>
+
+    <Pane fx:id="velo" visible="false" style="-fx-background-color: rgba(0,0,0,0.35);"/>
+
+    <VBox fx:id="panel" visible="false" minWidth="480" prefWidth="480" maxWidth="480" maxHeight="Infinity" StackPane.alignment="CENTER_RIGHT"/>
+  </children>
+</StackPane>

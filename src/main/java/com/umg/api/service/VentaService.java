@@ -25,20 +25,30 @@ public class VentaService {
     private static final String BASE_URL = Api.URL + "/ventas";
 
     public Venta crearVenta(Map<String, Object> datos) throws Exception {
-        try (CloseableHttpClient client = HttpClients.createDefault()) {
-            HttpPost request = new HttpPost(BASE_URL + "/create/");
+    try (CloseableHttpClient client = HttpClients.createDefault()) {
+        HttpPost request = new HttpPost(BASE_URL + "/create/");
 
-            String json = Api.mapper.writeValueAsString(datos);
-            request.setEntity(EntityBuilder.create().setText(json).setContentType(ContentType.APPLICATION_JSON).build());
+        String json = Api.mapper.writeValueAsString(datos);
+        request.setEntity(EntityBuilder.create().setText(json).setContentType(ContentType.APPLICATION_JSON).build());
 
-            ClassicHttpResponse response = client.execute(request);
-            InputStream is = response.getEntity().getContent();
-            if (response.getCode() != 200) {
-                throw Api.error(is, response.getCode());
-            }
-            return Api.mapper.readValue(is, Venta.class);
+        ClassicHttpResponse response = client.execute(request);
+        InputStream is = response.getEntity().getContent();
+        if (response.getCode() != 200) {
+            throw Api.error(is, response.getCode());
         }
+
+        Venta venta = Api.mapper.readValue(is, Venta.class);
+
+        // La venta ya quedó guardada: la factura corre aparte y nunca debe romperla
+        try {
+            FacturaService.guardarEnSegundoPlano(venta.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return venta;
     }
+}
 
     public ResumenVentas getResumenHoy(Integer usuarioId) throws Exception {
         String url = BASE_URL + "?hoy=1" + (usuarioId != null ? "&usuarioId=" + usuarioId : "");
