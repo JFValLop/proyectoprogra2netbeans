@@ -34,6 +34,9 @@ public class PrincipalController {
     private Button btnPuntoVenta;
 
     @FXML
+    private Button btnValidar;
+
+    @FXML
     private Button btnHistorial;
     
     @FXML
@@ -106,6 +109,7 @@ public class PrincipalController {
 
         btnPuntoVenta.setOnAction(e -> Barra.ir("Cartelera.fxml"));
         btnLocalidades.setOnAction(e -> Barra.ir("Recintos.fxml"));
+        btnValidar.setOnAction(e -> Barra.ir("Validar.fxml"));
         btnPanel.setOnAction(e -> Barra.ir("Panel.fxml"));
         btnConciertos.setOnAction(e -> catalogo("CONCIERTOS"));
         btnHistorial.setText(admin ? "Gestión de ventas" : "Mis ventas");
@@ -137,6 +141,9 @@ public class PrincipalController {
         }
         else if (nombre.equals("GestionVentas.fxml")) {
         marcar(btnHistorial);
+        }
+        else if (nombre.equals("Validar.fxml")) {
+        marcar(btnValidar);
         }
         
         else if (nombre.equals(CATALOGO)) {
@@ -188,7 +195,7 @@ public class PrincipalController {
     }
 
     private void marcar(Button boton) {
-        for (Button b : List.of(btnPanel, btnPuntoVenta, btnHistorial, btnReportes, btnArtistas, btnConciertos, btnLocalidades, btnUsuarios)) {
+        for (Button b : List.of(btnPanel, btnPuntoVenta, btnValidar, btnHistorial, btnReportes, btnArtistas, btnConciertos, btnLocalidades, btnUsuarios)) {
             b.getStyleClass().remove("nav-active");
             Node icono = b.getGraphic();
             if (icono != null) {

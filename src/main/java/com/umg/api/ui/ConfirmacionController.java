@@ -6,13 +6,16 @@ import com.umg.api.model.Concierto;
 import com.umg.api.model.Orden;
 import com.umg.api.model.Venta;
 import com.umg.api.model.ZonaMapa;
+import com.umg.api.service.VentaService;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import javafx.fxml.FXML;
 import javafx.print.PrinterJob;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.layout.GridPane;
@@ -74,7 +77,7 @@ public class ConfirmacionController {
 
         Barra.actualizarTurno();
         Barra.notificar("Venta " + venta.getNumero() + " registrada · " + venta.getBoletos().size() + " boletos · " + Formato.dinero(venta.getTotal()), "ok");
-        btnReenviar.setDisable(true);
+        btnReenviar.setOnAction(e -> reenviarCorreo(venta));
         btnNuevaVenta.setOnAction(e -> Barra.ir("Cartelera.fxml"));
         btnOtraVenta.setOnAction(e -> {
             Sesion.setVenta(null);
@@ -105,7 +108,7 @@ public class ConfirmacionController {
 
         int cantidad = venta.getBoletos().size();
         lblCantidad.setText(cantidad + (cantidad == 1 ? " boleto generado" : " boletos generados"));
-        lblEntrega.setText("Para imprimir en taquilla · cada boleto lleva un QR único para validar el acceso");
+        mostrarEntrega(venta.getCorreo());
 
         Map<String, String> colores = new HashMap<>();
         int i = 0;
@@ -139,6 +142,37 @@ public class ConfirmacionController {
             gridBoletos.add(p.getRaiz(), n % 3, n / 3);
             n++;
         }
+    }
+
+    private void mostrarEntrega(String correo) {
+        if (correo == null || correo.isEmpty()) {
+            lblEntrega.setText("Para imprimir en taquilla · cada boleto lleva un QR único para validar el acceso");
+        } else {
+            lblEntrega.setText("Impresos en taquilla · Enviados a " + correo + " · cada boleto lleva un QR único para validar el acceso");
+        }
+    }
+
+    private void reenviarCorreo(Venta venta) {
+        TextInputDialog dialogo = new TextInputDialog(venta.getCorreo() == null ? "" : venta.getCorreo());
+        dialogo.setTitle("Enviar boletos por correo");
+        dialogo.setHeaderText(null);
+        dialogo.setContentText("Correo del cliente:");
+        Optional<String> respuesta = dialogo.showAndWait();
+        if (respuesta.isEmpty() || !respuesta.get().contains("@")) {
+            return;
+        }
+
+        String correo = respuesta.get().trim();
+        btnReenviar.setDisable(true);
+        Fondo.cargar(() -> new VentaService().reenviar(venta.getId(), correo), mensaje -> {
+            venta.setCorreo(correo);
+            mostrarEntrega(correo);
+            Barra.notificar(mensaje, "ok");
+            btnReenviar.setDisable(false);
+        }, ex -> {
+            Barra.notificar(ex.getMessage(), "error");
+            btnReenviar.setDisable(false);
+        });
     }
 
     private void imprimir() {

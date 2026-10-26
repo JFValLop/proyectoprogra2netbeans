@@ -22,6 +22,7 @@ public class Venta {
     private Double montoRecibido;
     private Double cambio;
     private String autorizacion;
+    private String correo;
     private List<Boleto> boletos;
 
     public Venta() {
@@ -113,5 +114,13 @@ public class Venta {
 
     public void setBoletos(List<Boleto> boletos) {
         this.boletos = boletos;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 }

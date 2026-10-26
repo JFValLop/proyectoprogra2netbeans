@@ -78,7 +78,7 @@
                 </HBox>
                 <HBox alignment="CENTER_LEFT" spacing="10">
                   <children>
-                    <Button alignment="CENTER_LEFT" maxWidth="Infinity" mnemonicParsing="false" styleClass="demo-card" HBox.hgrow="ALWAYS">
+                    <Button alignment="CENTER_LEFT" maxWidth="Infinity" mnemonicParsing="false" onAction="#cambiarContrasena" styleClass="demo-card" HBox.hgrow="ALWAYS">
                       <graphic>
                         <HBox alignment="CENTER_LEFT" spacing="10">
                           <children>

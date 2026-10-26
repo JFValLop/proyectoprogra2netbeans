@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefWidth="1150" prefHeight="768" styleClass="app" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@styles.css" fx:controller="com.umg.api.ui.ValidarController">
+  <center>
+    <VBox spacing="18">
+      <padding><Insets top="22" right="28" bottom="20" left="28"/></padding>
+      <children>
+        <VBox spacing="4">
+          <children>
+            <Label text="ACCESO · ENTRADA AL CONCIERTO" styleClass="eyebrow"/>
+            <Label text="VALIDAR BOLETOS" styleClass="disp,s34"/>
+            <Label text="Escanea el QR del boleto con la cámara o escribe el código." styleClass="s13,c-muted"/>
+          </children>
+        </VBox>
+        <HBox spacing="18" VBox.vgrow="ALWAYS">
+          <children>
+            <VBox styleClass="card" spacing="14" HBox.hgrow="ALWAYS">
+              <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+              <children>
+                <StackPane VBox.vgrow="ALWAYS" minWidth="0" minHeight="300" prefWidth="400" prefHeight="300" fx:id="cajaCamara" style="-fx-background-color: #0A0908; -fx-background-radius: 12;">
+                  <children>
+                    <Label text="La cámara está apagada" styleClass="s14,c-dim" fx:id="lblCamara" wrapText="true"/>
+                    <ImageView fitWidth="560" fitHeight="420" preserveRatio="true" fx:id="imgCamara"/>
+                  </children>
+                </StackPane>
+                <Button text="Encender cámara" styleClass="btn-primary,btn-lg" mnemonicParsing="false" maxWidth="Infinity" fx:id="btnCamara"/>
+              </children>
+            </VBox>
+            <VBox spacing="18" prefWidth="400" minWidth="400" maxWidth="400">
+              <children>
+                <VBox styleClass="card" spacing="8" fx:id="cajaResultado">
+                  <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                  <children>
+                    <Label text="RESULTADO" styleClass="eyebrow"/>
+                    <Label text="Esperando QR..." styleClass="disp,s28" fx:id="lblEstado" wrapText="true"/>
+                    <Label text="Acerca el QR del boleto a la cámara." styleClass="s14,c-text2" fx:id="lblDetalle" wrapText="true"/>
+                  </children>
+                </VBox>
+                <VBox styleClass="card" spacing="10">
+                  <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                  <children>
+                    <Label text="Código del boleto" styleClass="form-lbl"/>
+                    <HBox spacing="8">
+                      <children>
+                        <TextField promptText="SVB-7F3A9C2E81B4" styleClass="input" prefHeight="42" HBox.hgrow="ALWAYS" fx:id="txtCodigo"/>
+                        <Button text="Validar" styleClass="btn-primary" mnemonicParsing="false" prefHeight="42" fx:id="btnValidar"/>
+                      </children>
+                    </HBox>
+                    <Label text="Si tienen lector de QR por USB, solo escanean aquí y se valida solo." styleClass="s12,c-dim" wrapText="true"/>
+                  </children>
+                </VBox>
+                <VBox styleClass="card" spacing="4">
+                  <padding><Insets top="16" right="20" bottom="16" left="20"/></padding>
+                  <children>
+                    <Label text="VALIDADOS EN ESTE TURNO" styleClass="eyebrow"/>
+                    <Label text="0" styleClass="disp,s32" fx:id="lblContador"/>
+                  </children>
+                </VBox>
+              </children>
+            </VBox>
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+  </center>
+</BorderPane>

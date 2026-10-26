@@ -76,6 +76,18 @@
             </children>
         </HBox>
 
+        <VBox spacing="6">
+            <children>
+                <Label text="Correo electrónico"
+                       styleClass="form-lbl"/>
+
+                <TextField fx:id="txtCorreo"
+                           promptText="Para recuperar la contraseña"
+                           styleClass="input"
+                           prefHeight="42"/>
+            </children>
+        </VBox>
+
         <!-- Rol -->
         <VBox spacing="6">
             <children>

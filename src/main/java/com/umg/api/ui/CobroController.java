@@ -161,7 +161,7 @@ public class CobroController {
         chkImprimir.setSelected(true);
         chkImprimir.setDisable(true);
         chkCorreo.setSelected(false);
-        chkCorreo.setDisable(true);
+        txtCorreo.textProperty().addListener((obs, viejo, nuevo) -> chkCorreo.setSelected(nuevo != null && nuevo.contains("@")));
 
         lblClienteEstado.setText("Deja el NIT vacío para Consumidor Final");
         btnBuscarNit.setOnAction(e -> buscarNit());
@@ -401,6 +401,9 @@ public class CobroController {
         try {
             Cliente c = obtenerCliente();
             datos.put("usuarioId", Sesion.getUsuario().getId());
+            if (chkCorreo.isSelected() && txtCorreo.getText().contains("@")) {
+                datos.put("correo", txtCorreo.getText().trim());
+            }
             datos.put("clienteId", c.getId());
             datos.put("conciertoId", orden.getConcierto().getId());
             datos.put("asientos", asientos);

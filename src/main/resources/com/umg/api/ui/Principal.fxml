@@ -45,6 +45,11 @@
                 <Region styleClass="icon,ic-pos,ic-text2" minWidth="20" minHeight="20" prefWidth="20" prefHeight="20" maxWidth="20" maxHeight="20"/>
               </graphic>
             </Button>
+            <Button text="Validar boletos" styleClass="nav-item" mnemonicParsing="false" maxWidth="Infinity" alignment="CENTER_LEFT" graphicTextGap="10" prefHeight="38" fx:id="btnValidar">
+              <graphic>
+                <Region styleClass="icon,ic-ticket,ic-text2" minWidth="20" minHeight="20" prefWidth="20" prefHeight="20" maxWidth="20" maxHeight="20"/>
+              </graphic>
+            </Button>
             <Button text="Historial de ventas" styleClass="nav-item" mnemonicParsing="false" maxWidth="Infinity" alignment="CENTER_LEFT" graphicTextGap="10" prefHeight="38" fx:id="btnHistorial">
               <graphic>
                 <Region styleClass="icon,ic-list,ic-text2" minWidth="20" minHeight="20" prefWidth="20" prefHeight="20" maxWidth="20" maxHeight="20"/>

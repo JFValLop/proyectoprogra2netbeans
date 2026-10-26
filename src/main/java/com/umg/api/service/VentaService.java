@@ -7,6 +7,8 @@ package com.umg.api.service;
 import com.umg.api.model.ResumenVentas;
 import com.umg.api.model.Venta;
 import java.io.InputStream;
+import java.util.Base64;
+import java.util.HashMap;
 import java.util.Map;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
@@ -60,5 +62,32 @@ public class VentaService {
             }
             return Api.mapper.readValue(is, ResumenVentas.class);
         }
+    }
+
+    public String enviarCorreo(int ventaId, String correo, byte[] pdf) throws Exception {
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
+            HttpPost request = new HttpPost(BASE_URL + "/" + ventaId + "/correo");
+
+            Map<String, Object> datos = new HashMap<>();
+            if (correo != null) {
+                datos.put("correo", correo);
+            }
+            if (pdf != null) {
+                datos.put("pdf", Base64.getEncoder().encodeToString(pdf));
+            }
+            String json = Api.mapper.writeValueAsString(datos);
+            request.setEntity(EntityBuilder.create().setText(json).setContentType(ContentType.APPLICATION_JSON).build());
+
+            ClassicHttpResponse response = client.execute(request);
+            InputStream is = response.getEntity().getContent();
+            if (response.getCode() != 200) {
+                throw Api.error(is, response.getCode());
+            }
+            return Api.mapper.readTree(is).get("message").asText();
+        }
+    }
+
+    public String reenviar(int ventaId, String correo) throws Exception {
+        return enviarCorreo(ventaId, correo, FacturaService.pdfDeVenta(ventaId));
     }
 }

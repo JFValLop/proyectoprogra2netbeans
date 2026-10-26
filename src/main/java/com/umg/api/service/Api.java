@@ -16,7 +16,7 @@ import java.io.InputStream;
  */
 public class Api {
 
-    public static final String URL = "https://proyecto-programacion-2-2ryp.onrender.com/api";
+    public static final String URL = "http://localhost:8081/api";
     public static final ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).registerModule(new JavaTimeModule());
 
     public static Exception error(InputStream is, int statusCode) {

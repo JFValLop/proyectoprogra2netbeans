@@ -35,4 +35,36 @@ public class AuthService {
             return Api.mapper.readValue(is, Usuario.class);
         }
     }
+
+    public String pedirCodigo(String usuario) throws Exception {
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
+            HttpPost request = new HttpPost(Api.URL + "/auth/recuperar/");
+
+            String json = Api.mapper.writeValueAsString(Map.of("usuario", usuario));
+            request.setEntity(EntityBuilder.create().setText(json).setContentType(ContentType.APPLICATION_JSON).build());
+
+            ClassicHttpResponse response = client.execute(request);
+            InputStream is = response.getEntity().getContent();
+            if (response.getCode() != 200) {
+                throw Api.error(is, response.getCode());
+            }
+            return Api.mapper.readTree(is).get("message").asText();
+        }
+    }
+
+    public String cambiarContrasena(String usuario, String codigo, String contrasena) throws Exception {
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
+            HttpPost request = new HttpPost(Api.URL + "/auth/restablecer/");
+
+            String json = Api.mapper.writeValueAsString(Map.of("usuario", usuario, "codigo", codigo, "contrasena", contrasena));
+            request.setEntity(EntityBuilder.create().setText(json).setContentType(ContentType.APPLICATION_JSON).build());
+
+            ClassicHttpResponse response = client.execute(request);
+            InputStream is = response.getEntity().getContent();
+            if (response.getCode() != 200) {
+                throw Api.error(is, response.getCode());
+            }
+            return Api.mapper.readTree(is).get("message").asText();
+        }
+    }
 }

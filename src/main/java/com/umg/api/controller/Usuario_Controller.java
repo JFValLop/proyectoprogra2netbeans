@@ -25,6 +25,9 @@ public class Usuario_Controller {
     private TextField txtNombre;
 
     @FXML
+    private TextField txtCorreo;
+
+    @FXML
     private ToggleButton btnVendedor;
 
     @FXML
@@ -84,6 +87,10 @@ public class Usuario_Controller {
                 usuario.getNombre() == null ? "" : usuario.getNombre()
         );
 
+        txtCorreo.setText(
+                usuario.getCorreo() == null ? "" : usuario.getCorreo()
+        );
+
         String rol = usuario.getRol();
 
         btnVendedor.setSelected(
@@ -111,12 +118,19 @@ public class Usuario_Controller {
 
         String usuario = txtUsuario.getText().trim();
         String nombre = txtNombre.getText().trim();
+        String correo = txtCorreo.getText().trim();
         String contrasena = txtContrasena.getText();
         String confirmar = txtConfirmar.getText();
 
         if (usuario.isEmpty()) {
             mostrarError("Escribe el nombre de usuario.");
             txtUsuario.requestFocus();
+            return;
+        }
+
+        if (!correo.isEmpty() && !correo.contains("@")) {
+            mostrarError("Escribe un correo válido.");
+            txtCorreo.requestFocus();
             return;
         }
 
@@ -205,7 +219,8 @@ public class Usuario_Controller {
                         usuario,
                         nombre.isEmpty() ? null : nombre,
                         rol,
-                        contrasena.isBlank() ? null : contrasena
+                        contrasena.isBlank() ? null : contrasena,
+                        correo.isEmpty() ? null : correo
                 );
 
                 mostrarAlerta(
@@ -222,6 +237,8 @@ public class Usuario_Controller {
                         nombre.isEmpty() ? null : nombre,
                         rol
                 );
+
+                nuevoUsuario.setCorreo(correo.isEmpty() ? null : correo);
 
                 servicio.crearUsuario(nuevoUsuario);
 

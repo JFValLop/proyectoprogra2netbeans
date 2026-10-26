@@ -88,9 +88,9 @@
             <version>2.18.3</version>
         </dependency>
         <dependency>
-            <groupId>com.google.zxing</groupId>
-            <artifactId>core</artifactId>
-            <version>3.5.3</version>
+            <groupId>org.openpnp</groupId>
+            <artifactId>opencv</artifactId>
+            <version>4.9.0-0</version>
         </dependency>
     </dependencies>
 
@@ -104,6 +104,7 @@
                     <mainClass>com.umg.api.App</mainClass>
                     <options>
                         <option>--enable-native-access=javafx.graphics</option>
+                        <option>--enable-native-access=ALL-UNNAMED</option>
                     </options>
                 </configuration>
             </plugin>

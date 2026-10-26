@@ -4,6 +4,7 @@ package com.umg.api.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.umg.api.Sesion;
 import com.umg.api.model.Usuario;
 
 import java.io.IOException;
@@ -136,7 +137,8 @@ public class Usuario_Service {
             String usuario,
             String nombre,
             String rol,
-            String contrasena
+            String contrasena,
+            String correo
     ) throws IOException {
 
         Map<String, Object> datos = new LinkedHashMap<>();
@@ -144,10 +146,12 @@ public class Usuario_Service {
         datos.put("usuario", usuario);
         datos.put("nombre", nombre);
         datos.put("rol", rol);
+        datos.put("correo", correo);
 
         // Solo enviar la contraseña si se desea cambiar.
         if (contrasena != null && !contrasena.isBlank()) {
             datos.put("contrasena", contrasena);
+            datos.put("cambiadoPor", Sesion.getUsuario().getUsuario());
         }
 
         try (CloseableHttpClient client = HttpClients.createDefault()) {

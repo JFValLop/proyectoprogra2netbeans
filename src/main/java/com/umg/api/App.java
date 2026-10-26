@@ -6,6 +6,7 @@ package com.umg.api;
 
 import com.umg.api.ui.PrincipalController;
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,12 +22,14 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     private static Stage ventana;
+    private static HostServices servicios;
     private static PrincipalController principal;
     private static Runnable alSalir;
 
     @Override
     public void start(Stage stage) throws Exception {
         ventana = stage;
+        servicios = getHostServices();
         stage.setTitle("Agencia FVP");
         cambiarPantalla("Login.fxml");
         stage.show();
@@ -71,6 +74,10 @@ public class App extends Application {
             alSalir = null;
             accion.run();
         }
+    }
+
+    public static void abrirNavegador(String direccion) {
+        servicios.showDocument(direccion);
     }
 
     public static PrincipalController getPrincipal() {

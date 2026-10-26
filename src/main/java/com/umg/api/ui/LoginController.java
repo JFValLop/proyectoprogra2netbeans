@@ -55,6 +55,15 @@ public class LoginController {
         }
     }
 
+    @FXML
+    void cambiarContrasena(ActionEvent event) {
+        try {
+            App.abrirDialogo("RecuperarContrasena.fxml", "Cambiar contraseña");
+        } catch (Exception ex) {
+            mostrarAlerta(Alert.AlertType.ERROR, "No se pudo abrir la ventana: " + ex.getMessage());
+        }
+    }
+
     private void mostrarAlerta(Alert.AlertType tipo, String mensaje) {
         Alert alerta = new Alert(tipo);
         alerta.setHeaderText(null);

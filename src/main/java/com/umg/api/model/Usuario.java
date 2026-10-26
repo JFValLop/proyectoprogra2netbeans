@@ -18,6 +18,7 @@ public class Usuario {
     private String usuario;
     private String nombre;
     private String rol;
+    private String correo;
     private String contrasena;
     private boolean status;
     private LocalDateTime createdAt;
@@ -64,6 +65,14 @@ public class Usuario {
 
     public void setRol(String rol) {
         this.rol = rol;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     @Override

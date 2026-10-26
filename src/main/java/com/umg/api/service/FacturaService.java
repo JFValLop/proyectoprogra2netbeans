@@ -31,6 +31,8 @@ public class FacturaService {
 
     private static final String BASE_URL = Api.URL + "/facturas";
 
+    private boolean correoEnviado = false;
+
     // ---------- Generar y guardar (al vender) ----------
 
     /** Convierte el reporte ya lleno en un XML (bytes). */
@@ -63,6 +65,13 @@ public class FacturaService {
             throw new Exception("La factura de la venta " + ventaId + " salió vacía");
         }
 
+        try {
+            new VentaService().enviarCorreo(ventaId, null, pdf(jp));
+            correoEnviado = true;
+        } catch (Exception e) {
+            System.err.println("No se pudo enviar el correo con la factura: " + e.getMessage());
+        }
+
         byte[] xml = xml(jp);
 
         try (CloseableHttpClient client = HttpClients.createDefault()) {
@@ -82,12 +91,21 @@ public class FacturaService {
     /** Lo llamas justo después de crear la venta; corre aparte para no frenar la pantalla. */
     public static void guardarEnSegundoPlano(int ventaId) {
         Thread hilo = new Thread(() -> {
+            FacturaService servicio = new FacturaService();
             try {
-                new FacturaService().generarYGuardar(ventaId);
+                servicio.generarYGuardar(ventaId);
                 System.out.println("Factura de la venta " + ventaId + " guardada en la nube (XML)");
             } catch (Exception e) {
                 System.err.println("No se pudo guardar la factura de la venta " + ventaId + ": " + e.getMessage());
                 e.printStackTrace();
+            }
+
+            if (!servicio.correoEnviado) {
+                try {
+                    new VentaService().enviarCorreo(ventaId, null, null);
+                } catch (Exception e) {
+                    System.err.println("No se pudo enviar el correo de la venta " + ventaId + ": " + e.getMessage());
+                }
             }
         });
         hilo.setDaemon(true);
@@ -132,6 +150,17 @@ public class FacturaService {
     /** PDF en memoria a partir del mismo JasperPrint. No se sube a ningún lado. */
     public static byte[] pdf(JasperPrint jp) throws JRException {
         return JasperExportManager.exportReportToPdf(jp);
+    }
+
+    public static byte[] pdfDeVenta(int ventaId) {
+        try {
+            Map<String, Object> params = new HashMap<>();
+            params.put("VENTA_ID", ventaId);
+            return pdf(ReportService.llenar("Factura", params));
+        } catch (Exception e) {
+            System.err.println("No se pudo armar la factura de la venta " + ventaId + ": " + e.getMessage());
+            return null;
+        }
     }
 
     private JsonNode getJson(String url) throws Exception {
