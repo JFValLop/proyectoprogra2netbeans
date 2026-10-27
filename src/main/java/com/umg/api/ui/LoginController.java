@@ -25,7 +25,24 @@ public class LoginController {
     @FXML
     private TextField txtUsuario;
 
+    @FXML
+    private TextField txtContrasenaVisible;
+
     private final AuthService authService = new AuthService();
+
+    @FXML
+    private void initialize() {
+        txtContrasenaVisible.textProperty().bindBidirectional(txtContrasena.textProperty());
+    }
+
+    @FXML
+    void verContrasena(ActionEvent event) {
+        boolean mostrar = !txtContrasenaVisible.isVisible();
+        txtContrasenaVisible.setVisible(mostrar);
+        txtContrasenaVisible.setManaged(mostrar);
+        txtContrasena.setVisible(!mostrar);
+        txtContrasena.setManaged(!mostrar);
+    }
 
     @FXML
     void ingresar(ActionEvent event) {

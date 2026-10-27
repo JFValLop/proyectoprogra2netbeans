@@ -13,7 +13,9 @@ import java.util.Optional;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Alert;
+import javafx.collections.FXCollections;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
@@ -34,7 +36,10 @@ public class RecintosController {
     private Button btnExplanada;
 
     @FXML
-    private Label lblUsadoPor;
+    private Label lblAviso;
+
+    @FXML
+    private ComboBox<Estadio> cmbRecinto;
 
     @FXML
     private Button btnNuevoRecinto;
@@ -151,7 +156,7 @@ public class RecintosController {
 
     private String plano = "TEATRO";
     private List<Localidad> localidades = new ArrayList<>();
-    private final Map<String, List<Localidad>> planos = new HashMap<>();
+    private final Map<Integer, List<Localidad>> planos = new HashMap<>();
     private List<Estadio> estadios;
     private Localidad original;
     private Localidad borrador;
@@ -163,6 +168,7 @@ public class RecintosController {
         btnEstadio.setOnAction(e -> elegirPlano("ESTADIO"));
         btnExplanada.setOnAction(e -> elegirPlano("EXPLANADA"));
         btnNuevoRecinto.setOnAction(e -> nuevoRecinto());
+        cmbRecinto.valueProperty().addListener((obs, viejo, nuevo) -> elegirRecinto());
 
         btnPorLadoMenos.setOnAction(e -> cambiar(0, 0, -1));
         btnPorLadoMas.setOnAction(e -> cambiar(0, 0, 1));
@@ -201,38 +207,57 @@ public class RecintosController {
             b.getStyleClass().remove("seg-on");
         }
         ("ESTADIO".equals(plano) ? btnEstadio : "EXPLANADA".equals(plano) ? btnExplanada : btnTeatro).getStyleClass().add("seg-on");
-        mostrarUsadoPor();
-        if (planos.containsKey(plano)) {
-            usar(planos.get(plano), null);
+        llenarRecintos(null);
+    }
+
+    private void llenarRecintos(Integer elegir) {
+        if (estadios == null) {
+            lblAviso.setText("");
+            Fondo.cargar(() -> estadioService.getEstadios(), lista -> {
+                estadios = lista;
+                llenarRecintos(elegir);
+            }, ex -> lblAviso.setText("Sin conexión con el servidor"));
+            return;
+        }
+        List<Estadio> deEsteTipo = new ArrayList<>();
+        Estadio seleccionar = null;
+        for (Estadio e : estadios) {
+            String tipo = e.getTipo() == null ? "TEATRO" : e.getTipo();
+            if (tipo.equals(plano)) {
+                deEsteTipo.add(e);
+                if (seleccionar == null || (elegir != null && e.getId() == elegir)) {
+                    seleccionar = e;
+                }
+            }
+        }
+        lblAviso.setText(deEsteTipo.isEmpty() ? "Todavía no hay recintos de este tipo" : "");
+        cmbRecinto.setItems(FXCollections.observableArrayList(deEsteTipo));
+        if (seleccionar != null) {
+            cmbRecinto.getSelectionModel().select(seleccionar);
+        }
+    }
+
+    private void elegirRecinto() {
+        Estadio recinto = cmbRecinto.getValue();
+        if (recinto == null) {
+            usar(new ArrayList<>(), null);
+            return;
+        }
+        if (planos.containsKey(recinto.getId())) {
+            usar(planos.get(recinto.getId()), null);
         } else {
             cargar(null);
         }
     }
 
-    private void mostrarUsadoPor() {
-        if (estadios == null) {
-            lblUsadoPor.setText("");
-            Fondo.cargar(() -> estadioService.getEstadios(), lista -> {
-                estadios = lista;
-                mostrarUsadoPor();
-            }, ex -> lblUsadoPor.setText("Sin conexión con el servidor"));
+    private void cargar(Integer elegir) {
+        Estadio pedido = cmbRecinto.getValue();
+        if (pedido == null) {
             return;
         }
-        List<String> nombres = new ArrayList<>();
-        for (Estadio e : estadios) {
-            String tipo = e.getTipo() == null ? "TEATRO" : e.getTipo();
-            if (tipo.equals(plano)) {
-                nombres.add(e.getNombre());
-            }
-        }
-        lblUsadoPor.setText(nombres.isEmpty() ? "Ningún recinto usa este plano todavía" : "Usado por: " + String.join(" · ", nombres));
-    }
-
-    private void cargar(Integer elegir) {
-        String pedido = plano;
-        Fondo.cargar(() -> localidadService.getPorPlano(pedido), lista -> {
-            planos.put(pedido, lista);
-            if (pedido.equals(plano)) {
+        Fondo.cargar(() -> localidadService.getLocalidades(pedido.getId()), lista -> {
+            planos.put(pedido.getId(), lista);
+            if (pedido == cmbRecinto.getValue()) {
                 usar(lista, elegir);
             }
         }, ex -> Barra.alerta(Alert.AlertType.ERROR, "No se pudieron cargar las localidades: " + ex.getMessage()));
@@ -368,6 +393,12 @@ public class RecintosController {
         dibujarLista();
         if (borrador == null) {
             planoPrevia.getChildren().clear();
+            txtNombre.setText("");
+            lblTotalNueva.setText("");
+            lblConfigurado.setText("");
+            lblMaximo.setText("");
+            btnGuardar.setOpacity(0.4);
+            btnGuardar.setDisable(true);
             return;
         }
 
@@ -520,9 +551,9 @@ public class RecintosController {
             return;
         }
         try {
-            estadioService.crearEstadio(nombre.get().trim(), plano);
+            Estadio nuevo = estadioService.crearEstadio(nombre.get().trim(), plano);
             estadios = null;
-            mostrarUsadoPor();
+            llenarRecintos(nuevo.getId());
         } catch (Exception ex) {
             Barra.alerta(Alert.AlertType.ERROR, ex.getMessage());
         }

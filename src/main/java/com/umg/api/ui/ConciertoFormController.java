@@ -176,7 +176,7 @@ public class ConciertoFormController {
         Map<Integer, Precio> precios = new HashMap<>();
         List<Localidad> localidades;
         try {
-            localidades = localidadService.getPorPlano(estadio.getTipo() == null ? "TEATRO" : estadio.getTipo());
+            localidades = localidadService.getLocalidades(estadio.getId());
             Concierto c = elegido();
             if (c != null) {
                 for (Precio p : precioService.getPrecios(c.getId())) {

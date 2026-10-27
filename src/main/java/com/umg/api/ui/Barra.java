@@ -6,6 +6,7 @@ package com.umg.api.ui;
 
 import com.umg.api.App;
 import com.umg.api.Sesion;
+import com.umg.api.service.Usuario_Service;
 import javafx.scene.control.Alert;
 
 /**
@@ -23,6 +24,15 @@ public class Barra {
     }
 
     public static void cerrarSesion() {
+        if (Sesion.getUsuario() != null) {
+            int id = Sesion.getUsuario().getId();
+            Fondo.cargar(() -> {
+                new Usuario_Service().marcarDesconectado(id);
+                return true;
+            }, ok -> {
+            }, ex -> {
+            });
+        }
         ir("Login.fxml");
         Sesion.cerrar();
     }

@@ -18,7 +18,7 @@
           <children>
             <VBox spacing="6">
               <children>
-                <Label text="CATÁLOGO · PLANOS POR TIPO DE RECINTO" styleClass="eyebrow"/>
+                <Label text="CATÁLOGO · PLANO DE CADA RECINTO" styleClass="eyebrow"/>
                 <Label text="RECINTOS" styleClass="disp,s34"/>
               </children>
             </VBox>
@@ -34,7 +34,9 @@
                 </HBox>
                 <HBox alignment="CENTER_RIGHT" spacing="10">
                   <children>
-                    <Label text="Usado por: Teatro Nacional · Teatro Lux · Auditorio JBG" styleClass="s12,w500,c-dim" fx:id="lblUsadoPor"/>
+                    <Label text="" styleClass="s12,w500,c-dim" fx:id="lblAviso"/>
+                    <Label text="Recinto" styleClass="s12,w600,c-muted"/>
+                    <ComboBox styleClass="combo" prefWidth="260" prefHeight="34" fx:id="cmbRecinto"/>
                     <Button text="Nuevo recinto" styleClass="btn-ghost,btn-sm" mnemonicParsing="false" fx:id="btnNuevoRecinto"/>
                   </children>
                 </HBox>

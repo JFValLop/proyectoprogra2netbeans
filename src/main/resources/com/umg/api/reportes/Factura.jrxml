@@ -3,7 +3,7 @@
 
 	<parameter name="VENTA_ID" class="java.lang.Integer"/>
 	<parameter name="COMPANIA" class="java.lang.String">
-		<defaultValueExpression><![CDATA["SVB - Venta de boletos"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["Billets - Venta de boletos"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="LEMA" class="java.lang.String">
 		<defaultValueExpression><![CDATA["Tus conciertos favoritos, en un solo lugar"]]></defaultValueExpression>

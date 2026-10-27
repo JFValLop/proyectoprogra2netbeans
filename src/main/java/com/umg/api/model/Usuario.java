@@ -23,6 +23,9 @@ public class Usuario {
     private boolean status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private boolean conectado;
+    private int minutosConectado;
+    private boolean ausente;
 
     public Usuario() {
     }
@@ -110,5 +113,29 @@ public class Usuario {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public boolean isConectado() {
+        return conectado;
+    }
+
+    public void setConectado(boolean conectado) {
+        this.conectado = conectado;
+    }
+
+    public int getMinutosConectado() {
+        return minutosConectado;
+    }
+
+    public void setMinutosConectado(int minutosConectado) {
+        this.minutosConectado = minutosConectado;
+    }
+
+    public boolean isAusente() {
+        return ausente;
+    }
+
+    public void setAusente(boolean ausente) {
+        this.ausente = ausente;
     }
 }

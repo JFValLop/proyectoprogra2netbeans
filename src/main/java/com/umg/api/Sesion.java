@@ -19,6 +19,15 @@ public class Sesion {
     private static Concierto concierto;
     private static Orden orden;
     private static Venta venta;
+    private static long ultimoMovimiento = System.currentTimeMillis();
+
+    public static void moverse() {
+        ultimoMovimiento = System.currentTimeMillis();
+    }
+
+    public static boolean estaAusente() {
+        return System.currentTimeMillis() - ultimoMovimiento > 5 * 60 * 1000;
+    }
 
     public static Usuario getUsuario() {
         return usuario;

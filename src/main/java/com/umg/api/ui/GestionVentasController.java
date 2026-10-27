@@ -84,6 +84,10 @@ public class GestionVentasController {
     private boolean admin;
     private boolean ajustando;
 
+    public static Integer usuarioInicial;
+    public static String nombreInicial;
+    private Integer filtroUsuario;
+
     // panel
     private Label pTitulo, pSub;
     private VBox cuerpo;
@@ -123,6 +127,17 @@ public class GestionVentasController {
         cmbVendedor.getItems().add(TODOS);
         cmbVendedor.setValue(TODOS);
 
+        filtroUsuario = usuarioInicial;
+        String nombreFiltro = nombreInicial;
+        usuarioInicial = null;
+        nombreInicial = null;
+        if (admin && filtroUsuario != null) {
+            lblTitulo.setText("VENTAS DE " + nombreFiltro.toUpperCase());
+            lblCeja.setText("USUARIOS · HISTORIAL DE VENTAS");
+            cmbVendedor.setVisible(false);
+            cmbVendedor.setManaged(false);
+        }
+
         // Rango: Hoy / 7 días / Todo
         ToggleGroup grupo = new ToggleGroup();
         tgHoy = botonRango("Hoy", grupo);
@@ -131,7 +146,11 @@ public class GestionVentasController {
         boxRango.getChildren().addAll(tgHoy, tg7, tgTodo);
         boxRango.setPadding(new Insets(4));
         boxRango.setStyle("-fx-background-color: #1F1E1B; -fx-border-color: #34322D; -fx-border-radius: 12; -fx-background-radius: 12;");
-        tgHoy.setSelected(true);
+        if (admin && filtroUsuario != null) {
+            tgTodo.setSelected(true);
+        } else {
+            tgHoy.setSelected(true);
+        }
         grupo.selectedToggleProperty().addListener((o, anterior, nuevo) -> {
             if (nuevo == null) {
                 anterior.setSelected(true);
@@ -211,7 +230,7 @@ public class GestionVentasController {
 
     private void cargar() {
         String rango = tg7.isSelected() ? "7" : tgTodo.isSelected() ? "todo" : "hoy";
-        Integer usuarioId = admin ? null : Sesion.getUsuario().getId();
+        Integer usuarioId = admin ? filtroUsuario : Integer.valueOf(Sesion.getUsuario().getId());
         lblResumen.setText("Cargando…");
         Fondo.cargar(() -> servicio.listarVentas(rango, usuarioId), lista -> {
             ventas = lista;

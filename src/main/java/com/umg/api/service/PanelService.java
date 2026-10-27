@@ -12,7 +12,7 @@ import java.time.Duration;
 public class PanelService {
 
     // Si ya tienen la URL base en otra clase (por ejemplo la que usa VentaService), usen esa.
-    private static final String BASE_URL = "http://localhost:8081";
+    private static final String BASE_URL = "https://proyecto-programacion-2-2ryp.onrender.com";
 
     private static final HttpClient HTTP = HttpClient.newBuilder()
             .connectTimeout(Duration.ofSeconds(20))

@@ -6,6 +6,7 @@ import com.umg.api.controller.Artistas_Controller;
 import com.umg.api.model.ResumenVentas;
 import com.umg.api.model.Usuario;
 import com.umg.api.model.Venta;
+import com.umg.api.service.Usuario_Service;
 import com.umg.api.service.VentaService;
 import java.util.List;
 import javafx.animation.Animation;
@@ -122,7 +123,11 @@ public class PrincipalController {
         actualizarTurno();
         
         revisarVentas();
-        Timeline revisar = new Timeline(new KeyFrame(Duration.seconds(10), e -> revisarVentas()));
+        avisarConexion();
+        Timeline revisar = new Timeline(new KeyFrame(Duration.seconds(10), e -> {
+            revisarVentas();
+            avisarConexion();
+        }));
         revisar.setCycleCount(Animation.INDEFINITE);
         revisar.play();
     }
@@ -170,6 +175,19 @@ public class PrincipalController {
             return;
         }
         Fondo.cargar(() -> new VentaService().getResumenHoy(null), r -> avisarVentasNuevas(r), ex -> {
+        });
+    }
+
+    private void avisarConexion() {
+        if (Sesion.getUsuario() == null) {
+            return;
+        }
+        int id = Sesion.getUsuario().getId();
+        Fondo.cargar(() -> {
+            new Usuario_Service().marcarConectado(id, Sesion.estaAusente());
+            return true;
+        }, ok -> {
+        }, ex -> {
         });
     }
 

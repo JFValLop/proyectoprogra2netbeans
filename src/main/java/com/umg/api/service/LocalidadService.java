@@ -54,19 +54,6 @@ public class LocalidadService {
         }
     }
 
-    public List<Localidad> getPorPlano(String plano) throws Exception {
-        try (CloseableHttpClient client = HttpClients.createDefault()) {
-            HttpGet request = new HttpGet(BASE_URL + "/plano/" + plano);
-            ClassicHttpResponse response = client.execute(request);
-
-            InputStream is = response.getEntity().getContent();
-            if (response.getCode() != 200) {
-                throw Api.error(is, response.getCode());
-            }
-            return Api.mapper.readValue(is, new TypeReference<List<Localidad>>(){});
-        }
-    }
-
     public Localidad actualizarLocalidad(Localidad localidad) throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpPut request = new HttpPut(BASE_URL + "/update/" + localidad.getId());

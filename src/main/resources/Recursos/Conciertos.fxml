@@ -29,7 +29,7 @@
             </StackPane>
             <VBox spacing="3">
               <children>
-                <Label styleClass="disp,s21" text="SVB·GUA" />
+                <Label styleClass="disp,s21" text="Billets" />
                 <Label styleClass="s10,w600,c-dim" text="TAQUILLA V1.0" />
               </children>
             </VBox>

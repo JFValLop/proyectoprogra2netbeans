@@ -46,7 +46,7 @@ ORDER BY u.nombre]]>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="26" isBold="true"/>
 				</textElement>
-				<text><![CDATA[SVB·GUA]]></text>
+				<text><![CDATA[Billets]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="34" width="250" height="14" forecolor="#666666" uuid="2338d2f6-39ce-4dd8-b5a3-3f8f84f19867"/>

@@ -24,7 +24,7 @@
             </StackPane>
             <VBox spacing="3">
               <children>
-                <Label text="SVB·GUA" styleClass="disp,s21"/>
+                <Label text="Billets" styleClass="disp,s21"/>
                 <Label text="TAQUILLA V1.0" styleClass="s10,w600,c-dim"/>
               </children>
             </VBox>

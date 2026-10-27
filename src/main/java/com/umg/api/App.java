@@ -4,12 +4,14 @@
  */
 package com.umg.api;
 
+import com.umg.api.service.Usuario_Service;
 import com.umg.api.ui.PrincipalController;
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.InputEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -30,7 +32,7 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         ventana = stage;
         servicios = getHostServices();
-        stage.setTitle("Agencia FVP");
+        stage.setTitle("Billets");
         cambiarPantalla("Login.fxml");
         stage.show();
     }
@@ -48,7 +50,10 @@ public class App extends Application {
             FXMLLoader loader = new FXMLLoader(App.class.getResource("/com/umg/api/ui/Principal.fxml"));
             Parent root = loader.load();
             principal = loader.getController();
-            ventana.setScene(new Scene(root));
+            Scene escena = new Scene(root);
+            escena.addEventFilter(InputEvent.ANY, e -> Sesion.moverse());
+            Sesion.moverse();
+            ventana.setScene(escena);
             ventana.centerOnScreen();
         }
         salirDePantalla();
@@ -95,6 +100,16 @@ public class App extends Application {
         dialogo.initModality(Modality.APPLICATION_MODAL);
         dialogo.setScene(escena);
         dialogo.showAndWait();
+    }
+
+    @Override
+    public void stop() {
+        if (Sesion.getUsuario() != null) {
+            try {
+                new Usuario_Service().marcarDesconectado(Sesion.getUsuario().getId());
+            } catch (Exception ex) {
+            }
+        }
     }
 
     public static void main(String[] args) {

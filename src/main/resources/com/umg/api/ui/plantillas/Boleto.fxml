@@ -14,7 +14,7 @@
     <VBox HBox.hgrow="ALWAYS" minWidth="0">
       <padding><Insets top="13" right="14" bottom="13" left="14"/></padding>
       <children>
-        <Label text="SVB·GUA · BOLETO DE ACCESO" styleClass="tk-eyebrow"/>
+        <Label text="Billets · BOLETO DE ACCESO" styleClass="tk-eyebrow"/>
         <Label text="SOFÍA LEMUS" styleClass="disp,s23,w900,tk-ink" fx:id="lblArtista"/>
         <Label text="vie 16 oct · 19:30 · Teatro Nacional" styleClass="tk-body" fx:id="lblFecha"/>
         <Region VBox.vgrow="ALWAYS"/>

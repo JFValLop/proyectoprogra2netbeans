@@ -225,4 +225,25 @@ public class Usuario_Service {
             }
         }
     }
+
+    public void marcarConectado(int id, boolean ausente) throws IOException {
+        marcar("/conectado/" + id, ausente);
+    }
+
+    public void marcarDesconectado(int id) throws IOException {
+        marcar("/desconectar/" + id, false);
+    }
+
+    private void marcar(String ruta, boolean ausente) throws IOException {
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
+            HttpPut request = new HttpPut(BASE_URL + ruta);
+            String json = objectMapper.writeValueAsString(Map.of("ausente", ausente));
+            request.setEntity(new StringEntity(json, ContentType.APPLICATION_JSON));
+            try (CloseableHttpResponse response = client.execute(request)) {
+                if (response.getCode() != 200) {
+                    throw new IOException("Error al marcar la conexión. HTTP: " + response.getCode());
+                }
+            }
+        }
+    }
 }

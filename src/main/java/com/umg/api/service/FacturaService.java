@@ -31,7 +31,7 @@ public class FacturaService {
 
     private static final String BASE_URL = Api.URL + "/facturas";
 
-    private boolean correoEnviado = false;
+    private byte[] pdfGenerado;
 
     // ---------- Generar y guardar (al vender) ----------
 
@@ -65,12 +65,7 @@ public class FacturaService {
             throw new Exception("La factura de la venta " + ventaId + " salió vacía");
         }
 
-        try {
-            new VentaService().enviarCorreo(ventaId, null, pdf(jp));
-            correoEnviado = true;
-        } catch (Exception e) {
-            System.err.println("No se pudo enviar el correo con la factura: " + e.getMessage());
-        }
+        pdfGenerado = pdf(jp);
 
         byte[] xml = xml(jp);
 
@@ -100,12 +95,10 @@ public class FacturaService {
                 e.printStackTrace();
             }
 
-            if (!servicio.correoEnviado) {
-                try {
-                    new VentaService().enviarCorreo(ventaId, null, null);
-                } catch (Exception e) {
-                    System.err.println("No se pudo enviar el correo de la venta " + ventaId + ": " + e.getMessage());
-                }
+            try {
+                new VentaService().enviarCorreo(ventaId, null, servicio.pdfGenerado);
+            } catch (Exception e) {
+                System.err.println("No se pudo enviar el correo de la venta " + ventaId + ": " + e.getMessage());
             }
         });
         hilo.setDaemon(true);

@@ -47,7 +47,8 @@
                   <children>
                     <Region maxHeight="19" maxWidth="19" minHeight="19" minWidth="19" prefHeight="19" prefWidth="19" styleClass="icon,ic-lock" />
                     <PasswordField id="txtContrasena" fx:id="txtContrasena" promptText="••••••••" styleClass="field-input" HBox.hgrow="ALWAYS" />
-                    <Button graphicTextGap="8" mnemonicParsing="false" styleClass="btn-icon">
+                    <TextField fx:id="txtContrasenaVisible" managed="false" visible="false" promptText="••••••••" styleClass="field-input" HBox.hgrow="ALWAYS" />
+                    <Button fx:id="btnVerContrasena" graphicTextGap="8" mnemonicParsing="false" onAction="#verContrasena" styleClass="btn-icon">
                       <graphic>
                         <Region maxHeight="18" maxWidth="18" minHeight="18" minWidth="18" prefHeight="18" prefWidth="18" styleClass="icon,ic-eye,ic-muted" />
                       </graphic>

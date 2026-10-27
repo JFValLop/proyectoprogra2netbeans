@@ -12,7 +12,9 @@ import com.umg.api.service.Concierto_Service;
 
 import com.umg.api.model.Estadio;
 import com.umg.api.service.Estadio_Service;
+import com.umg.api.ui.Barra;
 import com.umg.api.ui.ConciertoFormController;
+import com.umg.api.ui.GestionVentasController;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -27,8 +29,11 @@ import java.util.Locale;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ButtonBase;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -251,7 +256,7 @@ public class Artistas_Controller {
                         "USUARIO",
                         "ROL",
                         "CREADO",
-                        "ESTADO",
+                        "CONEXIÓN",
                         "ACCIONES"
                 );
 
@@ -647,6 +652,16 @@ public class Artistas_Controller {
     // USUARIOS: CREAR FILA
     // =====================================================
 
+    private String tiempoConectado(int minutos) {
+        if (minutos < 1) {
+            return "menos de 1 min";
+        }
+        if (minutos < 60) {
+            return minutos + " min";
+        }
+        return (minutos / 60) + " h " + (minutos % 60) + " min";
+    }
+
     private GridPane crearFilaUsuario(Usuario usuario) {
 
         GridPane fila = new GridPane();
@@ -743,6 +758,8 @@ public class Artistas_Controller {
         fila.add(lbCreado, 2, 0);
 
         boolean activo = usuario.isStatus();
+        boolean conectado = usuario.isConectado();
+        boolean ausente = conectado && usuario.isAusente();
 
         Region punto = new Region();
         punto.setMinSize(7, 7);
@@ -750,18 +767,22 @@ public class Artistas_Controller {
         punto.setMaxSize(7, 7);
         punto.getStyleClass().add("dot");
 
-        punto.setStyle(
-                activo
-                ? "-fx-background-color: #5BD68A;"
-                : "-fx-background-color: #8C8679;"
-        );
+        Label lbEstado = new Label();
+        lbEstado.getStyleClass().addAll("s13", "w600");
 
-        Label lbEstado = new Label(activo ? "Activo" : "Inactivo");
-        lbEstado.getStyleClass().addAll(
-                "s13",
-                "w600",
-                activo ? "c-green" : "c-dim"
-        );
+        if (ausente) {
+            punto.setStyle("-fx-background-color: #FFB020;");
+            lbEstado.setText("Ausente · " + tiempoConectado(usuario.getMinutosConectado()));
+            lbEstado.getStyleClass().add("c-amber");
+        } else if (conectado) {
+            punto.setStyle("-fx-background-color: #5BD68A;");
+            lbEstado.setText("En línea · " + tiempoConectado(usuario.getMinutosConectado()));
+            lbEstado.getStyleClass().add("c-green");
+        } else {
+            punto.setStyle("-fx-background-color: #8C8679;");
+            lbEstado.setText("Desconectado");
+            lbEstado.getStyleClass().add("c-dim");
+        }
 
         HBox estado = new HBox(6, punto, lbEstado);
         estado.setAlignment(Pos.CENTER_LEFT);
@@ -828,6 +849,20 @@ public class Artistas_Controller {
         acciones.setAlignment(Pos.CENTER_LEFT);
 
         fila.add(acciones, 4, 0);
+
+        fila.setCursor(Cursor.HAND);
+        fila.setOnMouseClicked(event -> {
+            Node nodo = (Node) event.getTarget();
+            while (nodo != null && nodo != fila) {
+                if (nodo instanceof ButtonBase) {
+                    return;
+                }
+                nodo = nodo.getParent();
+            }
+            GestionVentasController.usuarioInicial = usuario.getId();
+            GestionVentasController.nombreInicial = nombre;
+            Barra.ir("GestionVentas.fxml");
+        });
 
         return fila;
     }

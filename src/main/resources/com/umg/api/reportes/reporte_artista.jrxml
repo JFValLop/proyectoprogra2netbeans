@@ -45,7 +45,7 @@ ORDER BY total DESC]]>
 			<staticText>
 				<reportElement x="0" y="0" width="250" height="34"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="SansSerif" size="26" isBold="true"/></textElement>
-				<text><![CDATA[SVB·GUA]]></text>
+				<text><![CDATA[Billets]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="34" width="250" height="14" forecolor="#666666"/>
