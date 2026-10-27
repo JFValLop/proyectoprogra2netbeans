@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
@@ -122,10 +123,9 @@
                         <HBox alignment="CENTER_LEFT" spacing="12">
                            <children>
                               <Label text="Inventario en tiempo real" styleClass="s15,w700" />
-                              <Region HBox.hgrow="ALWAYS" />
-                              <HBox fx:id="leyenda" spacing="12" alignment="CENTER_RIGHT" />
                            </children>
                         </HBox>
+                        <FlowPane fx:id="leyenda" hgap="14" vgap="4" />
                         <VBox fx:id="listaInventario" />
                      </children>
                   </VBox>

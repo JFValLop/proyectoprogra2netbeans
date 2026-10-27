@@ -48,6 +48,7 @@
 
                         <HBox alignment="CENTER_LEFT"
                               prefHeight="40"
+                              maxHeight="40"
                               prefWidth="280"
                               spacing="10"
                               styleClass="field">

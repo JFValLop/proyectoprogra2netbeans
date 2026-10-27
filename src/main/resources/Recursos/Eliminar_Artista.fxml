@@ -33,6 +33,7 @@
                     cancelButton="true"
                     graphicTextGap="8"
                     mnemonicParsing="false"
+                    onAction="#cancelar"
                     styleClass="btn-icon">
 
                     <graphic>

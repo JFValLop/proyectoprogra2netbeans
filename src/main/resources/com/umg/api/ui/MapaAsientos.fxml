@@ -33,13 +33,6 @@
               </children>
             </VBox>
             <Region HBox.hgrow="ALWAYS"/>
-            <HBox alignment="CENTER_LEFT" styleClass="seg" spacing="2">
-              <children>
-                <Button text="A · Plano completo" mnemonicParsing="false" styleClass="seg-btn,seg-on" fx:id="btnModoA"/>
-                <Button text="B · Por sección" mnemonicParsing="false" styleClass="seg-btn" fx:id="btnModoB"/>
-                <Button text="C · Cantidad primero" mnemonicParsing="false" styleClass="seg-btn" fx:id="btnModoC"/>
-              </children>
-            </HBox>
             <HBox alignment="CENTER_LEFT" spacing="8" prefWidth="150">
               <children>
                 <Region styleClass="dot" minWidth="8" minHeight="8" prefWidth="8" prefHeight="8" maxWidth="8" maxHeight="8" style="-fx-background-color: #5BD68A;"/>

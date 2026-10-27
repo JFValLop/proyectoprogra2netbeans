@@ -108,6 +108,9 @@ public class PlanoRecinto {
     }
 
     public static String rgba(String hex, double alfa) {
+        if (hex == null || hex.isBlank()) {
+            hex = "#8C8679";
+        }
         Color c = Color.web(hex);
         return "rgba(" + Math.round(c.getRed() * 255) + "," + Math.round(c.getGreen() * 255) + "," + Math.round(c.getBlue() * 255) + "," + alfa + ")";
     }

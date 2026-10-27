@@ -96,7 +96,7 @@ public class ConfirmacionController {
 
         lblTotal.setText(Formato.dinero(venta.getTotal()));
         boolean efectivo = "EFECTIVO".equals(venta.getMetodoPago());
-        lblMetodo.setText(efectivo ? "Efectivo" : "Tarjeta (POS) · aut. " + venta.getAutorizacion());
+        lblMetodo.setText(efectivo ? "Efectivo" : "Tarjeta (POS)");
         statRecibido.setVisible(efectivo);
         statRecibido.setManaged(efectivo);
         statCambio.setVisible(efectivo);

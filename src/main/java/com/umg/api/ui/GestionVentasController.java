@@ -209,7 +209,7 @@ public class GestionVentasController {
                 cab("FECHA", W_FECHA, Pos.CENTER_LEFT),
                 concierto,
                 cab("LOCALIDADES", W_LOC, Pos.CENTER_LEFT),
-                cab("BOLETOS", W_BOL, Pos.CENTER_RIGHT),
+                cab("BOLETOS", W_BOL, Pos.CENTER),
                 cab("MÉTODO", W_MET, Pos.CENTER_LEFT),
                 cab("VENDEDOR", W_VEN, Pos.CENTER_LEFT),
                 cab("TOTAL", W_TOT, Pos.CENTER_RIGHT));
@@ -328,7 +328,7 @@ public class GestionVentasController {
 
         Label bol = new Label(String.valueOf(v.path("boletos").asInt()));
         bol.getStyleClass().addAll("s13", "w700");
-        bol.setAlignment(Pos.CENTER_RIGHT);
+        bol.setAlignment(Pos.CENTER);
         fijar(bol, W_BOL);
 
         Label met = new Label(metodo(txt(v, "metodoPago", "")));

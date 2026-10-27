@@ -5,6 +5,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
@@ -17,11 +19,11 @@
         <HBox alignment="CENTER_LEFT" spacing="10">
           <padding><Insets top="0" right="6" bottom="0" left="6"/></padding>
           <children>
-            <StackPane styleClass="logo" minWidth="34" minHeight="34" prefWidth="34" prefHeight="34" maxWidth="34" maxHeight="34">
-              <children>
-                <Region styleClass="icon,ic-ticket,ic-dark" minWidth="20" minHeight="20" prefWidth="20" prefHeight="20" maxWidth="20" maxHeight="20"/>
-              </children>
-            </StackPane>
+            <ImageView fitWidth="36" fitHeight="36" preserveRatio="true" smooth="true">
+              <image>
+                <Image url="@logo.png"/>
+              </image>
+            </ImageView>
             <VBox spacing="3">
               <children>
                 <Label text="Billets" styleClass="disp,s21"/>

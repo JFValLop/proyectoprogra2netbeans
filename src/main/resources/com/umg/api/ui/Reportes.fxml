@@ -33,13 +33,13 @@
             <ToggleButton fx:id="btnVendedor" text="Por vendedor" maxWidth="Infinity" prefHeight="44" />
 
             <Label text="Concierto" style="-fx-text-fill:#b8b3a9; -fx-font-size:12px; -fx-padding:10 0 0 0;" />
-            <ComboBox fx:id="cbConcierto" maxWidth="Infinity" prefHeight="40" />
+            <ComboBox fx:id="cbConcierto" styleClass="combo" maxWidth="Infinity" prefHeight="40" />
 
             <Label text="Artista" style="-fx-text-fill:#b8b3a9; -fx-font-size:12px; -fx-padding:6 0 0 0;" />
-            <ComboBox fx:id="cbArtista" maxWidth="Infinity" prefHeight="40" />
+            <ComboBox fx:id="cbArtista" styleClass="combo" maxWidth="Infinity" prefHeight="40" />
 
             <Label text="Vendedor" style="-fx-text-fill:#b8b3a9; -fx-font-size:12px; -fx-padding:6 0 0 0;" />
-            <ComboBox fx:id="cbVendedor" maxWidth="Infinity" prefHeight="40" />
+            <ComboBox fx:id="cbVendedor" styleClass="combo" maxWidth="Infinity" prefHeight="40" />
 
             <HBox spacing="8">
                <padding>
@@ -49,13 +49,13 @@
                   <VBox spacing="4" HBox.hgrow="ALWAYS">
                      <children>
                         <Label text="Desde" style="-fx-text-fill:#b8b3a9; -fx-font-size:12px;" />
-                        <DatePicker fx:id="dpDesde" maxWidth="Infinity" prefHeight="40" />
+                        <DatePicker fx:id="dpDesde" styleClass="date" maxWidth="Infinity" prefHeight="40" />
                      </children>
                   </VBox>
                   <VBox spacing="4" HBox.hgrow="ALWAYS">
                      <children>
                         <Label text="Hasta" style="-fx-text-fill:#b8b3a9; -fx-font-size:12px;" />
-                        <DatePicker fx:id="dpHasta" maxWidth="Infinity" prefHeight="40" />
+                        <DatePicker fx:id="dpHasta" styleClass="date" maxWidth="Infinity" prefHeight="40" />
                      </children>
                   </VBox>
                </children>

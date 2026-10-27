@@ -21,7 +21,7 @@
       <children>
         <Label styleClass="disp,s26" text="EDITAR ARTISTA" />
         <Region HBox.hgrow="ALWAYS" />
-        <Button cancelButton="true" graphicTextGap="8" mnemonicParsing="false" styleClass="btn-icon">
+        <Button cancelButton="true" graphicTextGap="8" mnemonicParsing="false" onAction="#cancelar" styleClass="btn-icon">
           <graphic>
             <Region maxHeight="18" maxWidth="18" minHeight="18" minWidth="18" prefHeight="18" prefWidth="18" styleClass="icon,ic-close,ic-muted" />
           </graphic>

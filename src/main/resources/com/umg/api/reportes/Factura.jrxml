@@ -203,7 +203,7 @@
 					<reportElement x="4" y="52" width="262" height="12"/>
 					<textElement><font size="9"/></textElement>
 					<textFieldExpression><![CDATA["TARJETA".equals($F{metodo_pago})
-	? "2. Autorización: " + ($F{autorizacion} == null ? "-" : $F{autorizacion})
+	? "2. Pagado en terminal POS"
 	: ($F{monto_recibido} == null ? ""
 		: "2. Recibido: Q " + new java.text.DecimalFormat("#,##0.00").format($F{monto_recibido})
 		  + "   Cambio: Q " + new java.text.DecimalFormat("#,##0.00").format($F{monto_recibido}.subtract($F{total})))]]></textFieldExpression>

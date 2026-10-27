@@ -209,7 +209,6 @@ public class Artistas_Controller {
                         "FECHA Y HORA",
                         "RECINTO",
                         "ESTADO",
-                        "OCUPACIÓN",
                         "ACCIONES"
                 );
 
@@ -294,7 +293,7 @@ public class Artistas_Controller {
 
         double[] porcentajesUsuarios = {34, 16, 16, 16, 18};
         double[] porcentajesArtistas = {8, 30, 22, 22, 18};
-        double[] porcentajesConciertos = {27, 17, 17, 13, 18, 8};
+        double[] porcentajesConciertos = {32, 20, 22, 14, 12};
 
         double[] porcentajes = esConciertos
                 ? porcentajesConciertos
@@ -731,6 +730,8 @@ public class Artistas_Controller {
         HBox etiquetaRol = new HBox(lbRol);
         etiquetaRol.setAlignment(Pos.CENTER_LEFT);
         etiquetaRol.getStyleClass().add("pill");
+        etiquetaRol.setMaxWidth(Region.USE_PREF_SIZE);
+        etiquetaRol.setMaxHeight(Region.USE_PREF_SIZE);
 
         if ("Administrador".equalsIgnoreCase(rol)) {
             etiquetaRol.setStyle(
@@ -1218,7 +1219,7 @@ private GridPane crearFilaConcierto(Concierto concierto) {
     fila.setPadding(new Insets(10, 18, 10, 18));
     fila.setHgap(12);
 
-    double[] porcentajes = {27, 17, 17, 13, 18, 8};
+    double[] porcentajes = {32, 20, 22, 14, 12};
 
     for (double porcentaje : porcentajes) {
 
@@ -1335,7 +1336,9 @@ private GridPane crearFilaConcierto(Concierto concierto) {
 
     HBox estado = new HBox(etiquetaEstado);
     estado.setAlignment(Pos.CENTER_LEFT);
-    estado.setPadding(new Insets(5, 8, 5, 8));
+    estado.setPadding(new Insets(5, 10, 5, 10));
+    estado.setMaxWidth(Region.USE_PREF_SIZE);
+    estado.setMaxHeight(Region.USE_PREF_SIZE);
     estado.setStyle(
             "-fx-background-color: " + colorFondo + ";"
             + "-fx-background-radius: 12;"
@@ -1343,14 +1346,7 @@ private GridPane crearFilaConcierto(Concierto concierto) {
 
     fila.add(estado, 3, 0);
 
-    // 5. Ocupación pendiente.
-
-    Label ocupacion = new Label("No disponible");
-    ocupacion.getStyleClass().addAll("s12", "c-dim");
-
-    fila.add(ocupacion, 4, 0);
-
-    // 6. Acción.
+    // 5. Acción.
 
     Button btnEditar = new Button();
     btnEditar.setMnemonicParsing(false);
@@ -1391,7 +1387,7 @@ private GridPane crearFilaConcierto(Concierto concierto) {
     HBox acciones = new HBox(4, btnEditar, btnPrecios);
     acciones.setAlignment(Pos.CENTER_LEFT);
 
-    fila.add(acciones, 5, 0);
+    fila.add(acciones, 4, 0);
 
     return fila;
 }

@@ -53,15 +53,6 @@ public class MapaController {
     private Label lblDetalle;
 
     @FXML
-    private Button btnModoA;
-
-    @FXML
-    private Button btnModoB;
-
-    @FXML
-    private Button btnModoC;
-
-    @FXML
     private Label lblActualizado;
 
     @FXML
@@ -130,8 +121,6 @@ public class MapaController {
     @FXML
     private void initialize() {
         concierto = Sesion.getConcierto();
-        btnModoB.setDisable(true);
-        btnModoC.setDisable(true);
 
         App.alSalir(() -> {
             detener();

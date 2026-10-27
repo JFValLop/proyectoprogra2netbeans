@@ -5,6 +5,9 @@
 package com.umg.api;
 
 import com.umg.api.service.Usuario_Service;
+import java.awt.Taskbar;
+import javax.imageio.ImageIO;
+import javafx.scene.image.Image;
 import com.umg.api.ui.PrincipalController;
 import javafx.application.Application;
 import javafx.application.HostServices;
@@ -33,6 +36,8 @@ public class App extends Application {
         ventana = stage;
         servicios = getHostServices();
         stage.setTitle("Billets");
+        stage.getIcons().add(new Image(App.class.getResourceAsStream("/com/umg/api/ui/logo.png")));
+        ponerIconoDock();
         cambiarPantalla("Login.fxml");
         stage.show();
     }
@@ -96,10 +101,20 @@ public class App extends Application {
 
         Stage dialogo = new Stage();
         dialogo.setTitle(titulo);
+        dialogo.getIcons().addAll(ventana.getIcons());
         dialogo.initOwner(ventana);
         dialogo.initModality(Modality.APPLICATION_MODAL);
         dialogo.setScene(escena);
         dialogo.showAndWait();
+    }
+
+    private static void ponerIconoDock() {
+        try {
+            if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.ICON_IMAGE)) {
+                Taskbar.getTaskbar().setIconImage(ImageIO.read(App.class.getResource("/com/umg/api/ui/logo.png")));
+            }
+        } catch (Exception ex) {
+        }
     }
 
     @Override

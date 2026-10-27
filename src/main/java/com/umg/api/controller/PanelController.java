@@ -21,6 +21,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -43,7 +44,7 @@ public class PanelController {
     @FXML private Label lblPromedio, lblPromedioSub;
     @FXML private Label lblAforo, lblAforoSub;
 
-    @FXML private HBox leyenda;
+    @FXML private FlowPane leyenda;
     @FXML private VBox listaInventario;
     @FXML private VBox listaArtistas;
     @FXML private HBox barras14;

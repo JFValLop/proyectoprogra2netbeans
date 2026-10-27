@@ -83,12 +83,6 @@ public class CobroController {
     private VBox panelTarjeta;
 
     @FXML
-    private TextField txtAutorizacion;
-
-    @FXML
-    private CheckBox chkImprimir;
-
-    @FXML
     private CheckBox chkCorreo;
 
     @FXML
@@ -158,8 +152,6 @@ public class CobroController {
         prepararMonto(btnMonto3, monto3);
         calcularCambio();
 
-        chkImprimir.setSelected(true);
-        chkImprimir.setDisable(true);
         chkCorreo.setSelected(false);
         txtCorreo.textProperty().addListener((obs, viejo, nuevo) -> chkCorreo.setSelected(nuevo != null && nuevo.contains("@")));
 
@@ -383,13 +375,7 @@ public class CobroController {
             datos.put("metodoPago", "EFECTIVO");
             datos.put("montoRecibido", recibido);
         } else {
-            String autorizacion = txtAutorizacion.getText() == null ? "" : txtAutorizacion.getText().trim();
-            if (autorizacion.isEmpty()) {
-                Barra.alerta(Alert.AlertType.WARNING, "Escribe el número de autorización del voucher");
-                return;
-            }
             datos.put("metodoPago", "TARJETA");
-            datos.put("autorizacion", autorizacion);
         }
 
         List<Integer> asientos = new ArrayList<>();

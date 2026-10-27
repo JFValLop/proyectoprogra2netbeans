@@ -120,15 +120,9 @@
               <padding><Insets top="10" right="12" bottom="10" left="12"/></padding>
               <children>
                 <Region styleClass="icon,ic-info,ic-amber" minWidth="19" minHeight="19" prefWidth="19" prefHeight="19" maxWidth="19" maxHeight="19"/>
-                <Label text="Procesa el cobro en la terminal POS y registra aquí el número de autorización del voucher." styleClass="s12,c-text2" wrapText="true"/>
+                <Label text="Procesa el cobro en la terminal POS y confirma la venta cuando el pago sea aprobado." styleClass="s12,c-text2" wrapText="true"/>
               </children>
             </HBox>
-            <VBox spacing="6">
-              <children>
-                <Label text="No. de autorización" styleClass="form-lbl"/>
-                <TextField promptText="p. ej. 004821" styleClass="input" prefHeight="42" id="txtAutorizacion" maxWidth="260" fx:id="txtAutorizacion"/>
-              </children>
-            </VBox>
           </children>
         </VBox>
         <VBox spacing="8">
@@ -136,7 +130,6 @@
             <Label text="Entrega de boletos" styleClass="form-lbl"/>
             <HBox alignment="CENTER_LEFT" spacing="16">
               <children>
-                <CheckBox id="chkImprimir" text="Imprimir en taquilla" selected="true" mnemonicParsing="false" fx:id="chkImprimir"/>
                 <CheckBox id="chkCorreo" text="Enviar QR por correo" selected="true" mnemonicParsing="false" fx:id="chkCorreo"/>
               </children>
             </HBox>
