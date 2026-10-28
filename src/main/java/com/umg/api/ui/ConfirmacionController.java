@@ -40,6 +40,9 @@ public class ConfirmacionController {
     private Label lblTotal;
 
     @FXML
+    private Label lblIva;
+
+    @FXML
     private Label lblMetodo;
 
     @FXML
@@ -95,6 +98,7 @@ public class ConfirmacionController {
         lblDetalle.setText(Formato.momento(venta.getFecha()) + " · " + venta.getVendedor() + cliente);
 
         lblTotal.setText(Formato.dinero(venta.getTotal()));
+        lblIva.setText("Incluye IVA (12%) · " + Formato.dinero(Formato.iva(venta.getTotal())));
         boolean efectivo = "EFECTIVO".equals(venta.getMetodoPago());
         lblMetodo.setText(efectivo ? "Efectivo" : "Tarjeta (POS)");
         statRecibido.setVisible(efectivo);

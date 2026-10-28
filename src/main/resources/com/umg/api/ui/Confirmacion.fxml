@@ -46,6 +46,7 @@
               <children>
                 <Label text="Total cobrado" styleClass="s11,w600,c-dim"/>
                 <Label text="Q 3,150.00" styleClass="disp,s28" fx:id="lblTotal"/>
+                <Label text="Incluye IVA (12%) · Q 337.50" styleClass="s11,c-dim" fx:id="lblIva"/>
               </children>
             </VBox>
             <VBox styleClass="stat" HBox.hgrow="ALWAYS" maxWidth="Infinity" spacing="4">

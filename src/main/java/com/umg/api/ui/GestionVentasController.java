@@ -6,6 +6,7 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.umg.api.Sesion;
+import com.umg.api.service.BoletoService;
 import com.umg.api.service.FacturaService;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -22,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.TreeSet;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
@@ -32,10 +34,13 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
@@ -88,6 +93,10 @@ public class GestionVentasController {
     public static String nombreInicial;
     private Integer filtroUsuario;
 
+    public static Integer clienteInicial;
+    public static String clienteNombreInicial;
+    private Integer filtroCliente;
+
     // panel
     private Label pTitulo, pSub;
     private VBox cuerpo;
@@ -138,6 +147,15 @@ public class GestionVentasController {
             cmbVendedor.setManaged(false);
         }
 
+        filtroCliente = clienteInicial;
+        String nombreCliente = clienteNombreInicial;
+        clienteInicial = null;
+        clienteNombreInicial = null;
+        if (filtroCliente != null) {
+            lblTitulo.setText("COMPRAS DE " + nombreCliente.toUpperCase());
+            lblCeja.setText("CLIENTES · HISTORIAL DE COMPRAS");
+        }
+
         // Rango: Hoy / 7 días / Todo
         ToggleGroup grupo = new ToggleGroup();
         tgHoy = botonRango("Hoy", grupo);
@@ -146,7 +164,7 @@ public class GestionVentasController {
         boxRango.getChildren().addAll(tgHoy, tg7, tgTodo);
         boxRango.setPadding(new Insets(4));
         boxRango.setStyle("-fx-background-color: #1F1E1B; -fx-border-color: #34322D; -fx-border-radius: 12; -fx-background-radius: 12;");
-        if (admin && filtroUsuario != null) {
+        if ((admin && filtroUsuario != null) || filtroCliente != null) {
             tgTodo.setSelected(true);
         } else {
             tgHoy.setSelected(true);
@@ -230,9 +248,9 @@ public class GestionVentasController {
 
     private void cargar() {
         String rango = tg7.isSelected() ? "7" : tgTodo.isSelected() ? "todo" : "hoy";
-        Integer usuarioId = admin ? filtroUsuario : Integer.valueOf(Sesion.getUsuario().getId());
+        Integer usuarioId = admin || filtroCliente != null ? filtroUsuario : Integer.valueOf(Sesion.getUsuario().getId());
         lblResumen.setText("Cargando…");
-        Fondo.cargar(() -> servicio.listarVentas(rango, usuarioId), lista -> {
+        Fondo.cargar(() -> servicio.listarVentas(rango, usuarioId, filtroCliente), lista -> {
             ventas = lista;
             actualizarVendedores();
             pintar();
@@ -503,8 +521,18 @@ public class GestionVentasController {
         cuerpo.getChildren().clear();
 
         cuerpo.getChildren().add(seccion("TICKET"));
+        if (d.path("boletos").isEmpty()) {
+            cuerpo.getChildren().add(aviso("Todos los boletos de esta venta fueron cancelados."));
+        }
         for (JsonNode b : d.path("boletos")) {
             cuerpo.getChildren().add(ticket(ventaId, b));
+        }
+
+        if (!d.path("cancelados").isEmpty()) {
+            cuerpo.getChildren().add(seccion("CANCELADOS"));
+            for (JsonNode c : d.path("cancelados")) {
+                cuerpo.getChildren().add(cancelado(c));
+            }
         }
 
         cuerpo.getChildren().add(seccion("FACTURA"));
@@ -579,21 +607,34 @@ public class GestionVentasController {
         Label cuando = new Label(fc == null ? "" : fechaLarga(fc));
         cuando.getStyleClass().addAll("s11", "c-dim");
 
-        String lugar = b.path("dePie").asBoolean()
-                ? "De pie · sin asiento"
-                : (b.hasNonNull("bloque") ? "Bloque " + b.get("bloque").asText() + " · " : "")
-                + "Fila " + b.path("fila").asText() + " · Asiento " + b.path("numero").asText();
-        Label sitio = new Label(lugar);
+        Label sitio = new Label(lugar(b));
         sitio.getStyleClass().addAll("s12", "c-muted");
 
         Label precio = new Label(dinero(b.path("precio").asDouble()));
         precio.getStyleClass().addAll("s14", "w700");
 
-        VBox info = new VBox(4, chip(txt(b, "localidad", "General")), artista, cuando, sitio, precio);
+        int boletoId = b.get("id").asInt();
+        String codigoBoleto = txt(b, "codigo", "SVB|V" + ventaId + "|B" + boletoId);
+
+        Region espacio = new Region();
+        HBox.setHgrow(espacio, Priority.ALWAYS);
+        HBox pie = new HBox(8, precio, espacio);
+        pie.setAlignment(Pos.CENTER_LEFT);
+        if (b.path("usado").asBoolean()) {
+            Label usado = new Label("Ya entró");
+            usado.getStyleClass().addAll("s11", "w600", "c-dim");
+            pie.getChildren().add(usado);
+        } else if (admin) {
+            Button cancelar = new Button("Cancelar");
+            cancelar.getStyleClass().addAll("btn-ghost", "btn-sm");
+            cancelar.setOnAction(e -> cancelarBoleto(ventaId, boletoId, codigoBoleto, cancelar));
+            pie.getChildren().add(cancelar);
+        }
+
+        VBox info = new VBox(4, chip(txt(b, "localidad", "General")), artista, cuando, sitio, pie);
         HBox.setHgrow(info, Priority.ALWAYS);
 
-        int boletoId = b.get("id").asInt();
-        ImageView qr = new ImageView(qr("SVB|V" + ventaId + "|B" + boletoId, 220));
+        ImageView qr = new ImageView(qr(codigoBoleto, 220));
         qr.setFitWidth(96);
         qr.setFitHeight(96);
         StackPane marco = new StackPane(qr);
@@ -607,6 +648,79 @@ public class GestionVentasController {
         tarjeta.setStyle("-fx-background-color: #2A2825; -fx-border-color: #3A3833;"
                 + " -fx-background-radius: 12; -fx-border-radius: 12;");
         return tarjeta;
+    }
+
+    private Node cancelado(JsonNode c) {
+        Label estado = new Label("CANCELADO");
+        estado.getStyleClass().addAll("s11", "w700", "c-red");
+        Region espacio = new Region();
+        HBox.setHgrow(espacio, Priority.ALWAYS);
+        Label precio = new Label(dinero(c.path("precio").asDouble()));
+        precio.getStyleClass().addAll("s13", "w700", "c-dim");
+        HBox arriba = new HBox(8, chip(txt(c, "localidad", "General")), espacio, estado);
+        arriba.setAlignment(Pos.CENTER_LEFT);
+
+        Label sitio = new Label(lugar(c) + " · " + txt(c, "codigo", ""));
+        sitio.getStyleClass().addAll("s12", "c-muted");
+
+        ZonedDateTime cuando = fecha(c.get("canceladoEn"));
+        String quien = (cuando == null ? "" : fechaLarga(cuando)) + (c.hasNonNull("canceladoPor") ? " · " + c.get("canceladoPor").asText() : "");
+        Label detalle = new Label(quien);
+        detalle.getStyleClass().addAll("s11", "c-dim");
+
+        VBox tarjeta = new VBox(4, arriba, sitio, detalle);
+        if (c.hasNonNull("motivo")) {
+            Label motivo = new Label("Motivo: " + c.get("motivo").asText());
+            motivo.getStyleClass().addAll("s12", "c-muted");
+            motivo.setWrapText(true);
+            tarjeta.getChildren().add(motivo);
+        }
+        tarjeta.getChildren().add(precio);
+        tarjeta.setPadding(new Insets(12, 14, 12, 14));
+        tarjeta.setStyle("-fx-background-color: transparent; -fx-border-color: #3A3833;"
+                + " -fx-border-style: segments(5, 4); -fx-background-radius: 12; -fx-border-radius: 12;");
+        return tarjeta;
+    }
+
+    private void cancelarBoleto(int ventaId, int boletoId, String codigoBoleto, Button boton) {
+        TextInputDialog dialogo = new TextInputDialog();
+        dialogo.setTitle("Cancelar boleto");
+        dialogo.setHeaderText("¿Cancelar el boleto " + codigoBoleto + "?\nEl lugar vuelve a quedar libre para la venta y el QR deja de servir.");
+        dialogo.setContentText("Motivo (opcional):");
+        dialogo.getDialogPane().getButtonTypes().setAll(
+                new ButtonType("Cancelar boleto", ButtonBar.ButtonData.OK_DONE),
+                new ButtonType("Volver", ButtonBar.ButtonData.CANCEL_CLOSE));
+        Optional<String> respuesta = dialogo.showAndWait();
+        if (respuesta.isEmpty()) {
+            return;
+        }
+
+        boton.setDisable(true);
+        int usuarioId = Sesion.getUsuario().getId();
+        Fondo.cargar(() -> new BoletoService().cancelar(boletoId, usuarioId, respuesta.get()), mensaje -> {
+            Barra.notificar(mensaje, "ok");
+            Barra.actualizarTurno();
+            cargar();
+            if (ventaMostrada == ventaId) {
+                Fondo.cargar(() -> servicio.detalleVenta(ventaId), d -> {
+                    if (ventaMostrada == ventaId) {
+                        pintarDetalle(d);
+                    }
+                }, ex -> {
+                });
+            }
+        }, ex -> {
+            boton.setDisable(false);
+            Barra.notificar(ex.getMessage(), "error");
+        });
+    }
+
+    private static String lugar(JsonNode b) {
+        if (b.path("dePie").asBoolean()) {
+            return "De pie · sin asiento";
+        }
+        return (b.hasNonNull("bloque") ? "Bloque " + b.get("bloque").asText() + " · " : "")
+                + "Fila " + b.path("fila").asText() + " · Asiento " + b.path("numero").asText();
     }
 
     // =====================================================================

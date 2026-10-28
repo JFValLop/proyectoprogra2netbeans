@@ -109,7 +109,13 @@ public class FacturaService {
 
     /** rango: "hoy", "7" o "todo". usuarioId null = todos los vendedores. */
     public JsonNode listarVentas(String rango, Integer usuarioId) throws Exception {
-        String url = BASE_URL + "/ventas?rango=" + rango + (usuarioId != null ? "&usuarioId=" + usuarioId : "");
+        return listarVentas(rango, usuarioId, null);
+    }
+
+    public JsonNode listarVentas(String rango, Integer usuarioId, Integer clienteId) throws Exception {
+        String url = BASE_URL + "/ventas?rango=" + rango
+                + (usuarioId != null ? "&usuarioId=" + usuarioId : "")
+                + (clienteId != null ? "&clienteId=" + clienteId : "");
         return getJson(url);
     }
 

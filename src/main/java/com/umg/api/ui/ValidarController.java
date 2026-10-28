@@ -25,6 +25,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -49,6 +50,17 @@ public class ValidarController {
 
     @FXML
     private ImageView imgCamara;
+
+    @FXML
+    private StackPane marco;
+
+    @FXML
+    private Region esquina1, esquina2, esquina3, esquina4;
+
+    @FXML
+    private Label lblGuia;
+
+    private static final double RECUADRO = 0.6;
 
     @FXML
     private Button btnCamara;
@@ -83,6 +95,11 @@ public class ValidarController {
         lblContador.setText(String.valueOf(validados));
         imgCamara.fitWidthProperty().bind(cajaCamara.widthProperty().subtract(20));
         imgCamara.fitHeightProperty().bind(cajaCamara.heightProperty().subtract(20));
+        imgCamara.boundsInParentProperty().addListener((o, a, b) -> {
+            double lado = Math.min(b.getWidth(), b.getHeight()) * RECUADRO;
+            marco.setPrefSize(lado, lado);
+        });
+        colorMarco("#FFB020");
 
         btnCamara.setOnAction(e -> {
             if (encendida) {
@@ -121,6 +138,8 @@ public class ValidarController {
             encendida = true;
             Platform.runLater(() -> {
                 lblCamara.setText("");
+                marco.setVisible(true);
+                lblGuia.setVisible(true);
                 btnCamara.setText("Apagar cámara");
                 btnCamara.setDisable(false);
             });
@@ -147,6 +166,8 @@ public class ValidarController {
     private void apagarCamara() {
         encendida = false;
         imgCamara.setImage(null);
+        marco.setVisible(false);
+        lblGuia.setVisible(false);
         lblCamara.setText("La cámara está apagada");
         btnCamara.setText("Encender cámara");
     }
@@ -164,12 +185,34 @@ public class ValidarController {
             byte[] datos = new byte[(int) gris.total()];
             gris.get(0, 0, datos);
 
-            LuminanceSource fuente = new PlanarYUVLuminanceSource(datos, gris.cols(), gris.rows(), 0, 0, gris.cols(), gris.rows(), false);
+            int ancho = gris.cols();
+            int alto = gris.rows();
+            int lado = (int) (Math.min(ancho, alto) * RECUADRO);
+            String codigo = decodificar(datos, ancho, alto, (ancho - lado) / 2, (alto - lado) / 2, lado, lado);
+            if (codigo == null) {
+                codigo = decodificar(datos, ancho, alto, 0, 0, ancho, alto);
+            }
+            return codigo;
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    private String decodificar(byte[] datos, int ancho, int alto, int x, int y, int w, int h) {
+        try {
+            LuminanceSource fuente = new PlanarYUVLuminanceSource(datos, ancho, alto, x, y, w, h, false);
             Result resultado = new QRCodeReader().decode(new BinaryBitmap(new HybridBinarizer(fuente)));
             return resultado.getText();
         } catch (Exception ex) {
             return null;
         }
+    }
+
+    private void colorMarco(String color) {
+        esquina1.setStyle("-fx-border-color: " + color + "; -fx-border-width: 4 0 0 4; -fx-border-radius: 12 0 0 0;");
+        esquina2.setStyle("-fx-border-color: " + color + "; -fx-border-width: 4 4 0 0; -fx-border-radius: 0 12 0 0;");
+        esquina3.setStyle("-fx-border-color: " + color + "; -fx-border-width: 0 0 4 4; -fx-border-radius: 0 0 0 12;");
+        esquina4.setStyle("-fx-border-color: " + color + "; -fx-border-width: 0 4 4 0; -fx-border-radius: 0 0 12 0;");
     }
 
     private void validarManual() {
@@ -241,14 +284,18 @@ public class ValidarController {
         if (tipo.equals("valido")) {
             lblEstado.getStyleClass().add("c-green");
             cajaResultado.setStyle("-fx-background-color: rgba(91,214,138,0.15); -fx-border-color: #5BD68A;");
+            colorMarco("#5BD68A");
         } else if (tipo.equals("usado")) {
             lblEstado.getStyleClass().add("c-amber");
             cajaResultado.setStyle("-fx-background-color: rgba(255,176,32,0.15); -fx-border-color: #FFB020;");
+            colorMarco("#FFB020");
         } else if (tipo.equals("no-existe")) {
             lblEstado.getStyleClass().add("c-red");
             cajaResultado.setStyle("-fx-background-color: rgba(255,106,85,0.15); -fx-border-color: #FF6A55;");
+            colorMarco("#FF6A55");
         } else {
             cajaResultado.setStyle("");
+            colorMarco("#FFB020");
         }
     }
 }

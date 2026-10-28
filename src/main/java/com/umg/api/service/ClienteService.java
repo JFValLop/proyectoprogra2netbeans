@@ -4,6 +4,7 @@
  */
 package com.umg.api.service;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.umg.api.model.Cliente;
 import java.io.InputStream;
 import java.net.URLEncoder;
@@ -39,6 +40,17 @@ public class ClienteService {
                 throw Api.error(is, response.getCode());
             }
             return Api.mapper.readValue(is, Cliente.class);
+        }
+    }
+
+    public JsonNode listar() throws Exception {
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
+            ClassicHttpResponse response = client.execute(new HttpGet(BASE_URL));
+            InputStream is = response.getEntity().getContent();
+            if (response.getCode() != 200) {
+                throw Api.error(is, response.getCode());
+            }
+            return Api.mapper.readTree(is);
         }
     }
 

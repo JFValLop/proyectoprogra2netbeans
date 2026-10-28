@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="16" styleClass="app" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@styles.css" fx:controller="com.umg.api.ui.ClientesController">
+  <padding><Insets top="22" right="28" bottom="20" left="28"/></padding>
+  <children>
+    <HBox alignment="BOTTOM_LEFT">
+      <children>
+        <VBox spacing="2" HBox.hgrow="ALWAYS">
+          <children>
+            <Label text="COMPRADORES · HISTORIAL DE COMPRAS" styleClass="eyebrow"/>
+            <Label text="CLIENTES" styleClass="disp,s34"/>
+          </children>
+        </VBox>
+        <VBox alignment="CENTER_RIGHT" spacing="2">
+          <children>
+            <Label text="" styleClass="s12,c-dim" fx:id="lblResumen"/>
+            <Label text="Q 0.00" styleClass="disp,s28" fx:id="lblTotal"/>
+          </children>
+        </VBox>
+      </children>
+    </HBox>
+
+    <HBox alignment="CENTER_LEFT" spacing="12">
+      <children>
+        <TextField fx:id="txtBuscar" promptText="Nombre, NIT o correo" prefWidth="320" minHeight="38"/>
+        <Label text="Haz clic en un cliente para ver sus compras" styleClass="s12,c-dim"/>
+      </children>
+    </HBox>
+
+    <VBox VBox.vgrow="ALWAYS" spacing="0" style="-fx-background-color: #1F1E1B; -fx-border-color: #34322D; -fx-background-radius: 14; -fx-border-radius: 14;">
+      <children>
+        <HBox fx:id="cabecera" alignment="CENTER_LEFT"/>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" VBox.vgrow="ALWAYS" style="-fx-background: transparent; -fx-background-color: transparent;">
+          <content>
+            <VBox fx:id="filas"/>
+          </content>
+        </ScrollPane>
+      </children>
+    </VBox>
+  </children>
+</VBox>

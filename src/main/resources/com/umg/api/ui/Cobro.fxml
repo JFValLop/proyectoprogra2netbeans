@@ -24,6 +24,20 @@
           <children>
           </children>
         </VBox>
+        <HBox alignment="CENTER_LEFT">
+          <children>
+            <Label text="Subtotal sin IVA" styleClass="s12,c-dim"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="Q 2,812.50" styleClass="s12,c-muted" fx:id="lblSinIva"/>
+          </children>
+        </HBox>
+        <HBox alignment="CENTER_LEFT">
+          <children>
+            <Label text="IVA (12%)" styleClass="s12,c-dim"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="Q 337.50" styleClass="s12,c-muted" fx:id="lblIva"/>
+          </children>
+        </HBox>
         <HBox alignment="BASELINE_LEFT">
           <children>
             <Label text="TOTAL" styleClass="s11,w700,c-dim"/>

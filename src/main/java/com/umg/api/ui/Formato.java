@@ -23,6 +23,14 @@ public class Formato {
         return "Q " + String.format("%,.2f", monto);
     }
 
+    public static double sinIva(double total) {
+        return Math.round(total / 1.12 * 100) / 100.0;
+    }
+
+    public static double iva(double total) {
+        return total - sinIva(total);
+    }
+
     public static String dineroCorto(double monto) {
         if (monto == Math.floor(monto)) {
             return "Q " + String.format("%,.0f", monto);

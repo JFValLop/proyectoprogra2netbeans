@@ -26,6 +26,17 @@
                   <children>
                     <Label text="La cámara está apagada" styleClass="s14,c-dim" fx:id="lblCamara" wrapText="true"/>
                     <ImageView fitWidth="560" fitHeight="420" preserveRatio="true" fx:id="imgCamara"/>
+                    <StackPane fx:id="marco" visible="false" mouseTransparent="true" prefWidth="240" prefHeight="240" maxWidth="-Infinity" maxHeight="-Infinity">
+                      <children>
+                        <Region fx:id="esquina1" StackPane.alignment="TOP_LEFT" minWidth="38" minHeight="38" maxWidth="38" maxHeight="38"/>
+                        <Region fx:id="esquina2" StackPane.alignment="TOP_RIGHT" minWidth="38" minHeight="38" maxWidth="38" maxHeight="38"/>
+                        <Region fx:id="esquina3" StackPane.alignment="BOTTOM_LEFT" minWidth="38" minHeight="38" maxWidth="38" maxHeight="38"/>
+                        <Region fx:id="esquina4" StackPane.alignment="BOTTOM_RIGHT" minWidth="38" minHeight="38" maxWidth="38" maxHeight="38"/>
+                      </children>
+                    </StackPane>
+                    <Label text="Coloca el QR dentro del recuadro" fx:id="lblGuia" visible="false" mouseTransparent="true" StackPane.alignment="BOTTOM_CENTER" styleClass="s12,w600" style="-fx-background-color: rgba(10,9,8,0.75); -fx-background-radius: 99; -fx-padding: 6 14 6 14; -fx-text-fill: #F3EFE6;">
+                      <StackPane.margin><Insets bottom="22"/></StackPane.margin>
+                    </Label>
                   </children>
                 </StackPane>
                 <Button text="Encender cámara" styleClass="btn-primary,btn-lg" mnemonicParsing="false" maxWidth="Infinity" fx:id="btnCamara"/>

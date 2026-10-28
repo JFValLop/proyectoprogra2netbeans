@@ -50,6 +50,12 @@ public class CobroController {
     private Label lblTotal;
 
     @FXML
+    private Label lblSinIva;
+
+    @FXML
+    private Label lblIva;
+
+    @FXML
     private Button btnCerrarCobro;
 
     @FXML
@@ -129,6 +135,8 @@ public class CobroController {
         lblResumen.setText("RESUMEN · " + boletos + (boletos == 1 ? " BOLETO" : " BOLETOS"));
         lblArtista.setText(c.getArtista() == null ? "" : c.getArtista().toUpperCase());
         lblDetalle.setText(Formato.fechaLarga(c.getFecha(), c.getHora()) + (c.getEstadio() == null ? "" : " · " + c.getEstadio()));
+        lblSinIva.setText(Formato.dinero(Formato.sinIva(orden.getTotal())));
+        lblIva.setText(Formato.dinero(Formato.iva(orden.getTotal())));
         lblTotal.setText(Formato.dinero(orden.getTotal()));
         btnConfirmarVenta.setText("Confirmar venta · " + Formato.dinero(orden.getTotal()));
         dibujarResumen();

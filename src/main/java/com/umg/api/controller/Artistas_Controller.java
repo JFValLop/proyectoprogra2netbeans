@@ -1154,53 +1154,6 @@ private void filtrarConciertos(String texto) {
     }
     
     
-private void abrirEditarConcierto(Concierto concierto) {
-    try {
-        java.net.URL recurso =
-                getClass().getResource("/Recursos/Editar_Concierto.fxml");
-
-        if (recurso == null) {
-            throw new IllegalStateException(
-                    "No se encontró /Recursos/Editar_Concierto.fxml"
-            );
-        }
-
-        FXMLLoader loader = new FXMLLoader(recurso);
-
-        EditarConcierto_Controller controller =
-                new EditarConcierto_Controller(
-                        concierto,
-                        this::cargarConciertos
-                );
-
-        loader.setController(controller);
-
-        Parent root = loader.load();
-
-        Stage stage = new Stage();
-        stage.setTitle("Editar concierto");
-        stage.initModality(Modality.APPLICATION_MODAL);
-
-        if (btnCrear_Artista.getScene() != null) {
-            stage.initOwner(
-                    btnCrear_Artista.getScene().getWindow()
-            );
-        }
-
-        stage.setScene(new Scene(root));
-        stage.showAndWait();
-
-    } catch (Exception e) {
-        e.printStackTrace();
-
-        mostrarAlerta(
-                Alert.AlertType.ERROR,
-                "Error",
-                "No fue posible abrir el formulario de edición.\n"
-                + e.getMessage()
-        );
-    }
-}
 
 
     // =====================================================
@@ -1351,7 +1304,7 @@ private GridPane crearFilaConcierto(Concierto concierto) {
     Button btnEditar = new Button();
     btnEditar.setMnemonicParsing(false);
     btnEditar.setTooltip(
-            new Tooltip("Editar concierto")
+            new Tooltip("Editar concierto, inventario y precios")
     );
     btnEditar.getStyleClass().add("btn-icon");
 
@@ -1363,28 +1316,10 @@ private GridPane crearFilaConcierto(Concierto concierto) {
     btnEditar.setGraphic(icono);
 
     btnEditar.setOnAction(event ->
-        abrirEditarConcierto(concierto)
+        abrirFormularioConcierto(concierto.getId(), "Editar concierto")
     );
 
-    Button btnPrecios = new Button();
-    btnPrecios.setMnemonicParsing(false);
-    btnPrecios.setTooltip(
-            new Tooltip("Inventario y precios")
-    );
-    btnPrecios.getStyleClass().add("btn-icon");
-
-    Region iconoPrecios = new Region();
-    iconoPrecios.getStyleClass().addAll(
-            "icon", "ic-payments", "ic-muted"
-    );
-
-    btnPrecios.setGraphic(iconoPrecios);
-
-    btnPrecios.setOnAction(event ->
-        abrirInventario(concierto)
-    );
-
-    HBox acciones = new HBox(4, btnEditar, btnPrecios);
+    HBox acciones = new HBox(4, btnEditar);
     acciones.setAlignment(Pos.CENTER_LEFT);
 
     fila.add(acciones, 4, 0);
@@ -1393,16 +1328,16 @@ private GridPane crearFilaConcierto(Concierto concierto) {
 }
 
 
-    private void abrirInventario(Concierto concierto) {
+    private void abrirFormularioConcierto(Integer conciertoId, String titulo) {
         try {
-            ConciertoFormController.conciertoInicial = concierto.getId();
-            App.abrirDialogo("ConciertoForm.fxml", "Inventario y precios");
+            ConciertoFormController.conciertoInicial = conciertoId;
+            App.abrirDialogo("ConciertoForm.fxml", titulo);
             cargarConciertos();
         } catch (Exception e) {
             mostrarAlerta(
                     Alert.AlertType.ERROR,
                     "Error",
-                    "No fue posible abrir el inventario.\n"
+                    "No fue posible abrir el formulario del concierto.\n"
                     + e.getMessage()
             );
         }
@@ -1462,49 +1397,7 @@ private GridPane crearFilaConcierto(Concierto concierto) {
 
    
 private void abrirCrearConcierto() {
-    try {
-        java.net.URL recurso = getClass().getResource(
-                "/Recursos/ConciertoForm.fxml"
-        );
-
-        if (recurso == null) {
-            throw new IllegalStateException(
-                    "No se encontró /Recursos/ConciertoForm.fxml"
-            );
-        }
-
-        FXMLLoader loader = new FXMLLoader(recurso);
-
-        Concierto_Controller controller =
-                new Concierto_Controller();
-
-        controller.setAlGuardar(this::cargarConciertos);
-        loader.setController(controller);
-
-        Parent root = loader.load();
-
-        Stage stage = new Stage();
-        stage.setTitle("Nuevo concierto");
-        stage.initModality(Modality.APPLICATION_MODAL);
-
-        if (btnCrear_Artista.getScene() != null) {
-            stage.initOwner(
-                    btnCrear_Artista.getScene().getWindow()
-            );
-        }
-
-        stage.setScene(new Scene(root));
-        stage.showAndWait();
-
-    } catch (Exception e) {
-        e.printStackTrace();
-
-        Alert alerta = new Alert(Alert.AlertType.ERROR);
-        alerta.setTitle("Error al abrir formulario");
-        alerta.setHeaderText("No se pudo abrir el formulario de concierto");
-        alerta.setContentText(e.getMessage());
-        alerta.showAndWait();
-    }
+    abrirFormularioConcierto(null, "Nuevo concierto");
 }
 
 

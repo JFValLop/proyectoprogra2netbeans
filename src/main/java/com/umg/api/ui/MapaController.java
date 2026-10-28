@@ -92,6 +92,12 @@ public class MapaController {
     private Label lblBoletos;
 
     @FXML
+    private Label lblSinIva;
+
+    @FXML
+    private Label lblIva;
+
+    @FXML
     private Label lblTotal;
 
     @FXML
@@ -520,6 +526,8 @@ public class MapaController {
         boxHold.setVisible(!seleccion.isEmpty());
         boxHold.setManaged(!seleccion.isEmpty());
         lblBoletos.setText(String.valueOf(boletos()));
+        lblSinIva.setText(Formato.dinero(Formato.sinIva(total())));
+        lblIva.setText(Formato.dinero(Formato.iva(total())));
         lblTotal.setText(Formato.dinero(total()));
         btnCobrar.setDisable(vacia);
         btnVaciar.setDisable(vacia);
