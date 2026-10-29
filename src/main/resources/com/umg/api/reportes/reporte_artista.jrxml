@@ -10,6 +10,7 @@
 	<parameter name="P_FILTROS" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT a.nombre || ' · ' || COALESCE(a.genero, '') AS artista,
+       string_agg(DISTINCT e.pais, ', ' ORDER BY e.pais) AS paises,
        COUNT(DISTINCT c.id)                        AS conciertos,
        COUNT(DISTINCT v.id)                        AS transacciones,
        COUNT(b.id)                                 AS boletos,
@@ -18,6 +19,7 @@ FROM ventas v
 JOIN boletos    b ON b."ventaId" = v.id
 JOIN conciertos c ON c.id = b."conciertoId"
 JOIN artista    a ON a.id = c."artistaId"
+JOIN estadios   e ON e.id = c."estadioId"
 WHERE (v."createdAt" AT TIME ZONE 'America/Guatemala')::date
         BETWEEN $P{P_DESDE} AND $P{P_HASTA}
   AND (CAST($P{P_CONCIERTO} AS INTEGER) IS NULL OR c.id = $P{P_CONCIERTO})
@@ -27,6 +29,7 @@ GROUP BY a.id, a.nombre, a.genero
 ORDER BY total DESC]]>
 	</queryString>
 	<field name="artista" class="java.lang.String"/>
+	<field name="paises" class="java.lang.String"/>
 	<field name="conciertos" class="java.lang.Long"/>
 	<field name="transacciones" class="java.lang.Long"/>
 	<field name="boletos" class="java.lang.Long"/>
@@ -81,27 +84,32 @@ ORDER BY total DESC]]>
 	<columnHeader>
 		<band height="24">
 			<staticText>
-				<reportElement x="0" y="0" width="195" height="22"/>
+				<reportElement x="0" y="0" width="150" height="22"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="SansSerif" size="8" isBold="true"/></textElement>
 				<text><![CDATA[ARTISTA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="195" y="0" width="65" height="22"/>
+				<reportElement x="150" y="0" width="85" height="22"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="SansSerif" size="8" isBold="true"/></textElement>
+				<text><![CDATA[PAÍSES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="235" y="0" width="65" height="22"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"><font fontName="SansSerif" size="8" isBold="true"/></textElement>
 				<text><![CDATA[CONCIERTOS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="260" y="0" width="90" height="22"/>
+				<reportElement x="300" y="0" width="80" height="22"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"><font fontName="SansSerif" size="8" isBold="true"/></textElement>
 				<text><![CDATA[TRANSACCIONES]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="350" y="0" width="70" height="22"/>
+				<reportElement x="380" y="0" width="55" height="22"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"><font fontName="SansSerif" size="8" isBold="true"/></textElement>
 				<text><![CDATA[BOLETOS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="420" y="0" width="95" height="22"/>
+				<reportElement x="435" y="0" width="80" height="22"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"><font fontName="SansSerif" size="8" isBold="true"/></textElement>
 				<text><![CDATA[TOTAL]]></text>
 			</staticText>
@@ -114,27 +122,32 @@ ORDER BY total DESC]]>
 	<detail>
 		<band height="22">
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="0" y="0" width="195" height="20"/>
+				<reportElement x="0" y="0" width="150" height="20"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="SansSerif" size="9" isBold="false"/></textElement>
 				<textFieldExpression><![CDATA[$F{artista}]]></textFieldExpression>
 			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="150" y="0" width="85" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="SansSerif" size="9" isBold="false"/></textElement>
+				<textFieldExpression><![CDATA[$F{paises}]]></textFieldExpression>
+			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="195" y="0" width="65" height="20"/>
+				<reportElement x="235" y="0" width="65" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"><font fontName="SansSerif" size="9" isBold="false"/></textElement>
 				<textFieldExpression><![CDATA[$F{conciertos}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="260" y="0" width="90" height="20"/>
+				<reportElement x="300" y="0" width="80" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"><font fontName="SansSerif" size="9" isBold="false"/></textElement>
 				<textFieldExpression><![CDATA[$F{transacciones}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="350" y="0" width="70" height="20"/>
+				<reportElement x="380" y="0" width="55" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"><font fontName="SansSerif" size="9" isBold="false"/></textElement>
 				<textFieldExpression><![CDATA[$F{boletos}]]></textFieldExpression>
 			</textField>
 			<textField pattern="&apos;Q&apos; #,##0.00" isBlankWhenNull="true">
-				<reportElement x="420" y="0" width="95" height="20"/>
+				<reportElement x="435" y="0" width="80" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"><font fontName="SansSerif" size="9" isBold="false"/></textElement>
 				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
 			</textField>
@@ -165,22 +178,22 @@ ORDER BY total DESC]]>
 				<graphicElement><pen lineWidth="1.5"/></graphicElement>
 			</line>
 			<staticText>
-				<reportElement x="0" y="10" width="260" height="22"/>
+				<reportElement x="0" y="10" width="300" height="22"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="SansSerif" size="9" isBold="true"/></textElement>
 				<text><![CDATA[TOTAL GENERAL]]></text>
 			</staticText>
 			<textField pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="260" y="10" width="90" height="22"/>
+				<reportElement x="300" y="10" width="80" height="22"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"><font fontName="SansSerif" size="9" isBold="true"/></textElement>
 				<textFieldExpression><![CDATA[$V{V_TRANSACCIONES}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="350" y="10" width="70" height="22"/>
+				<reportElement x="380" y="10" width="55" height="22"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"><font fontName="SansSerif" size="9" isBold="true"/></textElement>
 				<textFieldExpression><![CDATA[$V{V_BOLETOS}]]></textFieldExpression>
 			</textField>
 			<textField pattern="&apos;Q&apos; #,##0.00" isBlankWhenNull="true">
-				<reportElement x="420" y="10" width="95" height="22"/>
+				<reportElement x="435" y="10" width="80" height="22"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"><font fontName="SansSerif" size="9" isBold="true"/></textElement>
 				<textFieldExpression><![CDATA[$V{V_TOTAL}]]></textFieldExpression>
 			</textField>
