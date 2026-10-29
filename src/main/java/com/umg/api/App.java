@@ -9,6 +9,7 @@ import java.awt.Taskbar;
 import javax.imageio.ImageIO;
 import javafx.scene.image.Image;
 import com.umg.api.ui.PrincipalController;
+import com.umg.api.ui.Tema;
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.fxml.FXMLLoader;
@@ -96,8 +97,9 @@ public class App extends Application {
 
     public static void abrirDialogo(String fxml, String titulo) throws Exception {
         Parent root = FXMLLoader.load(App.class.getResource("/com/umg/api/ui/" + fxml));
+        Tema.aplicar(root);
         Scene escena = new Scene(root);
-        escena.setFill(Color.web("#141311"));
+        escena.setFill(Color.web(Tema.esClaro() ? "#FFFFFF" : "#141311"));
 
         Stage dialogo = new Stage();
         dialogo.setTitle(titulo);

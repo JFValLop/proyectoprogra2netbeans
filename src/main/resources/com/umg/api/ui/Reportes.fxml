@@ -15,30 +15,30 @@
 
 <HBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.umg.api.ui.ReportesController"
-      style="-fx-background-color:#141413;">
+      style="-fx-background-color:-c-bg;">
    <children>
 
       <!-- ============ PANEL IZQUIERDO: FILTROS ============ -->
       <VBox minWidth="300" prefWidth="300" maxWidth="300" spacing="8"
-            style="-fx-background-color:#1b1a18; -fx-border-color:#2a2926; -fx-border-width:0 1 0 0;">
+            style="-fx-background-color:-c-panel; -fx-border-color:-c-line; -fx-border-width:0 1 0 0;">
          <padding>
             <Insets top="20" right="16" bottom="20" left="16" />
          </padding>
          <children>
-            <Label text="JASPERREPORTS" style="-fx-text-fill:#8a867e; -fx-font-size:10px; -fx-font-weight:bold;" />
-            <Label text="REPORTES" style="-fx-text-fill:#f5efe6; -fx-font-size:30px; -fx-font-weight:bold;" />
+            <Label text="JASPERREPORTS" style="-fx-text-fill:-c-dim; -fx-font-size:10px; -fx-font-weight:bold;" />
+            <Label text="REPORTES" style="-fx-text-fill:-c-text; -fx-font-size:30px; -fx-font-weight:bold;" />
 
             <ToggleButton fx:id="btnConcierto" text="Por concierto" maxWidth="Infinity" prefHeight="44" />
             <ToggleButton fx:id="btnArtista" text="Por artista" maxWidth="Infinity" prefHeight="44" />
             <ToggleButton fx:id="btnVendedor" text="Por vendedor" maxWidth="Infinity" prefHeight="44" />
 
-            <Label text="Concierto" style="-fx-text-fill:#b8b3a9; -fx-font-size:12px; -fx-padding:10 0 0 0;" />
+            <Label text="Concierto" style="-fx-text-fill:-c-muted; -fx-font-size:12px; -fx-padding:10 0 0 0;" />
             <ComboBox fx:id="cbConcierto" styleClass="combo" maxWidth="Infinity" prefHeight="40" />
 
-            <Label text="Artista" style="-fx-text-fill:#b8b3a9; -fx-font-size:12px; -fx-padding:6 0 0 0;" />
+            <Label text="Artista" style="-fx-text-fill:-c-muted; -fx-font-size:12px; -fx-padding:6 0 0 0;" />
             <ComboBox fx:id="cbArtista" styleClass="combo" maxWidth="Infinity" prefHeight="40" />
 
-            <Label text="Vendedor" style="-fx-text-fill:#b8b3a9; -fx-font-size:12px; -fx-padding:6 0 0 0;" />
+            <Label text="Vendedor" style="-fx-text-fill:-c-muted; -fx-font-size:12px; -fx-padding:6 0 0 0;" />
             <ComboBox fx:id="cbVendedor" styleClass="combo" maxWidth="Infinity" prefHeight="40" />
 
             <HBox spacing="8">
@@ -48,13 +48,13 @@
                <children>
                   <VBox spacing="4" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label text="Desde" style="-fx-text-fill:#b8b3a9; -fx-font-size:12px;" />
+                        <Label text="Desde" style="-fx-text-fill:-c-muted; -fx-font-size:12px;" />
                         <DatePicker fx:id="dpDesde" styleClass="date" maxWidth="Infinity" prefHeight="40" />
                      </children>
                   </VBox>
                   <VBox spacing="4" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label text="Hasta" style="-fx-text-fill:#b8b3a9; -fx-font-size:12px;" />
+                        <Label text="Hasta" style="-fx-text-fill:-c-muted; -fx-font-size:12px;" />
                         <DatePicker fx:id="dpHasta" styleClass="date" maxWidth="Infinity" prefHeight="40" />
                      </children>
                   </VBox>
@@ -63,7 +63,7 @@
 
             <Button fx:id="btnGenerar" text="Generar reporte" onAction="#generar"
                     maxWidth="Infinity" prefHeight="46"
-                    style="-fx-background-color:#ffb01c; -fx-text-fill:#1a1a1a; -fx-font-weight:bold; -fx-font-size:14px; -fx-background-radius:12; -fx-cursor:hand;">
+                    style="-fx-background-color:-c-amber; -fx-text-fill:-c-ink; -fx-font-weight:bold; -fx-font-size:14px; -fx-background-radius:12; -fx-cursor:hand;">
                <VBox.margin>
                   <Insets top="12" />
                </VBox.margin>
@@ -77,19 +77,19 @@
       <VBox HBox.hgrow="ALWAYS">
          <children>
             <HBox alignment="CENTER_LEFT" spacing="8"
-                  style="-fx-padding:12 16 12 16; -fx-border-color:#2a2926; -fx-border-width:0 0 1 0;">
+                  style="-fx-padding:12 16 12 16; -fx-border-color:-c-line; -fx-border-width:0 0 1 0;">
                <children>
                   <Label fx:id="lblPagina" text="Vista previa · aún no hay reporte"
-                         style="-fx-text-fill:#8a867e; -fx-font-size:12px;" />
+                         style="-fx-text-fill:-c-dim; -fx-font-size:12px;" />
                   <Region HBox.hgrow="ALWAYS" />
                   <Button fx:id="btnAnterior" text="◀" onAction="#anterior" />
                   <Button fx:id="btnSiguiente" text="▶" onAction="#siguiente" />
                </children>
             </HBox>
             <ScrollPane fx:id="scroll" fitToWidth="true" VBox.vgrow="ALWAYS"
-                        style="-fx-background:#0f0f0e; -fx-background-color:#0f0f0e;">
+                        style="-fx-background:-c-raised; -fx-background-color:-c-raised;">
                <content>
-                  <StackPane alignment="TOP_CENTER" style="-fx-padding:24; -fx-background-color:#0f0f0e;">
+                  <StackPane alignment="TOP_CENTER" style="-fx-padding:24; -fx-background-color:-c-raised;">
                      <children>
                         <ImageView fx:id="ivPagina" preserveRatio="true" />
                      </children>

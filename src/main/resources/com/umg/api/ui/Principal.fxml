@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefWidth="1366" prefHeight="768" styleClass="app" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@styles.css" fx:controller="com.umg.api.ui.PrincipalController">
+<BorderPane fx:id="raiz" prefWidth="1366" prefHeight="768" styleClass="app" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@styles.css" fx:controller="com.umg.api.ui.PrincipalController">
   <left>
     <VBox id="sidebar" styleClass="sidebar" prefWidth="216" minWidth="216" maxWidth="216" spacing="18">
       <padding><Insets top="16" right="12" bottom="12" left="12"/></padding>
@@ -27,9 +27,18 @@
             <VBox spacing="3">
               <children>
                 <Label text="Billets" styleClass="disp,s21"/>
-                <Label text="TAQUILLA V1.0" styleClass="s10,w600,c-dim"/>
+                <Label text="TAQUILLA" styleClass="s10,w600,c-dim"/>
               </children>
             </VBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button styleClass="btn-icon" mnemonicParsing="false" fx:id="btnModo">
+              <graphic>
+                <Region styleClass="icon,ic-sun,ic-amber" minWidth="18" minHeight="18" prefWidth="18" prefHeight="18" maxWidth="18" maxHeight="18" fx:id="icoModo"/>
+              </graphic>
+              <tooltip>
+                <Tooltip text="Cambiar a modo claro" fx:id="tipModo"/>
+              </tooltip>
+            </Button>
           </children>
         </HBox>
         <VBox spacing="2">

@@ -20,6 +20,7 @@
               <children>
                 <Label text="CATÁLOGO · PLANO DE CADA RECINTO" styleClass="eyebrow"/>
                 <Label text="RECINTOS" styleClass="disp,s34"/>
+                <Label text="" styleClass="s12,c-muted" fx:id="lblDireccion"/>
               </children>
             </VBox>
             <Region HBox.hgrow="ALWAYS"/>
@@ -37,6 +38,7 @@
                     <Label text="" styleClass="s12,w500,c-dim" fx:id="lblAviso"/>
                     <Label text="Recinto" styleClass="s12,w600,c-muted"/>
                     <ComboBox styleClass="combo" prefWidth="260" prefHeight="34" fx:id="cmbRecinto"/>
+                    <Button text="Editar" styleClass="btn-ghost,btn-sm" mnemonicParsing="false" fx:id="btnEditarRecinto"/>
                     <Button text="Nuevo recinto" styleClass="btn-ghost,btn-sm" mnemonicParsing="false" fx:id="btnNuevoRecinto"/>
                   </children>
                 </HBox>

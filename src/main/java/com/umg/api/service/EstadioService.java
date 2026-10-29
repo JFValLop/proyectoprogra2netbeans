@@ -12,6 +12,7 @@ import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.ClassicHttpResponse;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.client5.http.classic.methods.HttpPut;
 import org.apache.hc.client5.http.entity.EntityBuilder;
 import org.apache.hc.core5.http.ContentType;
 import com.umg.api.model.Estadio;
@@ -38,11 +39,12 @@ public class EstadioService {
         }
     }
 
-    public Estadio crearEstadio(String nombre, String tipo) throws Exception {
+    public Estadio crearEstadio(String nombre, String tipo, String pais, String ciudad, String direccion) throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpPost request = new HttpPost(BASE_URL + "/create/");
 
-            String json = Api.mapper.writeValueAsString(Map.of("nombre", nombre, "tipo", tipo));
+            String json = Api.mapper.writeValueAsString(Map.of("nombre", nombre, "tipo", tipo,
+                    "pais", pais, "ciudad", ciudad, "direccion", direccion));
             request.setEntity(EntityBuilder.create().setText(json).setContentType(ContentType.APPLICATION_JSON).build());
 
             ClassicHttpResponse response = client.execute(request);
@@ -51,6 +53,22 @@ public class EstadioService {
                 throw Api.error(is, response.getCode());
             }
             return Api.mapper.readValue(is, Estadio.class);
+        }
+    }
+
+    public void actualizarEstadio(int id, String nombre, String pais, String ciudad, String direccion) throws Exception {
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
+            HttpPut request = new HttpPut(BASE_URL + "/update/" + id);
+
+            String json = Api.mapper.writeValueAsString(Map.of("nombre", nombre,
+                    "pais", pais, "ciudad", ciudad, "direccion", direccion));
+            request.setEntity(EntityBuilder.create().setText(json).setContentType(ContentType.APPLICATION_JSON).build());
+
+            ClassicHttpResponse response = client.execute(request);
+            InputStream is = response.getEntity().getContent();
+            if (response.getCode() != 200) {
+                throw Api.error(is, response.getCode());
+            }
         }
     }
 }

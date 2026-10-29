@@ -31,7 +31,7 @@
       </children>
     </HBox>
 
-    <VBox VBox.vgrow="ALWAYS" spacing="0" style="-fx-background-color: #1F1E1B; -fx-border-color: #34322D; -fx-background-radius: 14; -fx-border-radius: 14;">
+    <VBox VBox.vgrow="ALWAYS" spacing="0" style="-fx-background-color: -c-card; -fx-border-color: -c-line2; -fx-background-radius: 14; -fx-border-radius: 14;">
       <children>
         <HBox fx:id="cabecera" alignment="CENTER_LEFT"/>
         <ScrollPane fitToWidth="true" hbarPolicy="NEVER" VBox.vgrow="ALWAYS" style="-fx-background: transparent; -fx-background-color: transparent;">

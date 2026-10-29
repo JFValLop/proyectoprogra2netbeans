@@ -127,8 +127,8 @@ public class GestionVentasController {
         lblTitulo.setText(admin ? "GESTIÓN DE VENTAS" : "MIS VENTAS");
         lblCeja.setText(admin ? "TODAS LAS TAQUILLAS · VENTAS Y DETALLE" : "MI TAQUILLA · VENTAS Y DETALLE");
 
-        String campo = "-fx-background-color: #1F1E1B; -fx-border-color: #34322D; -fx-border-radius: 12;"
-                + " -fx-background-radius: 12; -fx-text-fill: #F2EFE6; -fx-prompt-text-fill: #7C786E; -fx-padding: 0 12 0 12;";
+        String campo = "-fx-background-color: -c-card; -fx-border-color: -c-line2; -fx-border-radius: 12;"
+                + " -fx-background-radius: 12; -fx-text-fill: -c-text; -fx-prompt-text-fill: -c-dim; -fx-padding: 0 12 0 12;";
         txtBuscar.setStyle(campo);
         cmbVendedor.setStyle(campo);
         cmbVendedor.setVisible(admin);
@@ -163,7 +163,7 @@ public class GestionVentasController {
         tgTodo = botonRango("Todo", grupo);
         boxRango.getChildren().addAll(tgHoy, tg7, tgTodo);
         boxRango.setPadding(new Insets(4));
-        boxRango.setStyle("-fx-background-color: #1F1E1B; -fx-border-color: #34322D; -fx-border-radius: 12; -fx-background-radius: 12;");
+        boxRango.setStyle("-fx-background-color: -c-card; -fx-border-color: -c-line2; -fx-border-radius: 12; -fx-background-radius: 12;");
         if ((admin && filtroUsuario != null) || filtroCliente != null) {
             tgTodo.setSelected(true);
         } else {
@@ -206,8 +206,8 @@ public class GestionVentasController {
         b.setToggleGroup(grupo);
         b.setFocusTraversable(false);
         Runnable estilo = () -> b.setStyle(b.isSelected()
-                ? "-fx-background-color: #3A3833; -fx-text-fill: #F2EFE6; -fx-background-radius: 8; -fx-padding: 7 14 7 14; -fx-font-weight: bold;"
-                : "-fx-background-color: transparent; -fx-text-fill: #A9A59B; -fx-background-radius: 8; -fx-padding: 7 14 7 14;");
+                ? "-fx-background-color: -c-line3; -fx-text-fill: -c-text; -fx-background-radius: 8; -fx-padding: 7 14 7 14; -fx-font-weight: bold;"
+                : "-fx-background-color: transparent; -fx-text-fill: -c-muted; -fx-background-radius: 8; -fx-padding: 7 14 7 14;");
         b.selectedProperty().addListener((o, a, n) -> estilo.run());
         estilo.run();
         return b;
@@ -219,7 +219,7 @@ public class GestionVentasController {
 
     private void armarCabecera() {
         cabecera.setPadding(new Insets(14, 18, 10, 18));
-        cabecera.setStyle("-fx-border-color: transparent transparent #2E2C28 transparent;");
+        cabecera.setStyle("-fx-border-color: transparent transparent -c-line transparent;");
         Label concierto = cab("CONCIERTO", -1, Pos.CENTER_LEFT);
         HBox.setHgrow(concierto, Priority.ALWAYS);
         cabecera.getChildren().addAll(
@@ -374,9 +374,9 @@ public class GestionVentasController {
     }
 
     private static String estiloFila(boolean seleccionada, boolean hover) {
-        String fondo = seleccionada ? "#2A2825" : hover ? "#252320" : "transparent";
+        String fondo = seleccionada ? "-c-raised" : hover ? "-c-raised" : "transparent";
         return "-fx-cursor: hand; -fx-background-color: " + fondo + ";"
-                + " -fx-border-color: transparent transparent #2A2825 transparent;";
+                + " -fx-border-color: transparent transparent -c-line transparent;";
     }
 
     private void marcarSeleccion() {
@@ -390,7 +390,7 @@ public class GestionVentasController {
         HBox c = new HBox(6, punto, l);
         c.setAlignment(Pos.CENTER_LEFT);
         c.setPadding(new Insets(3, 8, 3, 8));
-        c.setStyle("-fx-background-color: #2A2825; -fx-background-radius: 6;");
+        c.setStyle("-fx-background-color: -c-raised; -fx-background-radius: 6;");
         return c;
     }
 
@@ -408,7 +408,7 @@ public class GestionVentasController {
     // =====================================================================
 
     private void armarPanel() {
-        panel.setStyle("-fx-background-color: #1B1A17; -fx-border-color: transparent transparent transparent #34322D;"
+        panel.setStyle("-fx-background-color: -c-sheet; -fx-border-color: transparent transparent transparent -c-line2;"
                 + " -fx-border-width: 0 0 0 1; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 40, 0, -8, 0);");
         panel.setTranslateX(ANCHO_PANEL + 40);
 
@@ -443,7 +443,7 @@ public class GestionVentasController {
         HBox pie = new HBox(btnImprimir);
         HBox.setHgrow(btnImprimir, Priority.ALWAYS);
         pie.setPadding(new Insets(14, 24, 18, 24));
-        pie.setStyle("-fx-border-color: #2E2C28 transparent transparent transparent;");
+        pie.setStyle("-fx-border-color: -c-line transparent transparent transparent;");
 
         panel.getChildren().addAll(cab, linea(), sp, pie);
     }
@@ -452,7 +452,7 @@ public class GestionVentasController {
         Region l = new Region();
         l.setMinHeight(1);
         l.setMaxHeight(1);
-        l.setStyle("-fx-background-color: #2E2C28;");
+        l.setStyle("-fx-background-color: -c-line;");
         return l;
     }
 
@@ -645,7 +645,7 @@ public class GestionVentasController {
         HBox tarjeta = new HBox(14, info, marco);
         tarjeta.setAlignment(Pos.CENTER_LEFT);
         tarjeta.setPadding(new Insets(14));
-        tarjeta.setStyle("-fx-background-color: #2A2825; -fx-border-color: #3A3833;"
+        tarjeta.setStyle("-fx-background-color: -c-raised; -fx-border-color: -c-line3;"
                 + " -fx-background-radius: 12; -fx-border-radius: 12;");
         return tarjeta;
     }
@@ -677,7 +677,7 @@ public class GestionVentasController {
         }
         tarjeta.getChildren().add(precio);
         tarjeta.setPadding(new Insets(12, 14, 12, 14));
-        tarjeta.setStyle("-fx-background-color: transparent; -fx-border-color: #3A3833;"
+        tarjeta.setStyle("-fx-background-color: transparent; -fx-border-color: -c-line3;"
                 + " -fx-border-style: segments(5, 4); -fx-background-radius: 12; -fx-border-radius: 12;");
         return tarjeta;
     }
@@ -742,7 +742,7 @@ public class GestionVentasController {
         }
         ScrollPane sp = new ScrollPane(paginas);
         sp.setFitToWidth(true);
-        sp.setStyle("-fx-background: #14130F; -fx-background-color: #14130F;");
+        sp.setStyle("-fx-background: -c-bg; -fx-background-color: -c-bg;");
         VBox.setVgrow(sp, Priority.ALWAYS);
 
         Label estado = new Label("Factura " + numeroActual);
@@ -759,13 +759,14 @@ public class GestionVentasController {
 
         VBox contenido = new VBox(barra, sp);
         contenido.getStyleClass().add("app");
+        contenido.getStylesheets().addAll(raiz.getStylesheets());
+        Tema.aplicar(contenido);
 
         Stage ventana = new Stage();
         ventana.initOwner(raiz.getScene().getWindow());
         ventana.initModality(Modality.APPLICATION_MODAL);
         ventana.setTitle("Factura " + numeroActual);
         Scene escena = new Scene(contenido, 720, 880);
-        escena.getStylesheets().addAll(raiz.getScene().getStylesheets());
         ventana.setScene(escena);
 
         guardar.setOnAction(e -> {

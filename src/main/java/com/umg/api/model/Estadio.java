@@ -18,6 +18,9 @@ public class Estadio {
     private int accesos;
     private int capacidad;
     private String tipo;
+    private String pais;
+    private String ciudad;
+    private String direccion;
 
     public Estadio() {
     }
@@ -52,7 +55,52 @@ public class Estadio {
 
     @Override
     public String toString() {
-        return nombre + " · " + Estadio.nombreTipo(tipo);
+        String texto = nombre + " · " + Estadio.nombreTipo(tipo);
+        if (ciudad != null && !ciudad.isBlank()) {
+            texto += " · " + ciudad + ", " + pais;
+        }
+        return texto;
+    }
+
+    public String getNombreConLugar() {
+        if (ciudad == null || ciudad.isBlank()) {
+            return nombre;
+        }
+        return nombre + " · " + ciudad + ", " + pais;
+    }
+
+    public String getUbicacion() {
+        String texto = "";
+        for (String parte : new String[]{direccion, ciudad, pais}) {
+            if (parte != null && !parte.isBlank()) {
+                texto += (texto.isEmpty() ? "" : ", ") + parte;
+            }
+        }
+        return texto;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public static String nombreTipo(String tipo) {

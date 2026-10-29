@@ -1,0 +1,7 @@
+.root {
+  -c-bg: #FFFFFF; -c-panel: #FAF8F5; -c-card: #FFFFFF; -c-raised: #F5F1EB; -c-sheet: #FFFFFF;
+  -c-line: #EEE9E1; -c-line2: #E3DDD3; -c-line3: #CDC5B8;
+  -c-text: #1F1B16; -c-text2: #4A443B; -c-muted: #6F685D; -c-dim: #968E81;
+  -c-amber: #F28705; -c-amber-hover: #FF9A1F; -c-ink: #FFFFFF;
+  -c-red: #D9442E; -c-green: #1E9E5A;
+}

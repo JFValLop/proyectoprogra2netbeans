@@ -1,5 +1,6 @@
 package com.umg.api.ui;
 
+import com.umg.api.App;
 import com.umg.api.model.Estadio;
 import com.umg.api.model.Localidad;
 import com.umg.api.model.ZonaMapa;
@@ -9,7 +10,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Alert;
@@ -18,7 +18,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
@@ -43,6 +42,12 @@ public class RecintosController {
 
     @FXML
     private Button btnNuevoRecinto;
+
+    @FXML
+    private Button btnEditarRecinto;
+
+    @FXML
+    private Label lblDireccion;
 
     @FXML
     private VBox listaZonas;
@@ -168,6 +173,7 @@ public class RecintosController {
         btnEstadio.setOnAction(e -> elegirPlano("ESTADIO"));
         btnExplanada.setOnAction(e -> elegirPlano("EXPLANADA"));
         btnNuevoRecinto.setOnAction(e -> nuevoRecinto());
+        btnEditarRecinto.setOnAction(e -> editarRecinto());
         cmbRecinto.valueProperty().addListener((obs, viejo, nuevo) -> elegirRecinto());
 
         btnPorLadoMenos.setOnAction(e -> cambiar(0, 0, -1));
@@ -239,10 +245,14 @@ public class RecintosController {
 
     private void elegirRecinto() {
         Estadio recinto = cmbRecinto.getValue();
+        btnEditarRecinto.setDisable(recinto == null);
         if (recinto == null) {
+            lblDireccion.setText("");
             usar(new ArrayList<>(), null);
             return;
         }
+        String ubicacion = recinto.getUbicacion();
+        lblDireccion.setText(ubicacion.isEmpty() ? "Sin dirección registrada · usa Editar para agregarla" : ubicacion);
         if (planos.containsKey(recinto.getId())) {
             usar(planos.get(recinto.getId()), null);
         } else {
@@ -542,20 +552,27 @@ public class RecintosController {
     }
 
     private void nuevoRecinto() {
-        TextInputDialog dialogo = new TextInputDialog();
-        dialogo.setTitle("Nuevo recinto");
-        dialogo.setHeaderText(null);
-        dialogo.setContentText("Nombre del recinto (" + Estadio.nombreTipo(plano) + "):");
-        Optional<String> nombre = dialogo.showAndWait();
-        if (nombre.isEmpty() || nombre.get().isBlank()) {
+        RecintoFormController.tipoNuevo = plano;
+        abrirFormulario("Nuevo recinto");
+    }
+
+    private void editarRecinto() {
+        if (cmbRecinto.getValue() == null) {
             return;
         }
+        RecintoFormController.recintoEditar = cmbRecinto.getValue();
+        abrirFormulario("Editar recinto");
+    }
+
+    private void abrirFormulario(String titulo) {
         try {
-            Estadio nuevo = estadioService.crearEstadio(nombre.get().trim(), plano);
-            estadios = null;
-            llenarRecintos(nuevo.getId());
+            App.abrirDialogo("RecintoForm.fxml", titulo);
+            if (RecintoFormController.guardado != null) {
+                estadios = null;
+                llenarRecintos(RecintoFormController.guardado);
+            }
         } catch (Exception ex) {
-            Barra.alerta(Alert.AlertType.ERROR, ex.getMessage());
+            Barra.alerta(Alert.AlertType.ERROR, "No se pudo abrir el formulario: " + ex.getMessage());
         }
     }
 }

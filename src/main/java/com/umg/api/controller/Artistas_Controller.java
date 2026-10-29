@@ -15,6 +15,7 @@ import com.umg.api.service.Estadio_Service;
 import com.umg.api.ui.Barra;
 import com.umg.api.ui.ConciertoFormController;
 import com.umg.api.ui.GestionVentasController;
+import com.umg.api.ui.Tema;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -642,7 +643,7 @@ public class Artistas_Controller {
     nombresEstadios = listaEstadios.stream()
             .collect(Collectors.toMap(
                     Estadio::getId,
-                    Estadio::getNombre,
+                    Estadio::getNombreConLugar,
                     (nombreExistente, nuevoNombre) -> nombreExistente
             ));
 }
@@ -902,6 +903,7 @@ public class Artistas_Controller {
                 );
             }
 
+            Tema.aplicar(root);
             stage.setScene(new Scene(root));
             stage.showAndWait();
 
@@ -950,6 +952,7 @@ public class Artistas_Controller {
             Stage ventana = new Stage();
             ventana.setTitle("Editar usuario");
             ventana.initModality(Modality.APPLICATION_MODAL);
+            Tema.aplicar(contenido);
             ventana.setScene(new Scene(contenido));
             ventana.showAndWait();
 
@@ -984,6 +987,7 @@ public class Artistas_Controller {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Nuevo artista");
+            Tema.aplicar(root);
             stage.setScene(new Scene(root));
             stage.showAndWait();
 
@@ -1018,6 +1022,7 @@ public class Artistas_Controller {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Editar artista");
+            Tema.aplicar(root);
             stage.setScene(new Scene(root));
             stage.showAndWait();
 
@@ -1054,6 +1059,7 @@ public class Artistas_Controller {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Eliminar artista");
+            Tema.aplicar(root);
             stage.setScene(new Scene(root));
             stage.showAndWait();
 

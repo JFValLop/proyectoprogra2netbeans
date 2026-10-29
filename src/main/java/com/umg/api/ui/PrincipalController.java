@@ -20,6 +20,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -27,6 +29,18 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 public class PrincipalController {
+
+    @FXML
+    private BorderPane raiz;
+
+    @FXML
+    private Button btnModo;
+
+    @FXML
+    private Region icoModo;
+
+    @FXML
+    private Tooltip tipModo;
 
     @FXML
     private Button btnPanel;
@@ -110,6 +124,13 @@ public class PrincipalController {
         grupoCatalogos.setVisible(admin);
         grupoCatalogos.setManaged(admin);
         btnHistorial.setText(admin ? "Historial de ventas" : "Mis ventas");
+
+        Tema.aplicar(raiz);
+        pintarBotonModo();
+        btnModo.setOnAction(e -> {
+            Tema.cambiar(raiz);
+            pintarBotonModo();
+        });
 
         btnPuntoVenta.setOnAction(e -> Barra.ir("Cartelera.fxml"));
         btnLocalidades.setOnAction(e -> Barra.ir("Recintos.fxml"));
@@ -219,6 +240,17 @@ public class PrincipalController {
         ultimaVenta = masNueva;
     }
 
+    private void pintarBotonModo() {
+        icoModo.getStyleClass().removeAll("ic-sun", "ic-moon");
+        if (Tema.esClaro()) {
+            icoModo.getStyleClass().add("ic-moon");
+            tipModo.setText("Cambiar a modo oscuro");
+        } else {
+            icoModo.getStyleClass().add("ic-sun");
+            tipModo.setText("Cambiar a modo claro");
+        }
+    }
+
     private void marcar(Button boton) {
         for (Button b : List.of(btnPanel, btnPuntoVenta, btnValidar, btnHistorial, btnClientes, btnReportes, btnArtistas, btnConciertos, btnLocalidades, btnUsuarios)) {
             b.getStyleClass().remove("nav-active");
@@ -264,7 +296,7 @@ public class PrincipalController {
         tarjeta.setPadding(new Insets(12, 14, 12, 14));
         tarjeta.setMinWidth(280);
         tarjeta.setMaxWidth(440);
-        tarjeta.setStyle("-fx-background-color: #2A2825; -fx-border-color: #3A3833;"
+        tarjeta.setStyle("-fx-background-color: -c-raised; -fx-border-color: -c-line3;"
                 + " -fx-background-radius: 12; -fx-border-radius: 12;"
                 + " -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 32, 0, 0, 12);");
 

@@ -307,7 +307,7 @@ public class MapaController {
 
     private void pintarAsiento(Button b, AsientoMapa a, ZonaMapa z, int numero) {
         if (a == null || z.getPrecio() == null) {
-            b.setStyle("-fx-background-color: #2A2824;");
+            b.setStyle("-fx-background-color: -c-raised;");
             b.setCursor(Cursor.DEFAULT);
             return;
         }

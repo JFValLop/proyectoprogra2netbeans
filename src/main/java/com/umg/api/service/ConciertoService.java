@@ -47,7 +47,7 @@ public class ConciertoService {
         }
         Map<Integer, String> estadios = new HashMap<>();
         for (Estadio e : new EstadioService().getEstadios()) {
-            estadios.put(e.getId(), e.getNombre());
+            estadios.put(e.getId(), e.getNombreConLugar());
         }
         for (Concierto c : conciertos) {
             c.setArtista(artistas.get(c.getArtistaId()));

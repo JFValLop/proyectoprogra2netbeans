@@ -32,12 +32,12 @@ public class ClientesController {
 
     @FXML
     private void initialize() {
-        txtBuscar.setStyle("-fx-background-color: #1F1E1B; -fx-border-color: #34322D; -fx-border-radius: 12;"
-                + " -fx-background-radius: 12; -fx-text-fill: #F2EFE6; -fx-prompt-text-fill: #7C786E; -fx-padding: 0 12 0 12;");
+        txtBuscar.setStyle("-fx-background-color: -c-card; -fx-border-color: -c-line2; -fx-border-radius: 12;"
+                + " -fx-background-radius: 12; -fx-text-fill: -c-text; -fx-prompt-text-fill: -c-dim; -fx-padding: 0 12 0 12;");
         txtBuscar.textProperty().addListener((o, a, b) -> pintar());
 
         cabecera.setPadding(new Insets(14, 18, 10, 18));
-        cabecera.setStyle("-fx-border-color: transparent transparent #2E2C28 transparent;");
+        cabecera.setStyle("-fx-border-color: transparent transparent -c-line transparent;");
         Label cliente = cab("CLIENTE", -1, Pos.CENTER_LEFT);
         HBox.setHgrow(cliente, Priority.ALWAYS);
         cabecera.getChildren().addAll(
@@ -145,8 +145,8 @@ public class ClientesController {
     }
 
     private static String estiloFila(boolean hover) {
-        return "-fx-cursor: hand; -fx-background-color: " + (hover ? "#252320" : "transparent") + ";"
-                + " -fx-border-color: transparent transparent #2A2825 transparent;";
+        return "-fx-cursor: hand; -fx-background-color: " + (hover ? "-c-raised" : "transparent") + ";"
+                + " -fx-border-color: transparent transparent -c-line transparent;";
     }
 
     private static String fecha(JsonNode c) {

@@ -42,11 +42,11 @@ public class ReportesController{
 
     // Estilo de los 3 botones de tipo de reporte (solo si el FXML no trae "tile-sm")
     private static final String ESTILO_ON =
-            "-fx-background-color:#2b2417; -fx-border-color:#ffb01c; -fx-border-radius:12; "
-            + "-fx-background-radius:12; -fx-text-fill:#f5efe6; -fx-font-weight:bold; -fx-alignment:CENTER_LEFT;";
+            "-fx-background-color:rgba(255,176,32,0.12); -fx-border-color:-c-amber; -fx-border-radius:12; "
+            + "-fx-background-radius:12; -fx-text-fill:-c-text; -fx-font-weight:bold; -fx-alignment:CENTER_LEFT;";
     private static final String ESTILO_OFF =
-            "-fx-background-color:#1f1e1b; -fx-border-color:#2f2d29; -fx-border-radius:12; "
-            + "-fx-background-radius:12; -fx-text-fill:#f5efe6; -fx-font-weight:bold; -fx-alignment:CENTER_LEFT;";
+            "-fx-background-color:-c-card; -fx-border-color:-c-line2; -fx-border-radius:12; "
+            + "-fx-background-radius:12; -fx-text-fill:-c-text; -fx-font-weight:bold; -fx-alignment:CENTER_LEFT;";
 
     @FXML
     public void initialize() {
